@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.firemuffin303.slimegolem.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+
+  ],
+  "mixins": [
+    "CarvedPumpkinMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
