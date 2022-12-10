@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[42,)"
+loaderVersion = "[41,)"
 issueTrackerURL = "https://github.com/FireMuffin303/SlimeGolem/issues"
 license = "MIT"
 
@@ -18,14 +18,14 @@ logoFile = "icon.png"
 [[dependencies.slimegolem]]
 modId = "forge"
 mandatory = true
-versionRange = "[42,)"
+versionRange = "[41,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.slimegolem]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19.1,)"
+versionRange = "[1.19,1.19.2)"
 ordering = "NONE"
 side = "BOTH"
 
