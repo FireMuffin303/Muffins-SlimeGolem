@@ -1,7 +1,6 @@
 package net.firemuffin303.slimegolem.forge;
 
 import net.firemuffin303.slimegolem.ModPlatform;
-import net.firemuffin303.slimegolem.SlimeGolemMod;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -14,8 +13,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.fml.loading.FMLPaths;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.nio.file.Path;
 import java.util.function.Supplier;

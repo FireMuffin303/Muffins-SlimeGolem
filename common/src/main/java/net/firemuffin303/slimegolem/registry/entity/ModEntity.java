@@ -1,13 +1,10 @@
 package net.firemuffin303.slimegolem.registry.entity;
 
-import dev.architectury.registry.registries.DeferredRegister;
+
 import net.firemuffin303.slimegolem.ModPlatform;
-import net.firemuffin303.slimegolem.SlimeGolemMod;
-import net.minecraft.core.Registry;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.function.Supplier;
 
 public class ModEntity {

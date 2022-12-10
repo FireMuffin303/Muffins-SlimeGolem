@@ -1,11 +1,10 @@
 package net.firemuffin303.slimegolem.registry.item;
 
-import dev.architectury.registry.registries.DeferredRegister;
+
 import net.firemuffin303.slimegolem.ModPlatform;
 import net.firemuffin303.slimegolem.SlimeGolemMod;
 import net.firemuffin303.slimegolem.registry.block.ModBlock;
 import net.firemuffin303.slimegolem.registry.entity.ModEntity;
-import net.minecraft.core.Registry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;

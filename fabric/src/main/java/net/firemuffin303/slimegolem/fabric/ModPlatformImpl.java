@@ -1,8 +1,9 @@
 package net.firemuffin303.slimegolem.fabric;
 
-import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
+
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.firemuffin303.slimegolem.ModPlatform;
 import net.firemuffin303.slimegolem.SlimeGolemMod;
@@ -33,7 +34,7 @@ public class ModPlatformImpl {
     }
 
     public static <T extends Entity> void registerEntityRenderer(Supplier<EntityType<T>> entityTypeSupplier, EntityRendererProvider<T> entityRendererProvider) {
-        EntityRendererRegistry.register(entityTypeSupplier,entityRendererProvider);
+        EntityRendererRegistry.register(entityTypeSupplier.get(),entityRendererProvider);
     }
 
     public static <T extends Item> Supplier<T> registerItem(String id, Supplier<T> supplier) {
