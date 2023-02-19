@@ -10,7 +10,10 @@ import net.firemuffin303.slimegolem.SlimeGolemMod;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -54,6 +57,19 @@ public class ModPlatformImpl {
 
     public static CreativeModeTab registerCreativeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon) {
         return FabricItemGroupBuilder.build(resourceLocation,() -> icon.get());
+    }
+
+    public static <T extends Block> TagKey<T> registerBlockTag(ResourceKey<Registry<T>> blockRegistry, String id) {
+        return TagKey.create(blockRegistry,new ResourceLocation(SlimeGolemMod.MOD_ID,id));
+    }
+
+    public static <T extends Item> TagKey<T> registerItemTag(ResourceKey<Registry<T>> itemRegistry, String id) {
+        return TagKey.create(itemRegistry,new ResourceLocation(SlimeGolemMod.MOD_ID,id));
+    }
+
+    public static Supplier<SoundEvent> registerSoundEvent(String id) {
+        SoundEvent soundEvent = Registry.register(Registry.SOUND_EVENT,id,new SoundEvent(new ResourceLocation(SlimeGolemMod.MOD_ID,id)));
+        return () -> soundEvent;
     }
 
 

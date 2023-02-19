@@ -1,0 +1,13 @@
+{
+    "variants": {
+        "type=bottom": {
+            "model": "slimegolem:block/green_packed_slime_brick_slab"
+        },
+        "type=double": {
+            "model": "slimegolem:block/green_packed_slime_bricks"
+        },
+        "type=top": {
+            "model": "slimegolem:block/green_packed_slime_brick_slab_top"
+        }
+    }
+}

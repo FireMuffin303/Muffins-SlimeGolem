@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "stained_packed_slime_slab",
+    "key": {
+        "#": {
+            "item": "slimegolem:pink_packed_slime_block"
+        }
+    },
+    "pattern": [
+        "###"
+    ],
+    "result": {
+        "count": 6,
+        "item": "slimegolem:pink_packed_slime_slab"
+    }
+}

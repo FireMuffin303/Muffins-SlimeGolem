@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/template_wall_side_tall",
+    "textures": {
+        "wall": "slimegolem:block/light_blue_packed_slime_bricks"
+    }
+}

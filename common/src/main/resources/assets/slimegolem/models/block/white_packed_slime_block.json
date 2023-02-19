@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/cube_all",
+    "textures": {
+        "all": "slimegolem:block/white_packed_slime_block"
+    }
+}

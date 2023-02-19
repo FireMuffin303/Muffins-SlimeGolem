@@ -1,0 +1,8 @@
+{
+    "parent": "minecraft:block/slab_top",
+    "textures": {
+        "bottom": "slimegolem:block/purple_packed_slime_bricks",
+        "side": "slimegolem:block/purple_packed_slime_bricks",
+        "top": "slimegolem:block/purple_packed_slime_bricks"
+    }
+}

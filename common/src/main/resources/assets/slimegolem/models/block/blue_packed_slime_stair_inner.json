@@ -1,0 +1,8 @@
+{
+    "parent": "minecraft:block/inner_stairs",
+    "textures": {
+        "bottom": "slimegolem:block/blue_packed_slime_block",
+        "side": "slimegolem:block/blue_packed_slime_block",
+        "top": "slimegolem:block/blue_packed_slime_block"
+    }
+}

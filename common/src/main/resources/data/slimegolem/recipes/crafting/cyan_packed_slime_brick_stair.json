@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "stained_packed_slime_slab",
+    "key": {
+        "#": {
+            "item": "slimegolem:cyan_packed_slime_bricks"
+        }
+    },
+    "pattern": [
+        "#  ",
+        "## ",
+        "###"
+    ],
+    "result": {
+        "count": 4,
+        "item": "slimegolem:cyan_packed_slime_brick_stair"
+    }
+}

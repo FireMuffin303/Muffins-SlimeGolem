@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "count": 1,
+    "ingredient": {
+        "item": "slimegolem:purple_packed_slime_block"
+    },
+    "result": "slimegolem:purple_packed_slime_brick_wall"
+}

@@ -3,12 +3,14 @@ package net.firemuffin303.slimegolem.client.model;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.firemuffin303.slimegolem.SlimeGolemMod;
+import net.firemuffin303.slimegolem.registry.entity.SlimeGolemEntity;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
 @Environment(EnvType.CLIENT)
@@ -60,11 +62,28 @@ public class SlimeGolemModel<T extends Entity> extends HierarchicalModel<T> {
 
     @Override
     public void setupAnim(T entity, float f, float g, float h, float i, float j) {
-        this.head.yRot = i * 0.017453292F;
-        this.head.xRot = j * 0.017453292F;
+        this.root.getAllParts().forEach(ModelPart::resetPose);
+        this.animateLookTarget(i,j);
+        if(entity instanceof SlimeGolemEntity slimeGolemEntity){
+            if(slimeGolemEntity.isDancing()){
+                this.animateDancePose(h);
+            }
+        }
     }
 
     public ModelPart getHead() {
         return head;
     }
+
+    private void animateLookTarget(float i, float j){
+        this.head.yRot = i * 0.017453292F;
+        this.head.xRot = j * 0.017453292F;
+    }
+
+    private void animateDancePose(float h){
+        float n = h / 40.0F;
+        this.head.x = Mth.sin(n * 10.0F);
+        this.head.y = Mth.sin(n * 20.0F) + 14F;
+    }
+
 }
