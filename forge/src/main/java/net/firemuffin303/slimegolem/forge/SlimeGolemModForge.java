@@ -10,7 +10,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -25,8 +27,11 @@ public class SlimeGolemModForge {
 
     public SlimeGolemModForge() {
         // Submit our event bus to let architectury register our content on the right time
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         SlimeGolemMod.init();
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT,ModForgeConfig.CLIENT_CONFIG);
+
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         SOUND_EVENT.register(modEventBus);
         BLOCK.register(modEventBus);
         ITEMS.register(modEventBus);

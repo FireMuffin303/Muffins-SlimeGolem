@@ -8,7 +8,7 @@
     "FireMuffin303"
   ],
   "contact": {
-    "homepage": "https://modrinth.com/mod/muffins-slime-golem",
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/muffins-slime-golem",
     "sources": "https://github.com/FireMuffin303/SlimeGolem",
     "issues": "https://github.com/FireMuffin303/SlimeGolem/issues"
   },
@@ -21,6 +21,9 @@
     ],
     "client": [
       "net.firemuffin303.slimegolem.fabric.client.SlimeGolemClientModFabric"
+    ],
+    "modmenu": [
+      "net.firemuffin303.slimegolem.fabric.utils.ModMenuIntegration"
     ]
   },
   "mixins": [

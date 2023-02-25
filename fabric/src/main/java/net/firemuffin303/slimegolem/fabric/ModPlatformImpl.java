@@ -1,12 +1,12 @@
 package net.firemuffin303.slimegolem.fabric;
 
 
+import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.loader.api.FabricLoader;
-import net.firemuffin303.slimegolem.ModPlatform;
 import net.firemuffin303.slimegolem.SlimeGolemMod;
+import net.firemuffin303.slimegolem.fabric.utils.ModFabricConfig;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.Registry;
@@ -21,16 +21,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
-import java.nio.file.Path;
 import java.util.function.Supplier;
 
 public class ModPlatformImpl {
-    /**
-     * This is our actual method to {@link ModPlatform#getConfigDirectory()}.
-     */
-    public static Path getConfigDirectory() {
-        return FabricLoader.getInstance().getConfigDir();
-    }
+
 
     public static void registerRenderLayer(Supplier<Block> blockSupplier, RenderType renderType) {
         BlockRenderLayerMap.INSTANCE.putBlock(blockSupplier.get(),renderType);
@@ -70,6 +64,14 @@ public class ModPlatformImpl {
     public static Supplier<SoundEvent> registerSoundEvent(String id) {
         SoundEvent soundEvent = Registry.register(Registry.SOUND_EVENT,id,new SoundEvent(new ResourceLocation(SlimeGolemMod.MOD_ID,id)));
         return () -> soundEvent;
+    }
+
+    public static boolean getShowHoneyLayer() {
+        return SlimeGolemModFabric.CONFIG.client.showHoneyLayerOnSlimeGolem;
+    }
+
+    public static ResourceLocation registerLootTable(ResourceLocation resourceLocation) {
+        return resourceLocation;
     }
 
 

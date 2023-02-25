@@ -159,5 +159,9 @@
   "block.slimegolem.black_packed_slime_brick_stair":"Black Packed Slime Brick Stair",
   "block.slimegolem.black_packed_slime_brick_wall":"Black Packed Slime Brick Wall",
   "block.slimegolem.black_chiseled_packed_slime_block": "Black Chiseled Packed Slime Block",
-  "entity.slimegolem.slime_golem": "Slime Golem"
+  "entity.slimegolem.slime_golem": "Slime Golem",
+
+  "text.autoconfig.slimegolem.title": "Slime Golem Settings",
+  "text.autoconfig.slimegolem.option.client": "Client Setting",
+  "text.autoconfig.slimegolem.option.client.showHoneyLayerOnSlimeGolem": "Show Honey Layer on Slime Golem"
 }

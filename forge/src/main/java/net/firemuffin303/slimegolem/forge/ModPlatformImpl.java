@@ -75,5 +75,13 @@ public class ModPlatformImpl {
         return SlimeGolemModForge.SOUND_EVENT.register(id,() -> new SoundEvent(new ResourceLocation(SlimeGolemMod.MOD_ID,id)));
     }
 
+    public static boolean getShowHoneyLayer() {
+        return ModForgeConfig.SHOW_HONEY_ON_GOLEM.get();
+    }
+
+    public static ResourceLocation registerLootTable(ResourceLocation resourceLocation) {
+        return resourceLocation;
+    }
+
 
 }

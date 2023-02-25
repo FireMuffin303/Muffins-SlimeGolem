@@ -12,7 +12,7 @@ description = '''
 Add Slime Golem to Minecraft. A good ally for finding Slime Chunks!
 '''
 
-displayURL = "https://modrinth.com/mod/muffins-slime-golem"
+displayURL = "https://www.curseforge.com/minecraft/mc-mods/muffins-slime-golem"
 logoFile = "icon.png"
 
 [[dependencies.slimegolem]]

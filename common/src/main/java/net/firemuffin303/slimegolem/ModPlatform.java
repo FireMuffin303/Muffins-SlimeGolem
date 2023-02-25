@@ -71,4 +71,14 @@ public class ModPlatform {
     public static Supplier<SoundEvent> registerSoundEvent(String id) {
         throw new AssertionError();
     }
+
+    @ExpectPlatform
+    public static ResourceLocation registerLootTable(ResourceLocation resourceLocation){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static boolean getShowHoneyLayer(){
+        throw new AssertionError();
+    }
 }

@@ -1,6 +1,7 @@
 package net.firemuffin303.slimegolem.registry.entity;
 
 import com.google.common.collect.Maps;
+import net.firemuffin303.slimegolem.registry.ModLootTables;
 import net.firemuffin303.slimegolem.registry.block.ModBlock;
 import net.firemuffin303.slimegolem.registry.block.SlimeAlgaeBlock;
 import net.firemuffin303.slimegolem.registry.item.ModItem;
@@ -8,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -26,23 +28,23 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.animal.AbstractGolem;
-import net.minecraft.world.entity.animal.allay.Allay;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.DyeItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.*;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
@@ -50,11 +52,11 @@ import java.util.stream.Collectors;
 public class SlimeGolemEntity extends AbstractGolem implements Shearable {
     private static final EntityDataAccessor<Byte> DATA_PUMPKIN_ID;
     private static final EntityDataAccessor<Byte> DATA_COLOR_ID;
-    private static final EntityDataAccessor<Boolean> PLACE_ALGAE;
-    private static final EntityDataAccessor<Boolean> DATA_CAN_MUSIC_DROP;
+    private static final EntityDataAccessor<Boolean> IS_WAXED;
+    private static final EntityDataAccessor<Boolean> DATA_CAN_DANCE_DROP;
     private static final EntityDataAccessor<Boolean> DATA_DANCING;
     private static final Map<DyeColor, float[]> COLORARRAY_BY_COLOR;
-    private long musicDropCooldown;
+    private long danceDropCooldown;
     private final DynamicGameEventListener<SlimeGolemEntity.JukeboxListener> dynamicJukeboxListener;
     @Nullable
     private BlockPos jukebox;
@@ -101,64 +103,10 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.20000000298023224D);
     }
 
-    protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
-        ItemStack itemStack = player.getItemInHand(interactionHand);
-        if (itemStack.is(Items.SHEARS) && this.readyForShearing()) {
-            this.shear(SoundSource.PLAYERS);
-            this.gameEvent(GameEvent.SHEAR, player);
-            if (!this.level.isClientSide) {
-                itemStack.hurtAndBreak(1, player, (playerx) -> {
-                    playerx.broadcastBreakEvent(interactionHand);
-                });
-            }
-            return InteractionResult.sidedSuccess(this.level.isClientSide);
-        }else if((itemStack.getItem() instanceof DyeItem item)){
-            if(this.isAlive() && this.getColor() != item.getDyeColor()){
-                this.level.playSound(player,this, SoundEvents.DYE_USE,SoundSource.PLAYERS,1.0f,1.0f);
-                if(!player.level.isClientSide ){
-                    this.setColor(item.getDyeColor());
-                    if(!player.getAbilities().instabuild){
-                        itemStack.shrink(1);
-                    }
-                }
-                return InteractionResult.sidedSuccess(this.level.isClientSide);
-            }
-        }else if(itemStack.is(Items.SLIME_BALL) && !isAllowedPlaceAlgae()){
-            setAllowPlaceAlgae(true);
-            float g = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
-            this.playSound(SoundEvents.SLIME_SQUISH,1.0F,g);
-            if(!player.getAbilities().instabuild){
-                itemStack.shrink(1);
-            }
-            return InteractionResult.sidedSuccess(this.level.isClientSide);
-
-        }else if(itemStack.is(Items.HONEYCOMB) && isAllowedPlaceAlgae()){
-            setAllowPlaceAlgae(false);
-            float g = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
-            this.playSound(SoundEvents.SLIME_SQUISH,1.0F,g);
-            if(!player.getAbilities().instabuild){
-                itemStack.shrink(1);
-            }
-            return InteractionResult.sidedSuccess(this.level.isClientSide);
-
-        }else if(itemStack.is(ModItem.SLIME_PIE.get()) && this.canDropMusic() && this.isDancing()){
-            this.spawnAtLocation(ModItem.MUSIC_DISC_BOUNCYSLIME.get(),1);
-            this.spawnHeartParticle();
-            this.resetMusicDropCooldown();
-            float g = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
-            this.playSound(SoundEvents.SLIME_SQUISH,1.0f,g);
-            if(!player.getAbilities().instabuild){
-                itemStack.shrink(1);
-            }
-            return InteractionResult.SUCCESS;
-        }
-        return InteractionResult.PASS;
-    }
-
     @Override
     public void aiStep() {
         super.aiStep();
-        if(isAllowedPlaceAlgae()){
+        if(!isWaxed()){
             if (!this.level.isClientSide) {
                 ChunkPos chunkPos = this.chunkPosition();
                 boolean isSlimeChunk = WorldgenRandom.seedSlimeChunk(chunkPos.x, chunkPos.z, ((WorldGenLevel)level).getSeed(), 987234911L).nextInt(10) == 0;
@@ -181,25 +129,106 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
             }
         }
 
-        this.updateMusicDropCooldown();
+        if (this.isDancing() && this.shouldStopDancing() && this.tickCount % 20 == 0) {
+            this.setDancing(false);
+            this.jukebox = null;
+
+        }
+
+        System.out.println(this.isDancing());
+
+        this.updateDanceDropCooldown();
+    }
+
+    protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
+        ItemStack itemStack = player.getItemInHand(interactionHand);
+        if (itemStack.is(Items.SHEARS) && this.readyForShearing()) {
+            this.shear(SoundSource.PLAYERS);
+            this.gameEvent(GameEvent.SHEAR, player);
+            if (!this.level.isClientSide) {
+                itemStack.hurtAndBreak(1, player, (playerx) -> {
+                    playerx.broadcastBreakEvent(interactionHand);
+                });
+            }
+            return InteractionResult.sidedSuccess(this.level.isClientSide);
+        }else if((itemStack.getItem() instanceof DyeItem item)){
+            if(this.isAlive() && this.getColor() != item.getDyeColor()){
+                this.level.playSound(player,this, SoundEvents.DYE_USE,SoundSource.PLAYERS,1.0f,1.0f);
+                if(!player.level.isClientSide ){
+                    this.setColor(item.getDyeColor());
+                    if(!player.getAbilities().instabuild){
+                        itemStack.shrink(1);
+                    }
+                }
+                return InteractionResult.sidedSuccess(this.level.isClientSide);
+            }
+        }else if(itemStack.is(Items.SLIME_BALL) && isWaxed()){
+            setWax(false);
+            float g = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+            this.playSound(SoundEvents.SLIME_SQUISH,1.0F,g);
+            if(!player.getAbilities().instabuild){
+                itemStack.shrink(1);
+            }
+            return InteractionResult.sidedSuccess(this.level.isClientSide);
+
+        }else if(itemStack.is(Items.HONEYCOMB) && !isWaxed()){
+            setWax(true);
+            float g = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+            this.playSound(SoundEvents.SLIME_SQUISH,1.0F,g);
+            if(!player.getAbilities().instabuild){
+                itemStack.shrink(1);
+            }
+            return InteractionResult.sidedSuccess(this.level.isClientSide);
+
+        }else if(itemStack.is(ModItem.SLIME_PIE.get()) && this.canDanceDrop() && this.isDancing()){
+            dropDanceItem(player);
+            this.spawnHeartParticle();
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
+    }
+
+    private void dropDanceItem(Player player){
+        if(!this.level.isClientSide) {
+            LootTable table = this.level.getServer().getLootTables().get(ModLootTables.SLIME_GOLEM_DANCE_DROP);
+            List<ItemStack> list = table.getRandomItems((new LootContext.Builder((ServerLevel) this.level)).withParameter(LootContextParams.ORIGIN,this.position()).withParameter(LootContextParams.THIS_ENTITY, this).withRandom(this.level.random).create(LootContextParamSets.GIFT));
+            if (!list.isEmpty()) {
+                Iterator<ItemStack> iterator = list.iterator();
+
+                while (iterator.hasNext()) {
+                    ItemStack itemStack = iterator.next();
+                    this.spawnAtLocation(itemStack, 1);
+                    this.resetDanceDropCooldown();
+                    float g = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+                    this.playSound(SoundEvents.SLIME_SQUISH, 1.0f, g);
+                    if (!player.getAbilities().instabuild) {
+                        itemStack.shrink(1);
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean shouldStopDancing() {
+        return this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), (double)GameEvent.JUKEBOX_PLAY.getNotificationRadius()) || !this.level.getBlockState(this.jukebox).is(Blocks.JUKEBOX);
     }
 
     public void addAdditionalSaveData(CompoundTag compoundTag) {
         super.addAdditionalSaveData(compoundTag);
-        compoundTag.putBoolean("allowedPlaceAlgae", this.isAllowedPlaceAlgae());
+        compoundTag.putBoolean("IsWaxed", this.isWaxed());
         compoundTag.putBoolean("Pumpkin",this.hasPumpkin());
         compoundTag.putByte("Color", (byte)this.getColor().getId());
-        compoundTag.putBoolean("CanMusicDrop",this.canDropMusic());
-        compoundTag.putLong("MusicDropCooldown",this.musicDropCooldown);
+        compoundTag.putBoolean("CanDanceDrop",this.canDanceDrop());
+        compoundTag.putLong("DanceDropCooldown",this.danceDropCooldown);
     }
 
     public void readAdditionalSaveData(CompoundTag compoundTag) {
         super.readAdditionalSaveData(compoundTag);
-        this.setAllowPlaceAlgae(compoundTag.getBoolean("allowedPlaceAlgae"));
+        this.setWax(compoundTag.getBoolean("IsWaxed"));
         this.setPumpkin(compoundTag.getBoolean("Pumpkin"));
         this.setColor(DyeColor.byId(compoundTag.getByte("Color")));
-        this.entityData.set(DATA_CAN_MUSIC_DROP,compoundTag.getBoolean("CanMusicDrop"));
-        this.musicDropCooldown = compoundTag.getInt("MusicDropCooldown");
+        this.entityData.set(DATA_CAN_DANCE_DROP,compoundTag.getBoolean("CanDanceDrop"));
+        this.danceDropCooldown = compoundTag.getInt("DanceDropCooldown");
 
     }
 
@@ -211,12 +240,12 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
         }
     }
 
-    public boolean isAllowedPlaceAlgae(){
-        return this.entityData.get(PLACE_ALGAE);
+    public boolean isWaxed(){
+        return this.entityData.get(IS_WAXED);
     }
 
-    public void setAllowPlaceAlgae(boolean bl){
-        this.entityData.set(PLACE_ALGAE,bl);
+    public void setWax(boolean bl){
+        this.entityData.set(IS_WAXED,bl);
     }
 
     public boolean hasPumpkin() {
@@ -252,23 +281,23 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
         return this.entityData.get(DATA_DANCING);
     }
 
-    private void resetMusicDropCooldown(){
-        this.musicDropCooldown = 6000L;
-        this.entityData.set(DATA_CAN_MUSIC_DROP,false);
+    private void resetDanceDropCooldown(){
+        this.danceDropCooldown = 6000L;
+        this.entityData.set(DATA_CAN_DANCE_DROP,false);
     }
 
-    private void updateMusicDropCooldown(){
-        if(this.musicDropCooldown > 0L){
-            --this.musicDropCooldown;
+    private void updateDanceDropCooldown(){
+        if(this.danceDropCooldown > 0L){
+            --this.danceDropCooldown;
         }
 
-        if(!this.level.isClientSide() && this.musicDropCooldown == 0L && !this.canDropMusic()){
-            this.entityData.set(DATA_CAN_MUSIC_DROP,true);
+        if(!this.level.isClientSide() && this.danceDropCooldown == 0L && !this.canDanceDrop()){
+            this.entityData.set(DATA_CAN_DANCE_DROP,true);
         }
     }
 
-    private boolean canDropMusic(){
-        return this.entityData.get(DATA_CAN_MUSIC_DROP);
+    private boolean canDanceDrop(){
+        return this.entityData.get(DATA_CAN_DANCE_DROP);
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSource) {
@@ -282,9 +311,9 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_PUMPKIN_ID, (byte)16);
-        this.entityData.define(PLACE_ALGAE,true);
-        this.entityData.define(DATA_COLOR_ID, (byte)5);
-        this.entityData.define(DATA_CAN_MUSIC_DROP,false);
+        this.entityData.define(IS_WAXED,false);
+        this.entityData.define(DATA_COLOR_ID, (byte)DyeColor.LIME.getId());
+        this.entityData.define(DATA_CAN_DANCE_DROP,false);
         this.entityData.define(DATA_DANCING,false);
     }
 
@@ -316,8 +345,8 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
 
     static {
         DATA_PUMPKIN_ID = SynchedEntityData.defineId(SlimeGolemEntity.class, EntityDataSerializers.BYTE);
-        PLACE_ALGAE = SynchedEntityData.defineId(SlimeGolemEntity.class, EntityDataSerializers.BOOLEAN);
-        DATA_CAN_MUSIC_DROP = SynchedEntityData.defineId(SlimeGolemEntity.class,EntityDataSerializers.BOOLEAN);
+        IS_WAXED = SynchedEntityData.defineId(SlimeGolemEntity.class, EntityDataSerializers.BOOLEAN);
+        DATA_CAN_DANCE_DROP = SynchedEntityData.defineId(SlimeGolemEntity.class,EntityDataSerializers.BOOLEAN);
         DATA_DANCING = SynchedEntityData.defineId(SlimeGolemEntity.class,EntityDataSerializers.BOOLEAN);
         DATA_COLOR_ID = SynchedEntityData.defineId(SlimeGolemEntity.class, EntityDataSerializers.BYTE);
         COLORARRAY_BY_COLOR = Maps.newEnumMap((Map) Arrays.stream(DyeColor.values()).collect(Collectors.toMap((dyeColor) -> {

@@ -1,5 +1,6 @@
 package net.firemuffin303.slimegolem;
 
+import net.firemuffin303.slimegolem.registry.ModLootTables;
 import net.firemuffin303.slimegolem.registry.block.ModBlock;
 import net.firemuffin303.slimegolem.registry.block.ModBlockTags;
 import net.firemuffin303.slimegolem.registry.entity.ModEntity;
@@ -16,6 +17,7 @@ public class SlimeGolemMod {
 
     public static void init() {
         ModSoundEvents.init();
+        ModLootTables.init();
         ModBlock.init();
         ModItem.init();
         ModEntity.init();
