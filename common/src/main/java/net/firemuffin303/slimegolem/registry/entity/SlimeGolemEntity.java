@@ -132,12 +132,13 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
         if (this.isDancing() && this.shouldStopDancing() && this.tickCount % 20 == 0) {
             this.setDancing(false);
             this.jukebox = null;
-
         }
 
-        System.out.println(this.isDancing());
-
         this.updateDanceDropCooldown();
+    }
+
+    private boolean shouldStopDancing() {
+        return this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), (double)GameEvent.JUKEBOX_PLAY.getNotificationRadius()) || !this.level.getBlockState(this.jukebox).is(Blocks.JUKEBOX);
     }
 
     protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
@@ -209,9 +210,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
         }
     }
 
-    private boolean shouldStopDancing() {
-        return this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), (double)GameEvent.JUKEBOX_PLAY.getNotificationRadius()) || !this.level.getBlockState(this.jukebox).is(Blocks.JUKEBOX);
-    }
+
 
     public void addAdditionalSaveData(CompoundTag compoundTag) {
         super.addAdditionalSaveData(compoundTag);
@@ -274,7 +273,9 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
     }
 
     public void setDancing(boolean bl){
-        this.entityData.set(DATA_DANCING,bl);
+        if(!this.level.isClientSide){
+            this.entityData.set(DATA_DANCING,bl);
+        }
     }
 
     public boolean isDancing(){
