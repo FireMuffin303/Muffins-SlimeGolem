@@ -183,6 +183,9 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
 
         }else if(itemStack.is(ModItem.SLIME_PIE.get()) && this.canDanceDrop() && this.isDancing()){
             dropDanceItem(player);
+            if (!player.getAbilities().instabuild) {
+                itemStack.shrink(1);
+            }
             this.spawnHeartParticle();
             return InteractionResult.SUCCESS;
         }
@@ -202,9 +205,6 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
                     this.resetDanceDropCooldown();
                     float g = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
                     this.playSound(SoundEvents.SLIME_SQUISH, 1.0f, g);
-                    if (!player.getAbilities().instabuild) {
-                        itemStack.shrink(1);
-                    }
                 }
             }
         }
