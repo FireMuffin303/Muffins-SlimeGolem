@@ -19,7 +19,7 @@ public class SolidSlimeWall extends WallBlock {
         if (entity.isSuppressingBounce()) {
             super.fallOn(level, blockState, blockPos, entity, fallDistance);
         } else {
-            entity.causeFallDamage(fallDistance, 0.0F, DamageSource.FALL);
+            entity.causeFallDamage(fallDistance, 0.0F, level.damageSources().fall());
         }
 
     }

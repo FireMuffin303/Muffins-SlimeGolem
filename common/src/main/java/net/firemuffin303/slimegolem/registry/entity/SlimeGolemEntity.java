@@ -7,9 +7,9 @@ import net.firemuffin303.slimegolem.registry.block.SlimeAlgaeBlock;
 import net.firemuffin303.slimegolem.registry.item.ModItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -372,16 +372,18 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
             return this.listenerRadius;
         }
 
-        public boolean handleGameEvent(ServerLevel serverLevel, GameEvent.Message message) {
-            if (message.gameEvent() == GameEvent.JUKEBOX_PLAY) {
-                SlimeGolemEntity.this.setJukeboxPlaying(new BlockPos(message.source()), true);
+        @Override
+        public boolean handleGameEvent(ServerLevel serverLevel, GameEvent gameEvent, GameEvent.Context context, Vec3 vec3) {
+            if (gameEvent == GameEvent.JUKEBOX_PLAY) {
+                SlimeGolemEntity.this.setJukeboxPlaying(new BlockPos((int) vec3.x, (int) vec3.y, (int) vec3.z), true);
                 return true;
-            } else if (message.gameEvent() == GameEvent.JUKEBOX_STOP_PLAY) {
-                SlimeGolemEntity.this.setJukeboxPlaying(new BlockPos(message.source()), false);
+            } else if (gameEvent == GameEvent.JUKEBOX_STOP_PLAY) {
+                SlimeGolemEntity.this.setJukeboxPlaying(new BlockPos((int) vec3.x, (int) vec3.y, (int) vec3.z), false);
                 return true;
             } else {
                 return false;
             }
         }
+
     }
 }

@@ -17,6 +17,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.CreativeModeTabRegistry;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.nio.file.Path;
@@ -48,19 +49,12 @@ public class ModPlatformImpl {
         return SlimeGolemModForge.BLOCK.register(id,supplier);
     }
 
-
-
     public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String id, Supplier<EntityType<T>> supplier) {
         return SlimeGolemModForge.ENTITY_TYPE.register(id,supplier);
     }
 
     public static CreativeModeTab registerCreativeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon) {
-        return new CreativeModeTab(resourceLocation.toString()) {
-            @Override
-            public ItemStack makeIcon() {
-                return icon.get();
-            }
-        };
+        return CreativeModeTabRegistry.create (resourceLocation.toString()).icon(icon).build();
     }
 
     public static <T extends Block> TagKey<T> registerBlockTag(ResourceKey<Registry<T>> blockRegistry, String id) {
@@ -72,7 +66,7 @@ public class ModPlatformImpl {
     }
 
     public static Supplier<SoundEvent> registerSoundEvent(String id) {
-        return SlimeGolemModForge.SOUND_EVENT.register(id,() -> new SoundEvent(new ResourceLocation(SlimeGolemMod.MOD_ID,id)));
+        return SlimeGolemModForge.SOUND_EVENT.register(id,() -> SoundEvent.createVariableRangeEvent(new ResourceLocation(SlimeGolemMod.MOD_ID,id)));
     }
 
     public static boolean getShowHoneyLayer() {

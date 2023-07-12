@@ -2,6 +2,7 @@ package net.firemuffin303.slimegolem.registry.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.BlockGetter;
@@ -19,7 +20,7 @@ public class SolidSlimeBlock extends Block {
         if (entity.isSuppressingBounce()) {
             super.fallOn(level, blockState, blockPos, entity, fallDistance);
         } else {
-            entity.causeFallDamage(fallDistance, 0.0F, DamageSource.FALL);
+            entity.causeFallDamage(fallDistance, 0.0F, level.damageSources().fall());
         }
 
     }

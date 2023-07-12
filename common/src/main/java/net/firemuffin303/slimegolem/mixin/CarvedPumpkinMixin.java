@@ -1,14 +1,13 @@
 package net.firemuffin303.slimegolem.mixin;
 
 import net.firemuffin303.slimegolem.registry.block.ModBlock;
-import net.firemuffin303.slimegolem.registry.block.ModBlockTags;
 import net.firemuffin303.slimegolem.registry.entity.ModEntity;
 import net.firemuffin303.slimegolem.registry.entity.SlimeGolemEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Wearable;
+import net.minecraft.world.item.Equipable;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CarvedPumpkinBlock;
@@ -18,7 +17,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.pattern.BlockInWorld;
 import net.minecraft.world.level.block.state.pattern.BlockPattern;
 import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
-import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,7 +29,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 @Mixin(CarvedPumpkinBlock.class)
-public class CarvedPumpkinMixin extends HorizontalDirectionalBlock implements Wearable {
+public class CarvedPumpkinMixin extends HorizontalDirectionalBlock implements Equipable {
     @Shadow @Final
     private static Predicate<BlockState> PUMPKINS_PREDICATE;
     private static Predicate<BlockState> PACKED_SLIME_PREDICATE;
@@ -125,5 +123,11 @@ public class CarvedPumpkinMixin extends HorizontalDirectionalBlock implements We
                   blockState.is(ModBlock.RED_PACKED_SLIME_BLOCK.get()) ||
                   blockState.is(ModBlock.BLACK_PACKED_SLIME_BLOCK.get()));
         };
+    }
+
+    @Shadow
+    @Override
+    public EquipmentSlot getEquipmentSlot() {
+        return EquipmentSlot.HEAD;
     }
 }
