@@ -5,6 +5,9 @@ import net.firemuffin303.slimegolem.ModPlatform;
 import net.firemuffin303.slimegolem.ModSoundEvents;
 import net.firemuffin303.slimegolem.registry.block.ModBlock;
 import net.firemuffin303.slimegolem.registry.entity.ModEntity;
+import net.minecraft.world.flag.FeatureFlag;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.*;
 
 import java.util.function.Supplier;
@@ -192,7 +195,7 @@ public class ModItem {
 
     private static Supplier<Item> register(String id, Supplier<Item> supplier){
         Supplier<Item> SUPPLIER =  ModPlatform.registerItem(id,supplier);
-        TAB.displayItems((itemDisplayParameters, output) -> output.accept(SUPPLIER.get()));
+        TAB.buildContents(new CreativeModeTab.ItemDisplayParameters(FeatureFlagSet.of(FeatureFlags.VANILLA),false,));
         return SUPPLIER;
     }
 }

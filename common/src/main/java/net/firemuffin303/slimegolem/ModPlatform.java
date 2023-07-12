@@ -28,7 +28,7 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
-    public static CreativeModeTab.Builder registerCreativeTab(ResourceLocation resourceLocation,Supplier<ItemStack> icon){
+    public static CreativeModeTab registerCreativeTab(ResourceLocation resourceLocation,Supplier<ItemStack> icon){
         throw new AssertionError();
     }
 

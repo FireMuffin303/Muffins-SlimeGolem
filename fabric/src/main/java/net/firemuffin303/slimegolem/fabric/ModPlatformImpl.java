@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -52,7 +53,7 @@ public class ModPlatformImpl {
     }
 
     public static CreativeModeTab registerCreativeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon) {
-        return FabricItemGroup.builder(resourceLocation).icon(icon).build();
+        return FabricItemGroup.builder().title(Component.translatable("itemGroup.%s.%s".formatted(resourceLocation.getNamespace(),resourceLocation.getPath()))).icon(icon).build();
     }
 
     public static <T extends Block> TagKey<T> registerBlockTag(ResourceKey<Registry<T>> blockRegistry, String id) {

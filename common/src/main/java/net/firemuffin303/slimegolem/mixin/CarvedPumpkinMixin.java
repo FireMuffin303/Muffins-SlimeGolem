@@ -125,7 +125,6 @@ public class CarvedPumpkinMixin extends HorizontalDirectionalBlock implements Eq
         };
     }
 
-    @Shadow
     @Override
     public EquipmentSlot getEquipmentSlot() {
         return EquipmentSlot.HEAD;

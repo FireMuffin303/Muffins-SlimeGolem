@@ -46,7 +46,7 @@ public class SlimeGolemHeadLayer extends RenderLayer<SlimeGolemEntity, SlimeGole
                     poseStack.translate(-0.5D, -0.5D, -0.5D);
                     this.blockRenderer.getModelRenderer().renderModel(poseStack.last(), multiBufferSource.getBuffer(RenderType.outline(TextureAtlas.LOCATION_BLOCKS)), blockState, bakedModel, 0.0F, 0.0F, 0.0F, i, n);
                 }else{
-                    this.itemRenderer.renderStatic(entity,itemStack, ItemDisplayContext.HEAD,false,poseStack,multiBufferSource,entity.level,i,LivingEntityRenderer.getOverlayCoords(entity,0.0F),entity.getId());
+                    this.itemRenderer.renderStatic(entity,itemStack, ItemDisplayContext.HEAD,false,poseStack,multiBufferSource,entity.level(),i,LivingEntityRenderer.getOverlayCoords(entity,0.0F),entity.getId());
                 }
                 poseStack.popPose();
             }

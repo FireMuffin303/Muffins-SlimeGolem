@@ -25,11 +25,6 @@ public class SlimeAlgaeBlock extends MultifaceBlock implements SimpleWaterlogged
     }
 
     @Override
-    public PushReaction getPistonPushReaction(BlockState blockState) {
-        return PushReaction.DESTROY;
-    }
-
-    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(new Property[]{WATERLOGGED});

@@ -14,7 +14,7 @@ import net.minecraft.world.item.Items;
 
 public class SlimeGolemMod {
     public static final String MOD_ID = "slimegolem";
-    public static final CreativeModeTab.Builder TAB = ModPlatform.registerCreativeTab(new ResourceLocation(MOD_ID, "main"), () -> new ItemStack(Items.SLIME_BALL));
+    public static final CreativeModeTab TAB = ModPlatform.registerCreativeTab(new ResourceLocation(MOD_ID, "main"), () -> new ItemStack(Items.SLIME_BALL));
 
     public static void init() {
         ModSoundEvents.init();

@@ -36,6 +36,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.*;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -107,11 +108,11 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
     public void aiStep() {
         super.aiStep();
         if(!isWaxed()){
-            if (!this.level.isClientSide) {
+            if (!this.level().isClientSide) {
                 ChunkPos chunkPos = this.chunkPosition();
-                boolean isSlimeChunk = WorldgenRandom.seedSlimeChunk(chunkPos.x, chunkPos.z, ((WorldGenLevel)level).getSeed(), 987234911L).nextInt(10) == 0;
+                boolean isSlimeChunk = WorldgenRandom.seedSlimeChunk(chunkPos.x, chunkPos.z, ((WorldGenLevel)level()).getSeed(), 987234911L).nextInt(10) == 0;
                 if(isSlimeChunk){
-                    if (!this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+                    if (!this.level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
                         return;
                     }
                     BlockState blockState = ModBlock.SLIME_ALGAE.get().defaultBlockState().setValue(SlimeAlgaeBlock.getFaceProperty(Direction.DOWN),true);
@@ -120,9 +121,9 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
                         int j = Mth.floor(this.getY());
                         int k = Mth.floor(this.getZ() + (double)((float)(l / 2 % 2 * 2 - 1) * 0.25F));
                         BlockPos blockPos2 = new BlockPos(i, j, k);
-                        if (this.level.getBlockState(blockPos2).isAir() && blockState.canSurvive(this.level, blockPos2)) {
-                            this.level.setBlockAndUpdate(blockPos2, blockState);
-                            this.level.gameEvent(GameEvent.BLOCK_PLACE, blockPos2, GameEvent.Context.of(this, blockState));
+                        if (this.level().getBlockState(blockPos2).isAir() && blockState.canSurvive(this.level(), blockPos2)) {
+                            this.level().setBlockAndUpdate(blockPos2, blockState);
+                            this.level().gameEvent(GameEvent.BLOCK_PLACE, blockPos2, GameEvent.Context.of(this, blockState));
                         }
                     }
                 }
@@ -138,7 +139,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
     }
 
     private boolean shouldStopDancing() {
-        return this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), (double)GameEvent.JUKEBOX_PLAY.getNotificationRadius()) || !this.level.getBlockState(this.jukebox).is(Blocks.JUKEBOX);
+        return this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), (double)GameEvent.JUKEBOX_PLAY.getNotificationRadius()) || !this.level().getBlockState(this.jukebox).is(Blocks.JUKEBOX);
     }
 
     protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
@@ -146,22 +147,22 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
         if (itemStack.is(Items.SHEARS) && this.readyForShearing()) {
             this.shear(SoundSource.PLAYERS);
             this.gameEvent(GameEvent.SHEAR, player);
-            if (!this.level.isClientSide) {
+            if (!this.level().isClientSide) {
                 itemStack.hurtAndBreak(1, player, (playerx) -> {
                     playerx.broadcastBreakEvent(interactionHand);
                 });
             }
-            return InteractionResult.sidedSuccess(this.level.isClientSide);
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
         }else if((itemStack.getItem() instanceof DyeItem item)){
             if(this.isAlive() && this.getColor() != item.getDyeColor()){
-                this.level.playSound(player,this, SoundEvents.DYE_USE,SoundSource.PLAYERS,1.0f,1.0f);
-                if(!player.level.isClientSide ){
+                this.level().playSound(player,this, SoundEvents.DYE_USE,SoundSource.PLAYERS,1.0f,1.0f);
+                if(!player.level().isClientSide ){
                     this.setColor(item.getDyeColor());
                     if(!player.getAbilities().instabuild){
                         itemStack.shrink(1);
                     }
                 }
-                return InteractionResult.sidedSuccess(this.level.isClientSide);
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
         }else if(itemStack.is(Items.SLIME_BALL) && isWaxed()){
             setWax(false);
@@ -170,7 +171,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
             if(!player.getAbilities().instabuild){
                 itemStack.shrink(1);
             }
-            return InteractionResult.sidedSuccess(this.level.isClientSide);
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
 
         }else if(itemStack.is(Items.HONEYCOMB) && !isWaxed()){
             setWax(true);
@@ -179,7 +180,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
             if(!player.getAbilities().instabuild){
                 itemStack.shrink(1);
             }
-            return InteractionResult.sidedSuccess(this.level.isClientSide);
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
 
         }else if(itemStack.is(ModItem.SLIME_PIE.get()) && this.canDanceDrop() && this.isDancing()){
             dropDanceItem(player);
@@ -193,9 +194,9 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
     }
 
     private void dropDanceItem(Player player){
-        if(!this.level.isClientSide) {
-            LootTable table = this.level.getServer().getLootTables().get(ModLootTables.SLIME_GOLEM_DANCE_DROP);
-            List<ItemStack> list = table.getRandomItems((new LootContext.Builder((ServerLevel) this.level)).withParameter(LootContextParams.ORIGIN,this.position()).withParameter(LootContextParams.THIS_ENTITY, this).withRandom(this.level.random).create(LootContextParamSets.GIFT));
+        if(!this.level().isClientSide) {
+            LootTable table = ((ServerLevel)this.level()).getServer().getLootData().getLootTable(ModLootTables.SLIME_GOLEM_DANCE_DROP);
+            List<ItemStack> list = table.getRandomItems((new LootParams.Builder((ServerLevel) this.level())).withParameter(LootContextParams.ORIGIN,this.position()).withParameter(LootContextParams.THIS_ENTITY, this).create(LootContextParamSets.GIFT));
             if (!list.isEmpty()) {
                 Iterator<ItemStack> iterator = list.iterator();
 
@@ -233,7 +234,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
 
     @Override
     public void updateDynamicGameEventListener(BiConsumer<DynamicGameEventListener<?>, ServerLevel> biConsumer) {
-        Level level = this.level;
+        Level level = this.level();
         if(level instanceof ServerLevel serverLevel){
             biConsumer.accept(this.dynamicJukeboxListener,serverLevel);
         }
@@ -273,7 +274,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
     }
 
     public void setDancing(boolean bl){
-        if(!this.level.isClientSide){
+        if(!this.level().isClientSide){
             this.entityData.set(DATA_DANCING,bl);
         }
     }
@@ -292,7 +293,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
             --this.danceDropCooldown;
         }
 
-        if(!this.level.isClientSide() && this.danceDropCooldown == 0L && !this.canDanceDrop()){
+        if(!this.level().isClientSide() && this.danceDropCooldown == 0L && !this.canDanceDrop()){
             this.entityData.set(DATA_CAN_DANCE_DROP,true);
         }
     }
@@ -320,8 +321,8 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
 
     @Override
     public void shear(SoundSource soundSource) {
-        this.level.playSound((Player)null, this, SoundEvents.SNOW_GOLEM_SHEAR, soundSource, 1.0F, 1.0F);
-        if (!this.level.isClientSide()) {
+        this.level().playSound((Player)null, this, SoundEvents.SNOW_GOLEM_SHEAR, soundSource, 1.0F, 1.0F);
+        if (!this.level().isClientSide()) {
             this.setPumpkin(false);
             this.spawnAtLocation(new ItemStack(Items.CARVED_PUMPKIN), 1.0F);
         }
@@ -341,7 +342,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
         double d = this.random.nextGaussian() * 0.02D;
         double e = this.random.nextGaussian() * 0.02D;
         double f = this.random.nextGaussian() * 0.02D;
-        this.level.addParticle(ParticleTypes.HEART, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d, e, f);
+        this.level().addParticle(ParticleTypes.HEART, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d, e, f);
     }
 
     static {
