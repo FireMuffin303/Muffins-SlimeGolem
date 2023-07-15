@@ -3,8 +3,8 @@ package net.firemuffin303.slimegolem.client;
 
 import net.firemuffin303.slimegolem.ModPlatform;
 import net.firemuffin303.slimegolem.client.renderer.entity.SlimeGolemRenderer;
-import net.firemuffin303.slimegolem.registry.block.ModBlock;
-import net.firemuffin303.slimegolem.registry.entity.ModEntity;
+import net.firemuffin303.slimegolem.common.registry.ModBlock;
+import net.firemuffin303.slimegolem.common.registry.ModEntity;
 import net.minecraft.client.renderer.RenderType;
 
 public class SlimeGolemClientMod {

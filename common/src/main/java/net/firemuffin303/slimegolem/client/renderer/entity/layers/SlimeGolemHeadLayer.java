@@ -3,7 +3,7 @@ package net.firemuffin303.slimegolem.client.renderer.entity.layers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.firemuffin303.slimegolem.client.model.SlimeGolemModel;
-import net.firemuffin303.slimegolem.registry.entity.SlimeGolemEntity;
+import net.firemuffin303.slimegolem.common.entity.SlimeGolemEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;

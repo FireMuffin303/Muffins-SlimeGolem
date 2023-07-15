@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "slimegolem",
+  "id": "muffins_slimegolem",
   "version": "${version}",
   "name": "Muffin's Slime Golem",
   "description": "Add Slime Golem to Minecraft. A good ally for finding Slime Chunks!",
@@ -13,22 +13,21 @@
     "issues": "https://github.com/FireMuffin303/SlimeGolem/issues"
   },
   "license": "MIT",
-  "icon": "assets/slimegolem/icon.png",
+  "icon": "assets/muffins_slimegolem/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.firemuffin303.slimegolem.fabric.SlimeGolemModFabric"
+      "net.firemuffin303.slimegolem.fabric.MuffinsSlimeGolemModFabric"
     ],
     "client": [
       "net.firemuffin303.slimegolem.fabric.client.SlimeGolemClientModFabric"
     ],
     "modmenu": [
-      "net.firemuffin303.slimegolem.fabric.utils.ModMenuIntegration"
     ]
   },
   "mixins": [
-    "slimegolem.mixins.json",
-    "slimegolem-common.mixins.json"
+    "muffins_slimegolem.mixins.json",
+    "muffins_slimegolem-common.mixins.json"
   ],
   "depends": {
     "fabric": "*",

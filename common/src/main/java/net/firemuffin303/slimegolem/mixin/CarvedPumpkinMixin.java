@@ -1,8 +1,8 @@
 package net.firemuffin303.slimegolem.mixin;
 
-import net.firemuffin303.slimegolem.registry.block.ModBlock;
-import net.firemuffin303.slimegolem.registry.entity.ModEntity;
-import net.firemuffin303.slimegolem.registry.entity.SlimeGolemEntity;
+import net.firemuffin303.slimegolem.common.registry.ModBlock;
+import net.firemuffin303.slimegolem.common.registry.ModEntity;
+import net.firemuffin303.slimegolem.common.entity.SlimeGolemEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.DyeColor;

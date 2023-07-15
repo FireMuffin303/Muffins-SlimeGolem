@@ -1,18 +1,18 @@
 package net.firemuffin303.slimegolem.client.renderer.entity;
 
-import net.firemuffin303.slimegolem.SlimeGolemMod;
+import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.client.model.SlimeGolemModel;
 import net.firemuffin303.slimegolem.client.renderer.entity.layers.SlimeGolemHeadLayer;
 import net.firemuffin303.slimegolem.client.renderer.entity.layers.SlimeGolemHoneyLayer;
 import net.firemuffin303.slimegolem.client.renderer.entity.layers.SlimeGolemOverlayLayer;
-import net.firemuffin303.slimegolem.registry.entity.SlimeGolemEntity;
+import net.firemuffin303.slimegolem.common.entity.SlimeGolemEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 
 public class SlimeGolemRenderer extends MobRenderer<SlimeGolemEntity, SlimeGolemModel<SlimeGolemEntity>> {
-    public static final ResourceLocation SLIME_GOLEM_LOCATION = new ResourceLocation(SlimeGolemMod.MOD_ID,"textures/entity/slime_golem/slime_golem.png");
+    public static final ResourceLocation SLIME_GOLEM_LOCATION = new ResourceLocation(MuffinsSlimeGolemMod.MOD_ID,"textures/entity/slime_golem/slime_golem.png");
 
 
     public SlimeGolemRenderer(EntityRendererProvider.Context context) {

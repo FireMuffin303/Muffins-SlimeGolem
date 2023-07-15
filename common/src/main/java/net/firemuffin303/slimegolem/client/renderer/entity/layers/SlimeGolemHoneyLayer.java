@@ -3,9 +3,9 @@ package net.firemuffin303.slimegolem.client.renderer.entity.layers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.firemuffin303.slimegolem.ModPlatform;
-import net.firemuffin303.slimegolem.SlimeGolemMod;
+import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.client.model.SlimeGolemModel;
-import net.firemuffin303.slimegolem.registry.entity.SlimeGolemEntity;
+import net.firemuffin303.slimegolem.common.entity.SlimeGolemEntity;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 
 public class SlimeGolemHoneyLayer extends RenderLayer<SlimeGolemEntity, SlimeGolemModel<SlimeGolemEntity>> {
-    public static final ResourceLocation WAX_LOCATION = new ResourceLocation(SlimeGolemMod.MOD_ID,"textures/entity/slime_golem/slime_golem_waxed.png");
+    public static final ResourceLocation WAX_LOCATION = new ResourceLocation(MuffinsSlimeGolemMod.MOD_ID,"textures/entity/slime_golem/slime_golem_waxed.png");
     private final SlimeGolemModel<SlimeGolemEntity> model;
 
     public SlimeGolemHoneyLayer(RenderLayerParent<SlimeGolemEntity, SlimeGolemModel<SlimeGolemEntity>> renderLayerParent, EntityModelSet entityModelSet) {
@@ -25,7 +25,7 @@ public class SlimeGolemHoneyLayer extends RenderLayer<SlimeGolemEntity, SlimeGol
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, SlimeGolemEntity entity, float f, float g, float h, float j, float k, float l) {
-        if(ModPlatform.getShowHoneyLayer()){
+        //if(ModPlatform.getShowHoneyLayer()){
             if(!entity.isInvisible()){
                 if(entity.isWaxed()){
                     VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.entityTranslucent(WAX_LOCATION));
@@ -34,6 +34,6 @@ public class SlimeGolemHoneyLayer extends RenderLayer<SlimeGolemEntity, SlimeGol
                     //renderColoredCutoutModel(this.getParentModel(),WAX_LOCATION,poseStack,multiBufferSource,i,entity,1.0f,1.0f,1.0f);
                 }
             }
-        }
+        //}
     }
 }

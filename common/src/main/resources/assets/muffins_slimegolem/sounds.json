@@ -1,0 +1,10 @@
+{
+  "music_disc.bouncyslime": {
+    "sounds": [
+      {
+        "name": "muffins_slimegolem:records/bouncyslime",
+        "stream": true
+      }
+    ]
+  }
+}

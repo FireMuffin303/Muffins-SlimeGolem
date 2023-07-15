@@ -1,7 +1,7 @@
 package net.firemuffin303.slimegolem.forge;
 
 import net.firemuffin303.slimegolem.ModPlatform;
-import net.firemuffin303.slimegolem.SlimeGolemMod;
+import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -41,41 +41,7 @@ public class ModPlatformImpl {
         EntityRenderers.register(entityTypeSupplier.get(), entityRendererProvider);
     }
 
-    public static <T extends Item> Supplier<T> registerItem(String id, Supplier<T> supplier) {
-        return SlimeGolemModForge.ITEMS.register(id,supplier);
-    }
 
-    public static <T extends Block> Supplier<T> registerBlock(String id, Supplier<T> supplier) {
-        return SlimeGolemModForge.BLOCK.register(id,supplier);
-    }
-
-    public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String id, Supplier<EntityType<T>> supplier) {
-        return SlimeGolemModForge.ENTITY_TYPE.register(id,supplier);
-    }
-
-    public static CreativeModeTab registerCreativeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon) {
-        return CreativeModeTabRegistry.create (resourceLocation.toString()).icon(icon).build();
-    }
-
-    public static <T extends Block> TagKey<T> registerBlockTag(ResourceKey<Registry<T>> blockRegistry, String id) {
-        return TagKey.create(blockRegistry,new ResourceLocation(SlimeGolemMod.MOD_ID,id));
-    }
-
-    public static <T extends Item> TagKey<T> registerItemTag(ResourceKey<Registry<T>> itemRegistry, String id) {
-        return TagKey.create(itemRegistry,new ResourceLocation(SlimeGolemMod.MOD_ID,id));
-    }
-
-    public static Supplier<SoundEvent> registerSoundEvent(String id) {
-        return SlimeGolemModForge.SOUND_EVENT.register(id,() -> SoundEvent.createVariableRangeEvent(new ResourceLocation(SlimeGolemMod.MOD_ID,id)));
-    }
-
-    public static boolean getShowHoneyLayer() {
-        return ModForgeConfig.SHOW_HONEY_ON_GOLEM.get();
-    }
-
-    public static ResourceLocation registerLootTable(ResourceLocation resourceLocation) {
-        return resourceLocation;
-    }
 
 
 }

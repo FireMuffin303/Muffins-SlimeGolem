@@ -3,8 +3,7 @@ package net.firemuffin303.slimegolem.client.renderer.entity.layers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.firemuffin303.slimegolem.client.model.SlimeGolemModel;
-import net.firemuffin303.slimegolem.client.renderer.entity.SlimeGolemRenderer;
-import net.firemuffin303.slimegolem.registry.entity.SlimeGolemEntity;
+import net.firemuffin303.slimegolem.common.entity.SlimeGolemEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -12,8 +11,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.world.entity.animal.Sheep;
-import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.item.DyeColor;
 
 public class SlimeGolemOverlayLayer extends RenderLayer<SlimeGolemEntity, SlimeGolemModel<SlimeGolemEntity>> {

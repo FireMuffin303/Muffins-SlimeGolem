@@ -2,8 +2,8 @@ package net.firemuffin303.slimegolem.client.model;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.firemuffin303.slimegolem.SlimeGolemMod;
-import net.firemuffin303.slimegolem.registry.entity.SlimeGolemEntity;
+import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
+import net.firemuffin303.slimegolem.common.entity.SlimeGolemEntity;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -15,8 +15,8 @@ import net.minecraft.world.entity.Entity;
 
 @Environment(EnvType.CLIENT)
 public class SlimeGolemModel<T extends Entity> extends HierarchicalModel<T> {
-    public static final ModelLayerLocation LAYER = new ModelLayerLocation(new ResourceLocation(SlimeGolemMod.MOD_ID,"slime_golem"),"main");
-    public static final ModelLayerLocation OUT_LAYER = new ModelLayerLocation(new ResourceLocation(SlimeGolemMod.MOD_ID,"slime_golem"),"outer");
+    public static final ModelLayerLocation LAYER = new ModelLayerLocation(new ResourceLocation(MuffinsSlimeGolemMod.MOD_ID,"slime_golem"),"main");
+    public static final ModelLayerLocation OUT_LAYER = new ModelLayerLocation(new ResourceLocation(MuffinsSlimeGolemMod.MOD_ID,"slime_golem"),"outer");
 
     private final ModelPart root;
     private final ModelPart head;

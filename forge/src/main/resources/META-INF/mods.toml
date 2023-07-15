@@ -4,7 +4,7 @@ issueTrackerURL = "https://github.com/FireMuffin303/SlimeGolem/issues"
 license = "MIT"
 
 [[mods]]
-modId = "slimegolem"
+modId = "muffins_slimegolem"
 version = "${version}"
 displayName = "Muffin's Slime Golem"
 authors = "FireMuffin303"
@@ -15,17 +15,17 @@ Add Slime Golem to Minecraft. A good ally for finding Slime Chunks!
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/muffins-slime-golem"
 logoFile = "icon.png"
 
-[[dependencies.slimegolem]]
+[[dependencies.muffins_slimegolem]]
 modId = "forge"
 mandatory = true
 versionRange = "[41,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.slimegolem]]
+[[dependencies.muffins_slimegolem]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19,1.19.2)"
+versionRange = "[1.20,)"
 ordering = "NONE"
 side = "BOTH"
 

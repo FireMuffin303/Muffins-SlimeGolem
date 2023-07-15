@@ -27,10 +27,7 @@ public class ModPlatform {
         throw new AssertionError();
     }
 
-    @ExpectPlatform
-    public static CreativeModeTab registerCreativeTab(ResourceLocation resourceLocation,Supplier<ItemStack> icon){
-        throw new AssertionError();
-    }
+
 
     @ExpectPlatform
     public static <T extends Item> Supplier<T> registerItem(String id, Supplier<T> supplier){

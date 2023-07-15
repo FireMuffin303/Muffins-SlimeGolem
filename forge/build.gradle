@@ -14,8 +14,17 @@ loom {
         convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
 
-        mixinConfig "slimegolem-common.mixins.json"
-        mixinConfig "slimegolem.mixins.json"
+        mixinConfig "muffins_slimegolem-common.mixins.json"
+        mixinConfig "muffins_slimegolem.mixins.json"
+    }
+    runs {
+        data {
+            forgeTemplate("data")
+            environment "data"
+            programArgs "--mod=muffins_slimegolem", "--all", "--output=" + file("src/generated/resources/"), "--existing=" + project(":common").file("src/main/resources/")
+            name "Forge Data Generation"
+
+        }
     }
 }
 
