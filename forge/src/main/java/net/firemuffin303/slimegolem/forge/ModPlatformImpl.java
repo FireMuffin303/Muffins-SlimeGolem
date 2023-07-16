@@ -13,11 +13,13 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.CreativeModeTabRegistry;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.nio.file.Path;
@@ -41,7 +43,9 @@ public class ModPlatformImpl {
         EntityRenderers.register(entityTypeSupplier.get(), entityRendererProvider);
     }
 
-
+    public static <T extends Mob> Supplier<Item> registerSpawnEgg(Supplier<EntityType<T>> entityType, int primaryColor, int secondaryColor, Item.Properties properties) {
+        return () -> new ForgeSpawnEggItem(entityType,primaryColor,secondaryColor,properties);
+    }
 
 
 }

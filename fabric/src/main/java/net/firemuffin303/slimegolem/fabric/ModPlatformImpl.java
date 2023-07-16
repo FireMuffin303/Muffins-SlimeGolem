@@ -16,11 +16,14 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 
+import java.util.Properties;
 import java.util.function.Supplier;
 
 public class ModPlatformImpl {
@@ -32,6 +35,10 @@ public class ModPlatformImpl {
 
     public static <T extends Entity> void registerEntityRenderer(Supplier<EntityType<T>> entityTypeSupplier, EntityRendererProvider<T> entityRendererProvider) {
         EntityRendererRegistry.register(entityTypeSupplier.get(),entityRendererProvider);
+    }
+
+    public static <T extends Mob> Supplier<Item> registerSpawnEgg(Supplier<EntityType<T>> entityType, int primaryColor, int secondaryColor, Item.Properties properties){
+        return () -> new SpawnEggItem(entityType.get(),primaryColor,secondaryColor,properties);
     }
 
 }

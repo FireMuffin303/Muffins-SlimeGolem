@@ -11,12 +11,14 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
 import java.nio.file.Path;
+import java.util.Properties;
 import java.util.function.Supplier;
 
 public class ModPlatform {
@@ -51,6 +53,11 @@ public class ModPlatform {
 
     @ExpectPlatform
     public static <T extends Entity> void registerEntityRenderer(Supplier<EntityType<T>> entityTypeSupplier, EntityRendererProvider<T> entityRendererProvider){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static <T extends Mob> Supplier<Item> registerSpawnEgg(Supplier<EntityType<T>> entityType, int primaryColor, int secondaryColor, Item.Properties properties){
         throw new AssertionError();
     }
 

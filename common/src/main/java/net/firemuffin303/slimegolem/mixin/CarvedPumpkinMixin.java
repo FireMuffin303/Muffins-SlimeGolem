@@ -1,7 +1,7 @@
 package net.firemuffin303.slimegolem.mixin;
 
 import net.firemuffin303.slimegolem.common.registry.ModBlock;
-import net.firemuffin303.slimegolem.common.registry.ModEntity;
+import net.firemuffin303.slimegolem.common.registry.ModEntityTypes;
 import net.firemuffin303.slimegolem.common.entity.SlimeGolemEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -56,7 +56,7 @@ public class CarvedPumpkinMixin extends HorizontalDirectionalBlock implements Eq
                 level.levelEvent(2001, blockInWorld.getPos(), Block.getId(blockInWorld.getState()));
             }
 
-            SlimeGolemEntity slimeGolemEntity = ModEntity.SLIME_GOLEM.get().create(level);
+            SlimeGolemEntity slimeGolemEntity = ModEntityTypes.SLIME_GOLEM.get().create(level);
             BlockState blockState = blockPatternMatch.getBlock(0,1,0).getState();
 
             byte color = getPackedSlimeBlock().get(blockState.getBlock());
