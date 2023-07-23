@@ -21,10 +21,15 @@ loom {
         data {
             forgeTemplate("data")
             environment "data"
-            programArgs "--mod=muffins_slimegolem", "--all", "--output=" + file("src/generated/resources/"), "--existing=" + project(":common").file("src/main/resources/")
+            programArgs "--mod=muffins_slimegolem", "--all", "--output=" + file("src/generated/resources/"), "--existing=" + project(":common").file("src/main/resources/").absolutePath
             name "Forge Data Generation"
 
         }
+    }
+}
+sourceSets.main {
+    resources {
+        srcDirs += "src/generated/resources/"
     }
 }
 

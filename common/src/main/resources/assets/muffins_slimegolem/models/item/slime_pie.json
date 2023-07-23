@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "slimegolem:item/slime_pie"
+    "layer0": "muffins_slimegolem:item/slime_pie"
   }
 }

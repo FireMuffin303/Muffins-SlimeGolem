@@ -15,7 +15,7 @@ public class MuffinsSlimeGolemMod {
         ModLootTables.init();
         ModBlock.BLOCKS.init();
         ModEntityTypes.ENTITY_TYPE.init();
-        ModItem.SLIME_BLOCK.init();
+        ModItem.ITEMS.init();
         ModItemTags.init();
         ModBlockTags.init();
 

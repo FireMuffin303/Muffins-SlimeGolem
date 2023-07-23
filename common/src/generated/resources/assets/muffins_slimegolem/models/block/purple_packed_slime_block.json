@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "muffins_slimegolem:block/purple_packed_slime_block"
+  }
+}

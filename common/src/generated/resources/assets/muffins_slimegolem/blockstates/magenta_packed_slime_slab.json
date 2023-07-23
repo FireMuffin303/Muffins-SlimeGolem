@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "muffins_slimegolem:block/magenta_packed_slime_slab"
+    },
+    "type=double": {
+      "model": "muffins_slimegolem:block/magenta_packed_slime_block"
+    },
+    "type=top": {
+      "model": "muffins_slimegolem:block/magenta_packed_slime_slab_top"
+    }
+  }
+}

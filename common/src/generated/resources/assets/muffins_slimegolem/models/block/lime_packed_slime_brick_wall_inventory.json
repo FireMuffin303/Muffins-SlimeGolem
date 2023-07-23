@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "muffins_slimegolem:block/lime_packed_slime_bricks"
+  }
+}

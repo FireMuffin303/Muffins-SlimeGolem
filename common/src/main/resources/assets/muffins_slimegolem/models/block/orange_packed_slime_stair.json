@@ -1,8 +1,0 @@
-{
-    "parent": "minecraft:block/stairs",
-    "textures": {
-        "bottom": "slimegolem:block/orange_packed_slime_block",
-        "side": "slimegolem:block/orange_packed_slime_block",
-        "top": "slimegolem:block/orange_packed_slime_block"
-    }
-}

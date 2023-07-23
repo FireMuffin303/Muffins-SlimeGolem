@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_side",
+  "textures": {
+    "wall": "muffins_slimegolem:block/magenta_packed_slime_bricks"
+  }
+}

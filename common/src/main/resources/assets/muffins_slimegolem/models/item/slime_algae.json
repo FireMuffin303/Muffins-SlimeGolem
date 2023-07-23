@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "slimegolem:block/slime_algae"
+    "layer0": "muffins_slimegolem:block/slime_algae"
   }
 }

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "muffins_slimegolem:block/orange_packed_slime_brick_slab"
+    },
+    "type=double": {
+      "model": "muffins_slimegolem:block/orange_packed_slime_bricks"
+    },
+    "type=top": {
+      "model": "muffins_slimegolem:block/orange_packed_slime_brick_slab_top"
+    }
+  }
+}

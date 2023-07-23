@@ -16,6 +16,9 @@
   "icon": "assets/muffins_slimegolem/icon.png",
   "environment": "*",
   "entrypoints": {
+    "fabric-datagen": [
+      "net.firemuffin303.slimegolem.fabric.datagen.ModDataGenerator"
+    ],
     "main": [
       "net.firemuffin303.slimegolem.fabric.MuffinsSlimeGolemModFabric"
     ],

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "muffins_slimegolem:block/orange_packed_slime_block"
+  }
+}

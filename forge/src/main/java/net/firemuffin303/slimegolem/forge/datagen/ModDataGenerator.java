@@ -1,6 +1,7 @@
 package net.firemuffin303.slimegolem.forge.datagen;
 
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
+import net.firemuffin303.slimegolem.forge.datagen.provider.ModBlockStateProvider;
 import net.firemuffin303.slimegolem.forge.datagen.provider.ModItemModelProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -12,6 +13,6 @@ public class ModDataGenerator {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event){
         DataGenerator dataGenerator = event.getGenerator();
-        dataGenerator.addProvider(event.includeClient(), new ModItemModelProvider(dataGenerator.getPackOutput(),event.getExistingFileHelper()));
+        dataGenerator.addProvider(event.includeClient(), new ModBlockStateProvider(dataGenerator.getPackOutput(),event.getExistingFileHelper()));
     }
 }
