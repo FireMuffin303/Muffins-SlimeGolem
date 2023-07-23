@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "slimegolem:music_disc_bouncyslime",
+          "name": "muffins_slimegolem:music_disc_bouncyslime",
           "weight": 5
         }
       ],

@@ -1,6 +1,5 @@
 package net.firemuffin303.slimegolem.common.registry;
 
-
 import com.teamresourceful.resourcefullib.common.item.tabs.ResourcefulCreativeTab;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "packed_slime_block",
+  "key": {
+    "A": {
+      "item": "muffins_slimegolem:packed_slime_bricks"
+    },
+    "B": {
+      "item": "minecraft:cyan_dye"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "result": {
+    "count": 8,
+    "item": "muffins_slimegolem:cyan_packed_slime_bricks"
+  },
+  "show_notification": true
+}

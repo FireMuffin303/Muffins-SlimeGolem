@@ -6,6 +6,8 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.common.registry.ModBlock;
+import net.firemuffin303.slimegolem.fabric.datagen.provider.LootTableProvider;
+import net.firemuffin303.slimegolem.fabric.datagen.provider.ModRecipeProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
@@ -24,6 +26,8 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
         pack.addProvider(BlockModelProvider::new);
+        pack.addProvider(LootTableProvider::new);
+        pack.addProvider(ModRecipeProvider::new);
     }
 
     private class BlockModelProvider extends FabricModelProvider {
@@ -34,7 +38,6 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
         @Override
         public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
             blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(ModBlock.PACKED_SLIME_BLOCK.get(), ModelTemplates.CUBE_ALL.create(ModBlock.PACKED_SLIME_BLOCK.get(), TextureMapping.cube(ModelLocationUtils.getModelLocation(Blocks.SLIME_BLOCK)), blockStateModelGenerator.modelOutput)));
-            //blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(ModBlock.PURPLE_PACKED_SLIME_BRICKS.get(),ModelLocationUtils.getModelLocation(ModBlock.PURPLE_PACKED_SLIME_BRICKS.get())));
             ModBlock.SLIME_BLOCKS.getEntries().forEach((block) -> {cubeall(block.get(),blockStateModelGenerator);});
 
             slab(Blocks.SLIME_BLOCK,blockStateModelGenerator, (SlabBlock) ModBlock.PACKED_SLIME_SLAB.get());

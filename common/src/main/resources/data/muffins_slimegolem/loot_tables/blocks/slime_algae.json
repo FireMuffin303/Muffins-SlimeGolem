@@ -41,7 +41,7 @@
                 "add": true,
                 "conditions": [
                   {
-                    "block": "slimegolem:slime_algae",
+                    "block": "muffins_slimegolem:slime_algae",
                     "condition": "minecraft:block_state_property",
                     "properties": {
                       "down": "true"
@@ -55,7 +55,7 @@
                 "add": true,
                 "conditions": [
                   {
-                    "block": "slimegolem:slime_algae",
+                    "block": "muffins_slimegolem:slime_algae",
                     "condition": "minecraft:block_state_property",
                     "properties": {
                       "up": "true"
@@ -69,7 +69,7 @@
                 "add": true,
                 "conditions": [
                   {
-                    "block": "slimegolem:slime_algae",
+                    "block": "muffins_slimegolem:slime_algae",
                     "condition": "minecraft:block_state_property",
                     "properties": {
                       "north": "true"
@@ -83,7 +83,7 @@
                 "add": true,
                 "conditions": [
                   {
-                    "block": "slimegolem:slime_algae",
+                    "block": "muffins_slimegolem:slime_algae",
                     "condition": "minecraft:block_state_property",
                     "properties": {
                       "south": "true"
@@ -97,7 +97,7 @@
                 "add": true,
                 "conditions": [
                   {
-                    "block": "slimegolem:slime_algae",
+                    "block": "muffins_slimegolem:slime_algae",
                     "condition": "minecraft:block_state_property",
                     "properties": {
                       "west": "true"
@@ -111,7 +111,7 @@
                 "add": true,
                 "conditions": [
                   {
-                    "block": "slimegolem:slime_algae",
+                    "block": "muffins_slimegolem:slime_algae",
                     "condition": "minecraft:block_state_property",
                     "properties": {
                       "east": "true"
@@ -130,7 +130,7 @@
                 "function": "minecraft:explosion_decay"
               }
             ],
-            "name": "slimegolem:slime_algae"
+            "name": "muffins_slimegolem:slime_algae"
           },
           {
             "type": "minecraft:item",
