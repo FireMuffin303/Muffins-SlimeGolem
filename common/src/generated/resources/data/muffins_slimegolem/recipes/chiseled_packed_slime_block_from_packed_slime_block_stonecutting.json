@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "muffins_slimegolem:packed_slime_block"
+  },
+  "result": "muffins_slimegolem:chiseled_packed_slime_block"
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "muffins_slimegolem:white_packed_slime_brick_stair_from_white_packed_slime_block_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_packed_slime_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "muffins_slimegolem:white_packed_slime_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_white_packed_slime_block",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "muffins_slimegolem:white_packed_slime_brick_stair_from_white_packed_slime_block_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

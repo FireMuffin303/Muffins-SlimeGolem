@@ -1,8 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "count": 1,
-    "ingredient": {
-        "item": "slimegolem:yellow_packed_slime_bricks"
-    },
-    "result": "slimegolem:yellow_packed_slime_brick_stair"
-}

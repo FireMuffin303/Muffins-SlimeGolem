@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "muffins_slimegolem:light_blue_packed_slime_block"
+  },
+  "result": "muffins_slimegolem:light_blue_packed_slime_brick_slab"
+}
