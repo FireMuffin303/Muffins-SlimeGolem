@@ -1,22 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "group": "packed_slime_block",
+  "category": "building",
   "key": {
     "A": {
-      "item": "muffins_slimegolem:packed_slime_bricks"
-    },
-    "B": {
-      "item": "minecraft:light_blue_dye"
+      "item": "muffins_slimegolem:light_blue_packed_slime_block"
     }
   },
   "pattern": [
-    "AAA",
-    "ABA",
-    "AAA"
+    "AA",
+    "AA"
   ],
   "result": {
-    "count": 8,
     "item": "muffins_slimegolem:light_blue_packed_slime_bricks"
   },
   "show_notification": true

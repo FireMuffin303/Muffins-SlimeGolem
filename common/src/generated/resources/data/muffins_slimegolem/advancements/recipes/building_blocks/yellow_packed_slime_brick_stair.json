@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "muffins_slimegolem:yellow_packed_slime_brick_stair"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_yellow_packed_slime_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "muffins_slimegolem:yellow_packed_slime_bricks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_yellow_packed_slime_bricks",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "muffins_slimegolem:yellow_packed_slime_brick_stair"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": {
+      "item": "muffins_slimegolem:brown_packed_slime_bricks"
+    }
+  },
+  "pattern": [
+    "AAA"
+  ],
+  "result": {
+    "item": "muffins_slimegolem:brown_packed_slime_brick_slab"
+  },
+  "show_notification": true
+}

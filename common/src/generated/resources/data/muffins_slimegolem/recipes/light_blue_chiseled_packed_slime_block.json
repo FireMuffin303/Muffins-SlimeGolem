@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": {
+      "item": "muffins_slimegolem:light_blue_packed_slime_slab"
+    }
+  },
+  "pattern": [
+    "A",
+    "A"
+  ],
+  "result": {
+    "item": "muffins_slimegolem:light_blue_chiseled_packed_slime_block"
+  },
+  "show_notification": true
+}

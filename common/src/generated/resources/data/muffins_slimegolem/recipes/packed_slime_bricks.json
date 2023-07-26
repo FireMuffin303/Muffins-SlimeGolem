@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": {
+      "item": "muffins_slimegolem:packed_slime_block"
+    }
+  },
+  "pattern": [
+    "AA",
+    "AA"
+  ],
+  "result": {
+    "item": "muffins_slimegolem:packed_slime_bricks"
+  },
+  "show_notification": true
+}
