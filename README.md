@@ -5,8 +5,8 @@
 <div align="center" markdown="1">
   <a href=""><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.1.2/assets/cozy/supported/forge_vector.svg"/></a>
   <a href=""><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.1.2/assets/cozy/supported/fabric_vector.svg"/></a>
-  <a href=""><img src="https://wsrv.nl/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2F%40intergrav%2Fdevins-badges%403%2Fassets%2Fcozy%2Favailable%2Fcurseforge_vector.svg&n=-1"/></a>
-  <a href=""><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.1.2/assets/cozy/available/modrinth_vector.svg"/></a>
+  <a href="https://legacy.curseforge.com/minecraft/mc-mods/muffins-slime-golem"><img src="https://wsrv.nl/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2F%40intergrav%2Fdevins-badges%403%2Fassets%2Fcozy%2Favailable%2Fcurseforge_vector.svg&n=-1"/></a>
+  <a href="https://modrinth.com/mod/muffins-slime-golem"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.1.2/assets/cozy/available/modrinth_vector.svg"/></a>
 </div>
 <br>
 
