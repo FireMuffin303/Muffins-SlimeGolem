@@ -1,9 +1,6 @@
 package net.firemuffin303.slimegolem.common.config;
 
-import com.teamresourceful.resourcefulconfig.common.annotations.Category;
-import com.teamresourceful.resourcefulconfig.common.annotations.Comment;
-import com.teamresourceful.resourcefulconfig.common.annotations.Config;
-import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
+import com.teamresourceful.resourcefulconfig.common.annotations.*;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
 import com.teamresourceful.resourcefulconfig.web.annotations.Gradient;
 import com.teamresourceful.resourcefulconfig.web.annotations.Link;
@@ -11,7 +8,6 @@ import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 
 @Config(MuffinsSlimeGolemMod.MOD_ID)
-@Category(id="client",translation = "text.resourceful.muffins_slimegolem.client")
 @WebInfo(
         title = "Muffin's Slimegolem",
         description = "Add Slime Golem to Minecraft. A good ally for finding Slime Chunks!",
@@ -26,7 +22,6 @@ import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
         }
 )
 public final class ModConfig {
-    //@Category(id="Client",translation = "text.resourcefulconfig.muffins_slimegolem.client")
     @ConfigEntry(id="showHoneyOnSlimeGolem",
             type = EntryType.BOOLEAN,
             translation = "text.resourcefulconfig.muffins_slimegolem.client.showHoneyOnSlimeGolem")

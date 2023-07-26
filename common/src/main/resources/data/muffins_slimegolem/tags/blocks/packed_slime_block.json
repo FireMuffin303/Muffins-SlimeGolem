@@ -1,21 +1,21 @@
 {
   "values": [
-    "slimegolem:packed_slime_block",
-    "slimegolem:white_packed_slime_block",
-    "slimegolem:orange_packed_slime_block",
-    "slimegolem:magenta_packed_slime_block",
-    "slimegolem:light_blue_packed_slime_block",
-    "slimegolem:yellow_packed_slime_block",
-    "slimegolem:lime_packed_slime_block",
-    "slimegolem:pink_packed_slime_block",
-    "slimegolem:gray_packed_slime_block",
-    "slimegolem:light_gray_packed_slime_block",
-    "slimegolem:cyan_packed_slime_block",
-    "slimegolem:purple_packed_slime_block",
-    "slimegolem:blue_packed_slime_block",
-    "slimegolem:brown_packed_slime_block",
-    "slimegolem:green_packed_slime_block",
-    "slimegolem:red_packed_slime_block",
-    "slimegolem:black_packed_slime_block"
+    "muffins_slimegolem:packed_slime_block",
+    "muffins_slimegolem:white_packed_slime_block",
+    "muffins_slimegolem:orange_packed_slime_block",
+    "muffins_slimegolem:magenta_packed_slime_block",
+    "muffins_slimegolem:light_blue_packed_slime_block",
+    "muffins_slimegolem:yellow_packed_slime_block",
+    "muffins_slimegolem:lime_packed_slime_block",
+    "muffins_slimegolem:pink_packed_slime_block",
+    "muffins_slimegolem:gray_packed_slime_block",
+    "muffins_slimegolem:light_gray_packed_slime_block",
+    "muffins_slimegolem:cyan_packed_slime_block",
+    "muffins_slimegolem:purple_packed_slime_block",
+    "muffins_slimegolem:blue_packed_slime_block",
+    "muffins_slimegolem:brown_packed_slime_block",
+    "muffins_slimegolem:green_packed_slime_block",
+    "muffins_slimegolem:red_packed_slime_block",
+    "muffins_slimegolem:black_packed_slime_block"
   ]
 }
