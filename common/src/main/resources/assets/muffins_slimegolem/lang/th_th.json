@@ -162,5 +162,6 @@
     "entity.muffins_slimegolem.slime_golem": "โกเลมสไลม์",
     "text.autoconfig.slimegolem.title": "การตั้งค่าโกเลมสไลม์",
     "text.autoconfig.slimegolem.option.client": "การตั้งค่าฝั่งผู้เล่น",
-    "text.autoconfig.slimegolem.option.client.showHoneyLayerOnSlimeGolem": "แสดงน้ำผึ้งบนโกเลมสไลม์"
+    "text.resourcefulconfig.muffins_slimegolem.client.showHoneyOnSlimeGolem": "แสดงน้ำผึ้งบนโกเลมสไลม์",
+    "text.resourcefulconfig.muffins_slimegolem.client.showHoneyOnSlimeGolem.comment": "ถ้าเปิด จะแสดงน้ำผึ้งบนโกเลมสไลม์"
 }

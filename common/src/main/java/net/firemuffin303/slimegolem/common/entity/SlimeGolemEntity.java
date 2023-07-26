@@ -164,6 +164,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
             }
         }else if(itemStack.is(Items.SLIME_BALL) && isWaxed()){
             setWax(false);
+            spawnWaxOffParticle();
             float g = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
             this.playSound(SoundEvents.SLIME_SQUISH,1.0F,g);
             if(!player.getAbilities().instabuild){
@@ -173,6 +174,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
 
         }else if(itemStack.is(Items.HONEYCOMB) && !isWaxed()){
             setWax(true);
+            spawnWaxOnParticle();
             float g = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
             this.playSound(SoundEvents.SLIME_SQUISH,1.0F,g);
             if(!player.getAbilities().instabuild){
@@ -341,6 +343,20 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
         double e = this.random.nextGaussian() * 0.02D;
         double f = this.random.nextGaussian() * 0.02D;
         this.level().addParticle(ParticleTypes.HEART, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d, e, f);
+    }
+
+    private void spawnWaxOnParticle() {
+        double d = this.random.nextGaussian() * 0.02D;
+        double e = this.random.nextGaussian() * 0.02D;
+        double f = this.random.nextGaussian() * 0.02D;
+        this.level().addParticle(ParticleTypes.WAX_ON, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d, e, f);
+    }
+
+    private void spawnWaxOffParticle() {
+        double d = this.random.nextGaussian() * 0.02D;
+        double e = this.random.nextGaussian() * 0.02D;
+        double f = this.random.nextGaussian() * 0.02D;
+        this.level().addParticle(ParticleTypes.WAX_OFF, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d, e, f);
     }
 
     static {

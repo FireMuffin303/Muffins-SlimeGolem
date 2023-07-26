@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.firemuffin303.slimegolem.ModPlatform;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.client.model.SlimeGolemModel;
+import net.firemuffin303.slimegolem.common.config.ModConfig;
 import net.firemuffin303.slimegolem.common.entity.SlimeGolemEntity;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -25,7 +26,7 @@ public class SlimeGolemHoneyLayer extends RenderLayer<SlimeGolemEntity, SlimeGol
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, SlimeGolemEntity entity, float f, float g, float h, float j, float k, float l) {
-        //if(ModPlatform.getShowHoneyLayer()){
+        if(ModConfig.showHoneyOnSlimeGolem){
             if(!entity.isInvisible()){
                 if(entity.isWaxed()){
                     VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.entityTranslucent(WAX_LOCATION));
@@ -34,6 +35,6 @@ public class SlimeGolemHoneyLayer extends RenderLayer<SlimeGolemEntity, SlimeGol
                     //renderColoredCutoutModel(this.getParentModel(),WAX_LOCATION,poseStack,multiBufferSource,i,entity,1.0f,1.0f,1.0f);
                 }
             }
-        //}
+        }
     }
 }
