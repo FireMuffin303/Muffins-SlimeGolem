@@ -29,3 +29,16 @@ versionRange = "[1.20,)"
 ordering = "NONE"
 side = "BOTH"
 
+[[dependencies.muffins_slimegolem]]
+modId = "resourcefullib"
+mandatory = true
+versionRange = "[2.1.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.muffins_slimegolem]]
+modId = "resourcefulconfig"
+mandatory = true
+versionRange = "[2.0.0,)"
+ordering = "NONE"
+side = "BOTH"
