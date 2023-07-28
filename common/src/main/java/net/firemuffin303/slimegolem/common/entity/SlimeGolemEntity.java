@@ -390,10 +390,10 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
         @Override
         public boolean handleGameEvent(ServerLevel serverLevel, GameEvent gameEvent, GameEvent.Context context, Vec3 vec3) {
             if (gameEvent == GameEvent.JUKEBOX_PLAY) {
-                SlimeGolemEntity.this.setJukeboxPlaying(new BlockPos((int) vec3.x, (int) vec3.y, (int) vec3.z), true);
+                SlimeGolemEntity.this.setJukeboxPlaying(BlockPos.containing(vec3), true);
                 return true;
             } else if (gameEvent == GameEvent.JUKEBOX_STOP_PLAY) {
-                SlimeGolemEntity.this.setJukeboxPlaying(new BlockPos((int) vec3.x, (int) vec3.y, (int) vec3.z), false);
+                SlimeGolemEntity.this.setJukeboxPlaying(BlockPos.containing(vec3), false);
                 return true;
             } else {
                 return false;
