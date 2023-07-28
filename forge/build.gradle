@@ -72,7 +72,7 @@ remapJar {
 
 jar {
     archiveClassifier = "dev"
-    archivesBaseName = "$archives_base_name-$minecraft_version-$mod_version-fabric"
+    archivesBaseName = "$archives_base_name-$minecraft_version-$mod_version-forge"
 }
 
 sourcesJar {
