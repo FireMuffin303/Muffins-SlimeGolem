@@ -2,6 +2,7 @@ package net.firemuffin303.slimegolem.forge;
 
 import net.firemuffin303.slimegolem.ModPlatform;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
+import net.firemuffin303.slimegolem.common.registry.ModBlockEntityTypes;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -18,6 +19,8 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.CreativeModeTabRegistry;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.loading.FMLPaths;
@@ -46,6 +49,9 @@ public class ModPlatformImpl {
     public static <T extends Mob> Supplier<Item> registerSpawnEgg(Supplier<EntityType<T>> entityType, int primaryColor, int secondaryColor, Item.Properties properties) {
         return () -> new ForgeSpawnEggItem(entityType,primaryColor,secondaryColor,properties);
     }
+
+    /*public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntity(String id, ModBlockEntityTypes.BlockEntitySupplier<T> blockEntityTypeSupplier, Block block) {
+    }*/
 
 
 }

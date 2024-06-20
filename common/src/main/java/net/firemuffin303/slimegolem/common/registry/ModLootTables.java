@@ -1,10 +1,6 @@
 package net.firemuffin303.slimegolem.common.registry;
 
-import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
-import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
-import net.firemuffin303.slimegolem.ModPlatform;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 
 public class ModLootTables {

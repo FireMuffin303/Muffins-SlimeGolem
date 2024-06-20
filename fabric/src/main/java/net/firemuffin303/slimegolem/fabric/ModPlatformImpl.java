@@ -5,10 +5,12 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
+import net.firemuffin303.slimegolem.common.registry.ModBlockEntityTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -22,6 +24,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.Properties;
 import java.util.function.Supplier;
@@ -39,6 +43,10 @@ public class ModPlatformImpl {
 
     public static <T extends Mob> Supplier<Item> registerSpawnEgg(Supplier<EntityType<T>> entityType, int primaryColor, int secondaryColor, Item.Properties properties){
         return () -> new SpawnEggItem(entityType.get(),primaryColor,secondaryColor,properties);
+    }
+
+    public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntity(String id, ModBlockEntityTypes.BlockEntitySupplier<T> blockEntityTypeSupplier, Block block) {
+        return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,new ResourceLocation(MuffinsSlimeGolemMod.MOD_ID,id),BlockEntityType.Builder.of(blockEntityTypeSupplier::create,block).build(null));
     }
 
 }
