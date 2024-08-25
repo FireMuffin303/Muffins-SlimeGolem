@@ -3,24 +3,28 @@ package net.firemuffin303.slimegolem.fabric.datagen.provider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.firemuffin303.slimegolem.common.registry.ModItem;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
 
-    public ModRecipeProvider(FabricDataOutput output) {
-        super(output);
+
+    public ModRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        super(output, registriesFuture);
     }
 
+
     @Override
-    public void buildRecipes(Consumer<FinishedRecipe> exporter) {
+    public void buildRecipes(RecipeOutput exporter) {
         //coloredBlock(ModItem.WHITE_PACKED_SLIME_BLOCK,ModItem.PACKED_SLIME_BLOCK.get(), Items.WHITE_DYE,exporter);
         //coloredBlock(ModItem.LIGHT_GRAY_PACKED_SLIME_BLOCK,ModItem.PACKED_SLIME_BLOCK.get(),Items.LIGHT_GRAY_DYE,exporter);
         //coloredBlock(ModItem.GRAY_PACKED_SLIME_BLOCK,ModItem.PACKED_SLIME_BLOCK.get(),Items.GRAY_DYE,exporter);
@@ -432,13 +436,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
     }
 
-    private void coloredBlock(String resultID, Supplier<Item> item,Item baseMaterial,Item colorDye, Consumer<FinishedRecipe> consumer){
+    private void coloredBlock(String resultID, Supplier<Item> item,Item baseMaterial,Item colorDye, RecipeOutput consumer){
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, item.get(),8)
                 .define('A',baseMaterial).define('B',colorDye)
                 .pattern("AAA").pattern("ABA").pattern("AAA").group("packed_slime_block").unlockedBy(getHasName(baseMaterial),has(baseMaterial)).save(consumer,resultID);
     }
 
-    private void createSlimeBlockCrafting(Item block,Item brick,Item chiseled,Item slab,Item stair,Item wall,Item brickSlab,Item brickStair,Item brickWall,Consumer<FinishedRecipe> consumer){
+    private void createSlimeBlockCrafting(Item block,Item brick,Item chiseled,Item slab,Item stair,Item wall,Item brickSlab,Item brickStair,Item brickWall,RecipeOutput consumer){
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,brick).define('A',block).pattern("AA").pattern("AA").unlockedBy(getHasName(block),has(block)).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,slab).define('A',block).pattern("AAA").unlockedBy(getHasName(block),has(block)).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,stair).define('A',block).pattern("A  ").pattern("AA ").pattern("AAA").unlockedBy(getHasName(block),has(block)).save(consumer);
@@ -452,12 +456,12 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     }
 
 
-    private void stonecut(String resultId,Item ingredient, Item result, int i, Consumer<FinishedRecipe> consumer){
+    private void stonecut(String resultId,Item ingredient, Item result, int i, RecipeOutput consumer){
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient),RecipeCategory.BUILDING_BLOCKS,result,i).unlockedBy(getHasName(ingredient),has(ingredient)).save(consumer,resultId);
 
     }
 
-    private void stoneCutFamily(Supplier<Item> block, Supplier<Item> brick, Supplier<Item> chiseled, Supplier<Item> slab, Supplier<Item> stair, Supplier<Item> wall, Supplier<Item> brick_slab, Supplier<Item> brick_stair, Supplier<Item> brick_wall, Consumer<FinishedRecipe> exporter){
+    private void stoneCutFamily(Supplier<Item> block, Supplier<Item> brick, Supplier<Item> chiseled, Supplier<Item> slab, Supplier<Item> stair, Supplier<Item> wall, Supplier<Item> brick_slab, Supplier<Item> brick_stair, Supplier<Item> brick_wall, RecipeOutput exporter){
         stonecut("",block.get(),brick.get(),1,exporter);
         stonecut("",block.get(),chiseled.get(),1,exporter);
         stonecut("",block.get(),stair.get(),1,exporter);
@@ -472,4 +476,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         stonecut("",brick.get(),brick_stair.get(),1,exporter);
         stonecut("",brick.get(),brick_wall.get(),1,exporter);
     }
+
+
 }

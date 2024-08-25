@@ -22,7 +22,7 @@ public class MuffinsSlimeGolemModFabric implements ModInitializer {
         FabricDefaultAttributeRegistry.register(ModEntityTypes.SLIME_GOLEM.get(), SlimeGolemEntity.createAttributes());
 
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,
-                new ResourceLocation(MuffinsSlimeGolemMod.MOD_ID,"main"),
+                ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID, "main"),
                 FabricItemGroup.builder().title(Component.translatable("itemGroup."+MuffinsSlimeGolemMod.MOD_ID+".main"))
                         .icon(() -> new ItemStack(ModItem.SLIME_PIE.get()))
                         .displayItems(MuffinsSlimeGolemMod::displayItem).build());

@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.function.Supplier;
 
 public class ModBlockEntityTypes {
-    public static final Supplier<BlockEntityType<SlimeCandleBlockEntity>> SLIME_CANDLE =  registerBlockEntity("",SlimeCandleBlockEntity::new,ModBlock.SLIME_CANDLE.get());
+    //public static final Supplier<BlockEntityType<SlimeCandleBlockEntity>> SLIME_CANDLE =  registerBlockEntity("",SlimeCandleBlockEntity::new,ModBlock.SLIME_CANDLE.get());
 
     private static <T extends BlockEntity> Supplier<BlockEntityType<T>> registerBlockEntity(String id, BlockEntitySupplier<T> blockEntityType, Block block){
         return () -> ModPlatform.registerBlockEntity(id,blockEntityType,block);

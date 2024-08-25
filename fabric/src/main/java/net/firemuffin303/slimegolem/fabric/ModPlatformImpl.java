@@ -3,31 +3,23 @@ package net.firemuffin303.slimegolem.fabric;
 
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.common.registry.ModBlockEntityTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
-import java.util.Properties;
 import java.util.function.Supplier;
 
 public class ModPlatformImpl {
@@ -46,7 +38,23 @@ public class ModPlatformImpl {
     }
 
     public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntity(String id, ModBlockEntityTypes.BlockEntitySupplier<T> blockEntityTypeSupplier, Block block) {
-        return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,new ResourceLocation(MuffinsSlimeGolemMod.MOD_ID,id),BlockEntityType.Builder.of(blockEntityTypeSupplier::create,block).build(null));
+        return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),BlockEntityType.Builder.of(blockEntityTypeSupplier::create,block).build(null));
+    }
+
+    public static Supplier<SoundEvent> registerSoundEvent(String id, Supplier<SoundEvent> event) {
+        return () -> Registry.register(BuiltInRegistries.SOUND_EVENT,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),event.get());
+    }
+
+    public static <T extends Block> Supplier<T> registerBlock(String id, Supplier<T> supplier) {
+        return () -> Registry.register(BuiltInRegistries.BLOCK,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),supplier.get());
+    }
+
+    public static <T extends Item> Supplier<T> registerItem(String id, Supplier<T> supplier) {
+        return () -> Registry.register(BuiltInRegistries.ITEM,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),supplier.get());
+    }
+
+    public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String id, Supplier<EntityType<T>> supplier) {
+        return () -> Registry.register(BuiltInRegistries.ENTITY_TYPE,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),supplier.get());
     }
 
 }

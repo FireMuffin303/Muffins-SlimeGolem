@@ -1,12 +1,12 @@
 package net.firemuffin303.slimegolem.common.entity;
 
 import com.google.common.collect.Maps;
-import net.firemuffin303.slimegolem.common.registry.ModLootTables;
-import net.firemuffin303.slimegolem.common.registry.ModBlock;
 import net.firemuffin303.slimegolem.common.block.SlimeAlgaeBlock;
+import net.firemuffin303.slimegolem.common.registry.ModBlock;
 import net.firemuffin303.slimegolem.common.registry.ModItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -16,11 +16,14 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.Shearable;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -28,22 +31,22 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.*;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
@@ -54,7 +57,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
     private static final EntityDataAccessor<Boolean> IS_WAXED;
     private static final EntityDataAccessor<Boolean> DATA_CAN_DANCE_DROP;
     private static final EntityDataAccessor<Boolean> DATA_DANCING;
-    private static final Map<DyeColor, float[]> COLORARRAY_BY_COLOR;
+    private static final Map<DyeColor, Integer> COLORARRAY_BY_COLOR;
     private long danceDropCooldown;
     private final DynamicGameEventListener<SlimeGolemEntity.JukeboxListener> dynamicJukeboxListener;
     @Nullable
@@ -63,21 +66,23 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
     public SlimeGolemEntity(EntityType<? extends AbstractGolem> entityType, Level level) {
         super(entityType, level);
         PositionSource positionSource = new EntityPositionSource(this, this.getEyeHeight());
-        this.dynamicJukeboxListener = new DynamicGameEventListener(new SlimeGolemEntity.JukeboxListener(positionSource, GameEvent.JUKEBOX_PLAY.getNotificationRadius()));
+        this.dynamicJukeboxListener = new DynamicGameEventListener(new SlimeGolemEntity.JukeboxListener(positionSource, GameEvent.JUKEBOX_PLAY.value().notificationRadius()));
     }
 
-    private static float[] createSlimeColor(DyeColor dyeColor) {
+    private static int createSlimeColor(DyeColor dyeColor) {
         if (dyeColor == DyeColor.WHITE) {
-            return new float[]{0.9019608F, 0.9019608F, 0.9019608F};
+            return -1644826;
         } else if(dyeColor == DyeColor.LIME){
-            return new float[]{0.4588235f, 0.7254901f, 0.3921568f};
+            return 7649380;
         }else{
-            float[] fs = dyeColor.getTextureDiffuseColors();
-            return new float[]{fs[0] , fs[1] , fs[2]};
+            int i = dyeColor.getTextureDiffuseColor();
+            float f = 0.75F;
+            return FastColor.ARGB32.color(255, Mth.floor((float) FastColor.ARGB32.red(i) * 0.75F), Mth.floor((float) FastColor.ARGB32.green(i) * 0.75F), Mth.floor((float) FastColor.ARGB32.blue(i) * 0.75F));
+
         }
     }
 
-    public static float[] getColorArray(DyeColor dyeColor) {
+    public static int getColorInt(DyeColor dyeColor) {
         return COLORARRAY_BY_COLOR.get(dyeColor);
     }
 
@@ -137,7 +142,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
     }
 
     private boolean shouldStopDancing() {
-        return this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), (double)GameEvent.JUKEBOX_PLAY.getNotificationRadius()) || !this.level().getBlockState(this.jukebox).is(Blocks.JUKEBOX);
+        return this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), (double)GameEvent.JUKEBOX_PLAY.value().notificationRadius()) || !this.level().getBlockState(this.jukebox).is(Blocks.JUKEBOX);
     }
 
     protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
@@ -146,9 +151,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
             this.shear(SoundSource.PLAYERS);
             this.gameEvent(GameEvent.SHEAR, player);
             if (!this.level().isClientSide) {
-                itemStack.hurtAndBreak(1, player, (playerx) -> {
-                    playerx.broadcastBreakEvent(interactionHand);
-                });
+                itemStack.hurtAndBreak(1, player, getSlotForHand(interactionHand));
             }
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }else if((itemStack.getItem() instanceof DyeItem item)){
@@ -194,6 +197,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
     }
 
     private void dropDanceItem(Player player){
+        /*
         if(!this.level().isClientSide) {
             LootTable table = ((ServerLevel)this.level()).getServer().getLootData().getLootTable(ModLootTables.SLIME_GOLEM_DANCE_DROP);
             List<ItemStack> list = table.getRandomItems((new LootParams.Builder((ServerLevel) this.level())).withParameter(LootContextParams.ORIGIN,this.position()).withParameter(LootContextParams.THIS_ENTITY, this).create(LootContextParamSets.GIFT));
@@ -208,7 +212,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
                     this.playSound(SoundEvents.SLIME_SQUISH, 1.0f, g);
                 }
             }
-        }
+        }*/
     }
 
 
@@ -310,13 +314,13 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
         return SoundEvents.SLIME_DEATH_SMALL;
     }
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_PUMPKIN_ID, (byte)16);
-        this.entityData.define(IS_WAXED,false);
-        this.entityData.define(DATA_COLOR_ID, (byte)DyeColor.LIME.getId());
-        this.entityData.define(DATA_CAN_DANCE_DROP,false);
-        this.entityData.define(DATA_DANCING,false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_PUMPKIN_ID, (byte)16);
+        builder.define(IS_WAXED,false);
+        builder.define(DATA_COLOR_ID, (byte)DyeColor.LIME.getId());
+        builder.define(DATA_CAN_DANCE_DROP,false);
+        builder.define(DATA_DANCING,false);
     }
 
     @Override
@@ -388,11 +392,11 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
         }
 
         @Override
-        public boolean handleGameEvent(ServerLevel serverLevel, GameEvent gameEvent, GameEvent.Context context, Vec3 vec3) {
-            if (gameEvent == GameEvent.JUKEBOX_PLAY) {
+        public boolean handleGameEvent(ServerLevel serverLevel, Holder<GameEvent> holder, GameEvent.Context context, Vec3 vec3) {
+            if (holder.is(GameEvent.JUKEBOX_PLAY)) {
                 SlimeGolemEntity.this.setJukeboxPlaying(BlockPos.containing(vec3), true);
                 return true;
-            } else if (gameEvent == GameEvent.JUKEBOX_STOP_PLAY) {
+            } else if (holder.is(GameEvent.JUKEBOX_STOP_PLAY)) {
                 SlimeGolemEntity.this.setJukeboxPlaying(BlockPos.containing(vec3), false);
                 return true;
             } else {
@@ -400,5 +404,8 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
             }
         }
 
+
+
     }
+
 }

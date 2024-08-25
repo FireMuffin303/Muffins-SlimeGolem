@@ -1,12 +1,11 @@
 package net.firemuffin303.slimegolem.common.block;
 
+import com.mojang.serialization.MapCodec;
+import net.firemuffin303.slimegolem.client.renderer.entity.layers.SlimeGolemHoneyLayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.MultifaceBlock;
-import net.minecraft.world.level.block.MultifaceSpreader;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -17,11 +16,19 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
 
 public class SlimeAlgaeBlock extends MultifaceBlock implements SimpleWaterloggedBlock {
+    public static final MapCodec<SlimeAlgaeBlock> CODEC = simpleCodec(SlimeAlgaeBlock::new);
+
     private static final BooleanProperty WATERLOGGED;
+
     public SlimeAlgaeBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED,false));
 
+    }
+
+    @Override
+    protected MapCodec<? extends MultifaceBlock> codec() {
+        return CODEC;
     }
 
     @Override

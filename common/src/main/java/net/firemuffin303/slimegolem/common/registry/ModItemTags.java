@@ -9,7 +9,7 @@ import net.minecraft.world.item.Item;
 
 public class ModItemTags {
 
-    public static final TagKey<Item> PACKED_SLIME_BLOCK = TagKey.create(Registries.ITEM,new ResourceLocation(MuffinsSlimeGolemMod.MOD_ID,"packed_slime_golem"));
+    public static final TagKey<Item> PACKED_SLIME_BLOCK = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,"packed_slime_golem"));
 
     public static void init(){}
 }

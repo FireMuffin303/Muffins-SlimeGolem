@@ -24,9 +24,6 @@
     ],
     "client": [
       "net.firemuffin303.slimegolem.fabric.client.SlimeGolemClientModFabric"
-    ],
-    "modmenu": [
-      "net.firemuffin303.slimegolem.fabric.config.ModMenuConfig"
     ]
   },
   "mixins": [
@@ -35,8 +32,6 @@
   ],
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.20.1",
-    "resourcefullib": ">=2.1.1",
-    "resourcefulconfig": ">=2.0.0"
+    "minecraft": ">=1.21"
   }
 }

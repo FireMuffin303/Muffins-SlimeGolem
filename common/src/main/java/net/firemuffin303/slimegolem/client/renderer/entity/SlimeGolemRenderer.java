@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 
 
 public class SlimeGolemRenderer extends MobRenderer<SlimeGolemEntity, SlimeGolemModel<SlimeGolemEntity>> {
-    public static final ResourceLocation SLIME_GOLEM_LOCATION = new ResourceLocation(MuffinsSlimeGolemMod.MOD_ID,"textures/entity/slime_golem/slime_golem.png");
+    public static final ResourceLocation SLIME_GOLEM_LOCATION = ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,"textures/entity/slime_golem/slime_golem.png");
 
 
     public SlimeGolemRenderer(EntityRendererProvider.Context context) {

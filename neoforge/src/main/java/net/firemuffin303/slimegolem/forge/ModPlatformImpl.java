@@ -1,37 +1,22 @@
 package net.firemuffin303.slimegolem.forge;
 
 import net.firemuffin303.slimegolem.ModPlatform;
-import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
-import net.firemuffin303.slimegolem.common.registry.ModBlockEntityTypes;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.common.CreativeModeTabRegistry;
-import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.fml.loading.FMLPaths;
+import net.neoforged.fml.loading.FMLPaths;
 
 import java.nio.file.Path;
 import java.util.function.Supplier;
 
 public class ModPlatformImpl {
-    /**
-     * This is our actual method to {@link ModPlatform#getConfigDirectory()}.
-     */
 
 
     public static Path getConfigDirectory() {
@@ -47,7 +32,7 @@ public class ModPlatformImpl {
     }
 
     public static <T extends Mob> Supplier<Item> registerSpawnEgg(Supplier<EntityType<T>> entityType, int primaryColor, int secondaryColor, Item.Properties properties) {
-        return () -> new ForgeSpawnEggItem(entityType,primaryColor,secondaryColor,properties);
+        return () -> new SpawnEggItem(entityType.get(),primaryColor,secondaryColor,properties);
     }
 
     /*public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntity(String id, ModBlockEntityTypes.BlockEntitySupplier<T> blockEntityTypeSupplier, Block block) {

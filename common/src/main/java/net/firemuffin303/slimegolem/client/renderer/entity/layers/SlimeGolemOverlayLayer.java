@@ -11,6 +11,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.util.FastColor;
+import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.item.DyeColor;
 
 public class SlimeGolemOverlayLayer extends RenderLayer<SlimeGolemEntity, SlimeGolemModel<SlimeGolemEntity>> {
@@ -33,33 +35,27 @@ public class SlimeGolemOverlayLayer extends RenderLayer<SlimeGolemEntity, SlimeG
                 (this.getParentModel()).copyPropertiesTo(this.model);
                 this.model.prepareMobModel(entity, f, g, h);
                 this.model.setupAnim(entity, f, g, j, k, l);
-                this.model.renderToBuffer(poseStack, vertexConsumer, i, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
+                this.model.renderToBuffer(poseStack, vertexConsumer, i, LivingEntityRenderer.getOverlayCoords(entity, 0.0F));
             }
         }else{
-            float s;
-            float t;
-            float u;
+            int u;
             if (entity.hasCustomName() && "jeb_".equals(entity.getName().getString())) {
                 int n = entity.tickCount / 25 + entity.getId();
                 int o = DyeColor.values().length;
                 int p = n % o;
                 int q = (n + 1) % o;
                 float r = ((float)(entity.tickCount % 25) + h) / 25.0F;
-                float[] fs = SlimeGolemEntity.getColorArray(DyeColor.byId(p));
-                float[] gs = SlimeGolemEntity.getColorArray(DyeColor.byId(q));
-                s = fs[0] * (1.0F - r) + gs[0] * r;
-                t = fs[1] * (1.0F - r) + gs[1] * r;
-                u = fs[2] * (1.0F - r) + gs[2] * r;
+                int fs = SlimeGolemEntity.getColorInt(DyeColor.byId(p));
+                int gs = SlimeGolemEntity.getColorInt(DyeColor.byId(q));
+                u = FastColor.ARGB32.lerp(r,fs,gs);
             } else {
-                float[] hs = SlimeGolemEntity.getColorArray(entity.getColor());
-                s = hs[0];
-                t = hs[1];
-                u = hs[2];
+                u = SlimeGolemEntity.getColorInt(entity.getColor());
             }
 
             this.model.prepareMobModel(entity, f, g, h);
             this.model.setupAnim(entity, f, g, j, k, l);
-            this.model.renderToBuffer(poseStack, multiBufferSource.getBuffer(RenderType.entityTranslucent(this.getTextureLocation(entity))),i,LivingEntityRenderer.getOverlayCoords(entity,0.0F),s,t,u,1.0f);
+            coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, this.getTextureLocation(entity), poseStack, multiBufferSource, i, entity, f, g, j, k, l, h, u);
+
         }
     }
 }

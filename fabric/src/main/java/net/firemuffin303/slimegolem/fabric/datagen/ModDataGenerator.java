@@ -38,7 +38,7 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
         @Override
         public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
             blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(ModBlock.PACKED_SLIME_BLOCK.get(), ModelTemplates.CUBE_ALL.create(ModBlock.PACKED_SLIME_BLOCK.get(), TextureMapping.cube(ModelLocationUtils.getModelLocation(Blocks.SLIME_BLOCK)), blockStateModelGenerator.modelOutput)));
-            ModBlock.SLIME_BLOCKS.getEntries().forEach((block) -> {cubeall(block.get(),blockStateModelGenerator);});
+            ModBlock.BLOCKS.forEach((block) -> {cubeall(block.get(),blockStateModelGenerator);});
 
             slab(Blocks.SLIME_BLOCK,blockStateModelGenerator, (SlabBlock) ModBlock.PACKED_SLIME_SLAB.get());
             slabBlockMapping().forEach(((block, slabBlock) -> slab(block,blockStateModelGenerator,slabBlock)));
@@ -88,7 +88,7 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
         private Map<Block,SlabBlock> slabBlockMapping(){
             Map<Block,SlabBlock> map = new HashMap<>();
             map.put(ModBlock.PACKED_SLIME_BRICKS.get(), (SlabBlock) ModBlock.PACKED_SLIME_BRICK_SLAB.get());
-
+/*
             map.put(ModBlock.WHITE_PACKED_SLIME_BLOCK.get(), (SlabBlock) ModBlock.WHITE_PACKED_SLIME_SLAB.get());
             map.put(ModBlock.WHITE_PACKED_SLIME_BRICKS.get(), (SlabBlock) ModBlock.WHITE_PACKED_SLIME_BRICK_SLAB.get());
 
@@ -136,14 +136,14 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
 
             map.put(ModBlock.PINK_PACKED_SLIME_BLOCK.get(), (SlabBlock) ModBlock.PINK_PACKED_SLIME_SLAB.get());
             map.put(ModBlock.PINK_PACKED_SLIME_BRICKS.get(), (SlabBlock) ModBlock.PINK_PACKED_SLIME_BRICK_SLAB.get());
-
+*/
             return map;
         }
 
         private Map<Block,StairBlock> stairBlockMapping(){
             Map<Block,StairBlock> map = new HashMap<>();
             map.put(ModBlock.PACKED_SLIME_BRICKS.get(), (StairBlock) ModBlock.PACKED_SLIME_BRICK_STAIR.get());
-
+/*
             map.put(ModBlock.WHITE_PACKED_SLIME_BLOCK.get(), (StairBlock) ModBlock.WHITE_PACKED_SLIME_STAIR.get());
             map.put(ModBlock.WHITE_PACKED_SLIME_BRICKS.get(), (StairBlock) ModBlock.WHITE_PACKED_SLIME_BRICK_STAIR.get());
 
@@ -191,7 +191,7 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
 
             map.put(ModBlock.PINK_PACKED_SLIME_BLOCK.get(), (StairBlock) ModBlock.PINK_PACKED_SLIME_STAIR.get());
             map.put(ModBlock.PINK_PACKED_SLIME_BRICKS.get(), (StairBlock) ModBlock.PINK_PACKED_SLIME_BRICK_STAIR.get());
-
+*/
             return map;
         }
 
@@ -199,7 +199,7 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
             Map<Block,WallBlock> map = new HashMap<>();
             map.put(Blocks.SLIME_BLOCK, (WallBlock) ModBlock.PACKED_SLIME_WALL.get());
             map.put(ModBlock.PACKED_SLIME_BRICKS.get(), (WallBlock) ModBlock.PACKED_SLIME_BRICK_WALL.get());
-
+/*
             map.put(ModBlock.WHITE_PACKED_SLIME_BLOCK.get(), (WallBlock) ModBlock.WHITE_PACKED_SLIME_WALL.get());
             map.put(ModBlock.WHITE_PACKED_SLIME_BRICKS.get(), (WallBlock) ModBlock.WHITE_PACKED_SLIME_BRICK_WALL.get());
 
@@ -247,7 +247,7 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
 
             map.put(ModBlock.PINK_PACKED_SLIME_BLOCK.get(), (WallBlock) ModBlock.PINK_PACKED_SLIME_WALL.get());
             map.put(ModBlock.PINK_PACKED_SLIME_BRICKS.get(), (WallBlock) ModBlock.PINK_PACKED_SLIME_BRICK_WALL.get());
-
+*/
             return map;
         }
 
