@@ -11,5 +11,6 @@ public class SlimeGolemClientMod {
     public static void init(){
         ModPlatform.registerRenderLayer(ModBlock.SLIME_ALGAE, RenderType.translucent());
         ModPlatform.registerEntityRenderer(ModEntityTypes.SLIME_GOLEM, SlimeGolemRenderer::new);
+
     }
 }

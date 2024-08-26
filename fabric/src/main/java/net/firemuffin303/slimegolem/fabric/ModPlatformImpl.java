@@ -49,8 +49,8 @@ public class ModPlatformImpl {
         return () -> Registry.register(BuiltInRegistries.BLOCK,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),supplier.get());
     }
 
-    public static <T extends Item> Supplier<T> registerItem(String id, Supplier<T> supplier) {
-        return () -> Registry.register(BuiltInRegistries.ITEM,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),supplier.get());
+    public static <T extends Item> Supplier<T> registerItem(String id, Supplier<T> item) {
+        return () -> Registry.register(BuiltInRegistries.ITEM,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),item.get());
     }
 
     public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String id, Supplier<EntityType<T>> supplier) {

@@ -72,12 +72,10 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
     private static int createSlimeColor(DyeColor dyeColor) {
         if (dyeColor == DyeColor.WHITE) {
             return -1644826;
-        } else if(dyeColor == DyeColor.LIME){
-            return 7649380;
         }else{
-            int i = dyeColor.getTextureDiffuseColor();
+            int i = dyeColor == DyeColor.LIME ? 7649380 : dyeColor.getTextureDiffuseColor();
             float f = 0.75F;
-            return FastColor.ARGB32.color(255, Mth.floor((float) FastColor.ARGB32.red(i) * 0.75F), Mth.floor((float) FastColor.ARGB32.green(i) * 0.75F), Mth.floor((float) FastColor.ARGB32.blue(i) * 0.75F));
+            return FastColor.ARGB32.color(255, Mth.floor((float) FastColor.ARGB32.red(i) * f), Mth.floor((float) FastColor.ARGB32.green(i) * f), Mth.floor((float) FastColor.ARGB32.blue(i) * f));
 
         }
     }

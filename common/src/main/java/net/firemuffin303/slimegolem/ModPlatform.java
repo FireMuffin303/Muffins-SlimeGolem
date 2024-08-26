@@ -5,7 +5,6 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.firemuffin303.slimegolem.common.registry.ModBlockEntityTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -14,15 +13,12 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.nio.file.Path;
-import java.util.Properties;
 import java.util.function.Supplier;
 
 public class ModPlatform {
@@ -34,7 +30,7 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
-    public static <T extends Item> Supplier<T> registerItem(String id, Supplier<T> supplier){
+    public static <T extends Item> Supplier<T> registerItem(String id, Supplier<T> item){
         throw new AssertionError();
     }
 

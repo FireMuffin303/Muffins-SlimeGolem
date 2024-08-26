@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[41,)"
+loaderVersion = "[4,)"
 issueTrackerURL = "https://github.com/FireMuffin303/SlimeGolem/issues"
 license = "MIT"
 
@@ -16,16 +16,18 @@ displayURL = "https://www.curseforge.com/minecraft/mc-mods/muffins-slime-golem"
 logoFile = "icon.png"
 
 [[dependencies.muffins_slimegolem]]
-modId = "forge"
-mandatory = true
-versionRange = "[41,)"
+modId = "neoforge"
+type = "required"
+versionRange = "[21.0,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.muffins_slimegolem]]
 modId = "minecraft"
-mandatory = true
+type = "required"
 versionRange = "[1.21,)"
 ordering = "NONE"
 side = "BOTH"
 
+[[mixin]]
+config = "muffins_slimegolem-common.mixins.json"

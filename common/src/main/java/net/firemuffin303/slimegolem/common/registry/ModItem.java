@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 import static net.firemuffin303.slimegolem.ModPlatform.registerSpawnEgg;
 
 public class ModItem {
-    public static final ArrayList<Supplier<Item>> ITEMS = new ArrayList<>();
+   // public static final  ArrayList<Item> ITEMS = new ArrayList<>();
 
     public static final Supplier<Item> SLIME_PIE = registerItem("slime_pie",() -> new Item(new Item.Properties().food(ModFoods.SLIME_PIE)));
     public static final Supplier<Item> SLIME_GOLEM_SPAWN_EGG = registerItem("slime_golem_spawn_egg", registerSpawnEgg(ModEntityTypes.SLIME_GOLEM,1619264,7665522,new Item.Properties()));
@@ -190,8 +190,8 @@ public class ModItem {
 
     public static void init(){}
 
-    public static Supplier<Item> registerItem(String id, Supplier<Item> item){
-        ITEMS.add(item);
+    public static <T extends Item> Supplier<T> registerItem(String id, Supplier<T> item){
+        //ITEMS.add(item.get());
         return ModPlatform.registerItem(id,item);
     }
 }

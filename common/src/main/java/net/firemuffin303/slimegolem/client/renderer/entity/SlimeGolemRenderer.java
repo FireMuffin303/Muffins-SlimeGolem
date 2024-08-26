@@ -1,11 +1,13 @@
 package net.firemuffin303.slimegolem.client.renderer.entity;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.client.model.SlimeGolemModel;
 import net.firemuffin303.slimegolem.client.renderer.entity.layers.SlimeGolemHeadLayer;
 import net.firemuffin303.slimegolem.client.renderer.entity.layers.SlimeGolemHoneyLayer;
 import net.firemuffin303.slimegolem.client.renderer.entity.layers.SlimeGolemOverlayLayer;
 import net.firemuffin303.slimegolem.common.entity.SlimeGolemEntity;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

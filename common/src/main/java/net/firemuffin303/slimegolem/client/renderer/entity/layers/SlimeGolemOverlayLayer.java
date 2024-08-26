@@ -26,9 +26,9 @@ public class SlimeGolemOverlayLayer extends RenderLayer<SlimeGolemEntity, SlimeG
     @Override
     public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, SlimeGolemEntity entity, float f, float g, float h, float j, float k, float l) {
         Minecraft minecraft = Minecraft.getInstance();
+        VertexConsumer vertexConsumer;
 
         if (entity.isInvisible()) {
-            VertexConsumer vertexConsumer;
             boolean bl = minecraft.shouldEntityAppearGlowing(entity);
             if (bl) {
                 vertexConsumer = multiBufferSource.getBuffer(RenderType.outline(this.getTextureLocation(entity)));
@@ -52,9 +52,13 @@ public class SlimeGolemOverlayLayer extends RenderLayer<SlimeGolemEntity, SlimeG
                 u = SlimeGolemEntity.getColorInt(entity.getColor());
             }
 
+            vertexConsumer = multiBufferSource.getBuffer(RenderType.entityTranslucent(this.getTextureLocation(entity)));
+
+
             this.model.prepareMobModel(entity, f, g, h);
             this.model.setupAnim(entity, f, g, j, k, l);
-            coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, this.getTextureLocation(entity), poseStack, multiBufferSource, i, entity, f, g, j, k, l, h, u);
+            this.model.renderToBuffer(poseStack, vertexConsumer, i, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), u);
+            //coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, this.getTextureLocation(entity), poseStack, multiBufferSource, i, entity, f, g, j, k, l, h, u);
 
         }
     }

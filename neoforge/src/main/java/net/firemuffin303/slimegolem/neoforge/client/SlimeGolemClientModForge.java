@@ -1,9 +1,9 @@
-package net.firemuffin303.slimegolem.forge.client;
+package net.firemuffin303.slimegolem.neoforge.client;
 
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.client.SlimeGolemClientMod;
 import net.firemuffin303.slimegolem.client.model.SlimeGolemModel;
-import net.firemuffin303.slimegolem.forge.config.ModForgeConfig;
+import net.firemuffin303.slimegolem.neoforge.config.ModForgeConfig;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
