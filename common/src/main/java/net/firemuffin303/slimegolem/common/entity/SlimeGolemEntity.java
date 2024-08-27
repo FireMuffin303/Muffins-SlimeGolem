@@ -44,6 +44,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.*;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -66,7 +67,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
     public SlimeGolemEntity(EntityType<? extends AbstractGolem> entityType, Level level) {
         super(entityType, level);
         PositionSource positionSource = new EntityPositionSource(this, this.getEyeHeight());
-        this.dynamicJukeboxListener = new DynamicGameEventListener(new SlimeGolemEntity.JukeboxListener(positionSource, GameEvent.JUKEBOX_PLAY.value().notificationRadius()));
+        this.dynamicJukeboxListener = new DynamicGameEventListener<>(new SlimeGolemEntity.JukeboxListener(positionSource, GameEvent.JUKEBOX_PLAY.value().notificationRadius()));
     }
 
     private static int createSlimeColor(DyeColor dyeColor) {
@@ -143,7 +144,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
         return this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), (double)GameEvent.JUKEBOX_PLAY.value().notificationRadius()) || !this.level().getBlockState(this.jukebox).is(Blocks.JUKEBOX);
     }
 
-    protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
+    protected @NotNull InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
         ItemStack itemStack = player.getItemInHand(interactionHand);
         if (itemStack.is(Items.SHEARS) && this.readyForShearing()) {
             this.shear(SoundSource.PLAYERS);
@@ -336,7 +337,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
     }
 
     @Override
-    public Vec3 getLeashOffset() {
+    public @NotNull Vec3 getLeashOffset() {
         return new Vec3(0.0D,this.getEyeHeight() * 0.6D,this.getBbWidth()*0.1D);
     }
 
@@ -381,7 +382,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
             this.listenerRadius = i;
         }
 
-        public PositionSource getListenerSource() {
+        public @NotNull PositionSource getListenerSource() {
             return this.listenerSource;
         }
 

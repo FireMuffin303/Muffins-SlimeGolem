@@ -1,5 +1,6 @@
 package net.firemuffin303.slimegolem.neoforge;
 
+import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -33,8 +34,8 @@ public class ModPlatformImpl {
         return SlimeGolemModNeoForge.ITEMS.register(id,supplier);
     }
 
-    public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String id,Supplier<EntityType<T>> supplier){
-        return SlimeGolemModNeoForge.ENTITY_TYPE.register(id,supplier);
+    public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String id,Supplier<EntityType.Builder<T>> supplier){
+        return SlimeGolemModNeoForge.ENTITY_TYPE.register(id,() -> supplier.get().build(MuffinsSlimeGolemMod.MOD_ID));
     }
 
     public static Supplier<SoundEvent> registerSoundEvent(String id, Supplier<SoundEvent> event) {

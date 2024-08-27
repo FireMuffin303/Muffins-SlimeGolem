@@ -3,6 +3,7 @@ package net.firemuffin303.slimegolem.common.registry;
 import net.firemuffin303.slimegolem.ModPlatform;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
 
 import java.util.ArrayList;
 import java.util.function.Supplier;
@@ -10,10 +11,10 @@ import java.util.function.Supplier;
 import static net.firemuffin303.slimegolem.ModPlatform.registerSpawnEgg;
 
 public class ModItem {
-   // public static final  ArrayList<Item> ITEMS = new ArrayList<>();
+    public static final  ArrayList<Supplier<Item>> ITEMS = new ArrayList<>();
 
     public static final Supplier<Item> SLIME_PIE = registerItem("slime_pie",() -> new Item(new Item.Properties().food(ModFoods.SLIME_PIE)));
-    public static final Supplier<Item> SLIME_GOLEM_SPAWN_EGG = registerItem("slime_golem_spawn_egg", registerSpawnEgg(ModEntityTypes.SLIME_GOLEM,1619264,7665522,new Item.Properties()));
+    public static final Supplier<Item> SLIME_GOLEM_SPAWN_EGG = registerItem("slime_golem_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.SLIME_GOLEM.get(),1619264,7665522,new Item.Properties()));
     public static final Supplier<Item> MUSIC_DISC_BOUNCYSLIME = registerItem("music_disc_bouncyslime",() -> new Item(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> MUSIC_DISC_BOUNCE_TIL_THE_END = registerItem("music_disc_bounce_til_the_end",() -> new Item(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> SLIME_ALGAE = registerItem("slime_algae",() -> new BlockItem(ModBlock.SLIME_ALGAE.get(),new Item.Properties()));
@@ -190,8 +191,8 @@ public class ModItem {
 
     public static void init(){}
 
-    public static <T extends Item> Supplier<T> registerItem(String id, Supplier<T> item){
-        //ITEMS.add(item.get());
+    public static Supplier<Item> registerItem(String id, Supplier<Item> item){
+        ITEMS.add(item);
         return ModPlatform.registerItem(id,item);
     }
 }

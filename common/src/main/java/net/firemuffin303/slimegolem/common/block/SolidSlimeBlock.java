@@ -1,8 +1,6 @@
 package net.firemuffin303.slimegolem.common.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.BlockGetter;

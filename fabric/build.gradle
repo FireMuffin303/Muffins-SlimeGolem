@@ -22,7 +22,10 @@ loom {
 }
 
 configurations {
-    common
+    common {
+        canBeResolved = true
+        canBeConsumed = false
+    }
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
@@ -36,12 +39,11 @@ repositories {
 
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
 
 
-    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}", {
-        exclude module: "fabric-api"
-    }
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
@@ -85,6 +87,8 @@ components.java {
         skip()
     }
 }
+
+
 
 publishing {
     publications {

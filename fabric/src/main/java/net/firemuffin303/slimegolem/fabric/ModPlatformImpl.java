@@ -46,15 +46,18 @@ public class ModPlatformImpl {
     }
 
     public static <T extends Block> Supplier<T> registerBlock(String id, Supplier<T> supplier) {
-        return () -> Registry.register(BuiltInRegistries.BLOCK,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),supplier.get());
+        T block = Registry.register(BuiltInRegistries.BLOCK,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),supplier.get());
+        return () -> block;
     }
 
     public static <T extends Item> Supplier<T> registerItem(String id, Supplier<T> item) {
-        return () -> Registry.register(BuiltInRegistries.ITEM,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),item.get());
+        T itemvar = Registry.register(BuiltInRegistries.ITEM,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),item.get());
+        return () -> itemvar;
     }
 
-    public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String id, Supplier<EntityType<T>> supplier) {
-        return () -> Registry.register(BuiltInRegistries.ENTITY_TYPE,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),supplier.get());
+    public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String id, Supplier<EntityType.Builder<T>> supplier) {
+        EntityType<T> entityType =  Registry.register(BuiltInRegistries.ENTITY_TYPE,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),supplier.get().build(MuffinsSlimeGolemMod.MOD_ID));
+        return () -> entityType;
     }
 
 }

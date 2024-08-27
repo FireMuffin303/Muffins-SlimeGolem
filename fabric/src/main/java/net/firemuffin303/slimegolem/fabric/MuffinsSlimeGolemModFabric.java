@@ -1,10 +1,17 @@
 package net.firemuffin303.slimegolem.fabric;
 
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.fabricmc.api.ModInitializer;
 import net.firemuffin303.slimegolem.common.registry.ModEntityTypes;
 import net.firemuffin303.slimegolem.common.entity.SlimeGolemEntity;
+import net.firemuffin303.slimegolem.common.registry.ModItem;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 public class MuffinsSlimeGolemModFabric implements ModInitializer {
 
@@ -13,13 +20,21 @@ public class MuffinsSlimeGolemModFabric implements ModInitializer {
         MuffinsSlimeGolemMod.init();
 
         FabricDefaultAttributeRegistry.register(ModEntityTypes.SLIME_GOLEM.get(), SlimeGolemEntity.createAttributes());
-/*
+
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,
                 ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID, "main"),
                 FabricItemGroup.builder()
                         .title(Component.translatable("itemGroup."+MuffinsSlimeGolemMod.MOD_ID+".main"))
                         .icon(() -> new ItemStack(ModItem.SLIME_PIE.get()))
-                        .displayItems(MuffinsSlimeGolemMod::displayItem).build());
-*/
+                        .displayItems((params,output) -> {
+                            output.accept(ModItem.SLIME_GOLEM_SPAWN_EGG.get());
+                            output.accept(ModItem.SLIME_PIE.get());
+                            output.accept(ModItem.MUSIC_DISC_BOUNCYSLIME.get());
+                            output.accept(ModItem.MUSIC_DISC_BOUNCE_TIL_THE_END.get());
+                            output.accept(ModItem.PACKED_SLIME_BLOCK.get());
+                            output.accept(ModItem.PACKED_SLIME_SLAB.get());
+                            output.accept(ModItem.PACKED_SLIME_STAIR.get());
+                        }).build());
+
     }
 }

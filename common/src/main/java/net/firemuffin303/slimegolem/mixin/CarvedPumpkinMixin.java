@@ -5,9 +5,6 @@ import net.firemuffin303.slimegolem.common.registry.ModBlock;
 import net.firemuffin303.slimegolem.common.registry.ModEntityTypes;
 import net.firemuffin303.slimegolem.common.entity.SlimeGolemEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Equipable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -21,12 +18,11 @@ import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Predicate;
 
 @Mixin(CarvedPumpkinBlock.class)
@@ -47,16 +43,17 @@ public class CarvedPumpkinMixin extends HorizontalDirectionalBlock {
 
     @Inject(at = @At("HEAD"), method = "trySpawnGolem")
     private void trySpawnGolem(Level level, BlockPos blockPos, CallbackInfo ci) {
-        spawnSlimeGolem(level, blockPos);
+        muffins_slimegolem$spawnSlimeGolem(level, blockPos);
     }
 
 
-    private void spawnSlimeGolem(Level level,BlockPos blockPos){
-        BlockPattern.BlockPatternMatch blockPatternMatch = this.getOrCreateSlimeGolemFull().find(level, blockPos);
+    @Unique
+    private void muffins_slimegolem$spawnSlimeGolem(Level level, BlockPos blockPos){
+        BlockPattern.BlockPatternMatch blockPatternMatch = this.muffins_slimegolem$getOrCreateSlimeGolemFull().find(level, blockPos);
         int i;
         int j;
         if (blockPatternMatch != null) {
-            for(i = 0; i < this.getOrCreateSlimeGolemFull().getHeight(); ++i) {
+            for(i = 0; i < this.muffins_slimegolem$getOrCreateSlimeGolemFull().getHeight(); ++i) {
                 BlockInWorld blockInWorld = blockPatternMatch.getBlock(0, i, 0);
                 level.setBlock(blockInWorld.getPos(), Blocks.AIR.defaultBlockState(), 2);
                 level.levelEvent(2001, blockInWorld.getPos(), Block.getId(blockInWorld.getState()));
@@ -71,14 +68,15 @@ public class CarvedPumpkinMixin extends HorizontalDirectionalBlock {
             level.addFreshEntity(slimeGolemEntity);
 
 
-            for(j = 0; j < this.getOrCreateSlimeGolemFull().getHeight(); ++j) {
+            for(j = 0; j < this.muffins_slimegolem$getOrCreateSlimeGolemFull().getHeight(); ++j) {
                 BlockInWorld blockInWorld2 = blockPatternMatch.getBlock(0, j, 0);
                 level.blockUpdated(blockInWorld2.getPos(), Blocks.AIR);
             }
         }
     }
 
-    private BlockPattern getOrCreateSlimeGolemFull() {
+    @Unique
+    private BlockPattern muffins_slimegolem$getOrCreateSlimeGolemFull() {
         if (this.slimeGolemFull == null) {
             this.slimeGolemFull = BlockPatternBuilder.start().aisle("^", "#").where('^', BlockInWorld.hasState(PUMPKINS_PREDICATE)).where('#', BlockInWorld.hasState(PACKED_SLIME_PREDICATE)).build();
         }

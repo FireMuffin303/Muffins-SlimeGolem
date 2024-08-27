@@ -45,7 +45,7 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
-    public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String id, Supplier<EntityType<T>> supplier){
+    public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String id, Supplier<EntityType.Builder<T>> supplier){
         throw new AssertionError();
     }
 

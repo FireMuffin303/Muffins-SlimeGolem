@@ -188,7 +188,7 @@ public class ModBlock {
     public static final Supplier<Block> PINK_PACKED_SLIME_BRICK_WALL = registerSlimeWall("pink_packed_slime_brick_wall");
 */
 
-    private static Supplier<Block> registerBlock(String id, Supplier<Block> blockSupplier) {
+    private static <T extends Block> Supplier<T> registerBlock(String id, Supplier<T> blockSupplier) {
         return ModPlatform.registerBlock(id, blockSupplier);
     }
 
@@ -197,7 +197,7 @@ public class ModBlock {
     }
 
     private static Supplier<Block> registerSlimeSlab(String id){
-        return  registerBlock(id,() -> new SolidSlimeSlab(BlockBehaviour.Properties.ofFullCopy(PACKED_SLIME_BLOCK.get())));
+        return registerBlock(id,() -> new SolidSlimeSlab(BlockBehaviour.Properties.ofFullCopy(PACKED_SLIME_BLOCK.get())));
     }
 
     private static Supplier<Block> registerSlimeStair(String id){
