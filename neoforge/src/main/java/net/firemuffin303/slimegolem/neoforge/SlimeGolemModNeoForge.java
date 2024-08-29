@@ -5,18 +5,27 @@ import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.common.registry.ModEntityTypes;
 import net.firemuffin303.slimegolem.common.registry.ModItem;
 import net.firemuffin303.slimegolem.neoforge.client.SlimeGolemClientModForge;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.IModBusEvent;
+import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
+import net.neoforged.fml.javafmlmod.FMLJavaModLanguageProvider;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -43,10 +52,7 @@ public class SlimeGolemModNeoForge {
                 () -> CreativeModeTab.builder()
                         .title(Component.translatable("itemGroup."+MuffinsSlimeGolemMod.MOD_ID+".main"))
                         .icon(() -> new ItemStack(ModItem.SLIME_PIE.get()))
-                        .displayItems((params,output) ->{
-                            output.accept(ModItem.SLIME_GOLEM_SPAWN_EGG.get());
-                            output.accept(ModItem.SLIME_PIE.get());
-                        })
+                        .displayItems(MuffinsSlimeGolemMod::displayItem)
                         .build());
 
         CREATIVE_MODE_TAB.register(iEventBus);
@@ -55,7 +61,6 @@ public class SlimeGolemModNeoForge {
         if(FMLEnvironment.dist.isClient()){
             SlimeGolemClientModForge.init();
         }
-
 
 
         iEventBus.addListener(this::registerAttribute);

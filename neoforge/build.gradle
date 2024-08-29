@@ -44,6 +44,7 @@ repositories{
 
 dependencies {
     neoForge "net.neoforged:neoforge:${rootProject.neoforge_version}"
+    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }

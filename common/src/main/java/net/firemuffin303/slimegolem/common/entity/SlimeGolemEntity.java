@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import net.firemuffin303.slimegolem.common.block.SlimeAlgaeBlock;
 import net.firemuffin303.slimegolem.common.registry.ModBlock;
 import net.firemuffin303.slimegolem.common.registry.ModItem;
+import net.firemuffin303.slimegolem.common.registry.ModLootTables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -43,11 +44,17 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.*;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
@@ -185,33 +192,34 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
 
         }else if(itemStack.is(ModItem.SLIME_PIE.get()) && this.canDanceDrop() && this.isDancing()){
-            dropDanceItem(player);
-            if (!player.getAbilities().instabuild) {
-                itemStack.shrink(1);
+            if(dropDanceItem(player)){
+                if (!player.getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                }
+                this.spawnHeartParticle();
+                return InteractionResult.SUCCESS;
             }
-            this.spawnHeartParticle();
-            return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }
 
-    private void dropDanceItem(Player player){
-        /*
+    private boolean dropDanceItem(Player player){
         if(!this.level().isClientSide) {
-            LootTable table = ((ServerLevel)this.level()).getServer().getLootData().getLootTable(ModLootTables.SLIME_GOLEM_DANCE_DROP);
-            List<ItemStack> list = table.getRandomItems((new LootParams.Builder((ServerLevel) this.level())).withParameter(LootContextParams.ORIGIN,this.position()).withParameter(LootContextParams.THIS_ENTITY, this).create(LootContextParamSets.GIFT));
+            ServerLevel serverLevel = (ServerLevel) this.level();
+            LootTable lootTable = serverLevel.getServer().reloadableRegistries().getLootTable(ModLootTables.SLIME_GOLEM_DANCE_DROP);
+            LootParams lootparams = (new LootParams.Builder(serverLevel)).withParameter(LootContextParams.ORIGIN, this.position()).withParameter(LootContextParams.THIS_ENTITY, this).create(LootContextParamSets.GIFT);
+            List<ItemStack> list = lootTable.getRandomItems(lootparams);
             if (!list.isEmpty()) {
-                Iterator<ItemStack> iterator = list.iterator();
-
-                while (iterator.hasNext()) {
-                    ItemStack itemStack = iterator.next();
+                for (ItemStack itemStack : list) {
                     this.spawnAtLocation(itemStack, 1);
                     this.resetDanceDropCooldown();
                     float g = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
                     this.playSound(SoundEvents.SLIME_SQUISH, 1.0f, g);
                 }
+                return true;
             }
-        }*/
+        }
+        return false;
     }
 
 

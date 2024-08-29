@@ -164,5 +164,6 @@
   "text.autoconfig.slimegolem.title": "Slime Golem Settings",
   "text.autoconfig.slimegolem.option.client": "Client Setting",
   "text.resourcefulconfig.muffins_slimegolem.client.showHoneyOnSlimeGolem": "Show Honey Layer on Slime Golem",
-  "text.resourcefulconfig.muffins_slimegolem.client.showHoneyOnSlimeGolem.comment": "Show Honey Layer on Slime Golem, if true."
+  "text.resourcefulconfig.muffins_slimegolem.client.showHoneyOnSlimeGolem.comment": "Show Honey Layer on Slime Golem, if true.",
+  "jei.muffins_slimegolem.info.slime_pie": "Give to Slime Golem while dancing for a music disc."
 }

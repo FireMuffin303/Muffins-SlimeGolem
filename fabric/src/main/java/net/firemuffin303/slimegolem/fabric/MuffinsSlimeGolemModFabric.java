@@ -26,15 +26,7 @@ public class MuffinsSlimeGolemModFabric implements ModInitializer {
                 FabricItemGroup.builder()
                         .title(Component.translatable("itemGroup."+MuffinsSlimeGolemMod.MOD_ID+".main"))
                         .icon(() -> new ItemStack(ModItem.SLIME_PIE.get()))
-                        .displayItems((params,output) -> {
-                            output.accept(ModItem.SLIME_GOLEM_SPAWN_EGG.get());
-                            output.accept(ModItem.SLIME_PIE.get());
-                            output.accept(ModItem.MUSIC_DISC_BOUNCYSLIME.get());
-                            output.accept(ModItem.MUSIC_DISC_BOUNCE_TIL_THE_END.get());
-                            output.accept(ModItem.PACKED_SLIME_BLOCK.get());
-                            output.accept(ModItem.PACKED_SLIME_SLAB.get());
-                            output.accept(ModItem.PACKED_SLIME_STAIR.get());
-                        }).build());
+                        .displayItems(MuffinsSlimeGolemMod::displayItem).build());
 
     }
 }
