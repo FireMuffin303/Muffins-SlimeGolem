@@ -2,6 +2,7 @@ package net.firemuffin303.slimegolem.mixin;
 
 import com.mojang.serialization.MapCodec;
 import net.firemuffin303.slimegolem.common.registry.ModBlock;
+import net.firemuffin303.slimegolem.common.registry.ModBlockTags;
 import net.firemuffin303.slimegolem.common.registry.ModEntityTypes;
 import net.firemuffin303.slimegolem.common.entity.SlimeGolemEntity;
 import net.minecraft.core.BlockPos;
@@ -84,7 +85,7 @@ public class CarvedPumpkinMixin extends HorizontalDirectionalBlock {
     }
 
     static {
-        PACKED_SLIME_PREDICATE = (blockState) -> blockState != null && (blockState.is(ModBlock.PACKED_SLIME_BLOCK.get()));
+        PACKED_SLIME_PREDICATE = (blockState) -> blockState != null && (blockState.is(ModBlockTags.SLIME_GOLEM_BLOCKS));
     }
 
 }

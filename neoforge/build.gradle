@@ -28,7 +28,10 @@ sourceSets.main {
 }
 
 configurations {
-    common
+    common {
+        canBeResolved = true
+        canBeConsumed = false
+    }
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
@@ -47,7 +50,7 @@ dependencies {
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }
 }
 
 processResources {
@@ -67,6 +70,7 @@ shadowJar {
 }
 
 remapJar {
+
     input.set shadowJar.archiveFile
     dependsOn shadowJar
     archiveClassifier = null
@@ -74,7 +78,7 @@ remapJar {
 
 jar {
     archiveClassifier = "dev"
-    archivesBaseName = "$archives_base_name-$minecraft_version-$mod_version-forge"
+    archivesBaseName = "$archives_base_name-$minecraft_version-$mod_version-neoforge"
 }
 
 sourcesJar {

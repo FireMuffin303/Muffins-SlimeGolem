@@ -24,10 +24,12 @@
     ],
     "client": [
       "net.firemuffin303.slimegolem.fabric.client.SlimeGolemClientModFabric"
+    ],
+    "jei_mod_plugin": [
+      "net.firemuffin303.slimegolem.common.integration.JEIIntegration"
     ]
   },
   "mixins": [
-    "muffins_slimegolem.mixins.json",
     "muffins_slimegolem-common.mixins.json"
   ],
   "depends": {

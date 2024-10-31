@@ -29,5 +29,5 @@ versionRange = "[1.21,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[mixin]]
+[[mixins]]
 config = "muffins_slimegolem-common.mixins.json"

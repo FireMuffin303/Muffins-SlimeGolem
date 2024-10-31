@@ -1,11 +1,14 @@
 package net.firemuffin303.slimegolem;
 
+import com.ibm.icu.impl.Assert;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 //import dev.architectury.platform.Platform;
 import net.firemuffin303.slimegolem.common.registry.ModBlockEntityTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -50,7 +53,7 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
-    public static Supplier<SoundEvent> registerSoundEvent(String id, Supplier<SoundEvent> event){
+    public static Supplier<Holder.Reference<SoundEvent>> registerSoundEvent(String id, Supplier<SoundEvent> event){
         throw new AssertionError();
     }
 
@@ -66,6 +69,11 @@ public class ModPlatform {
 
     @ExpectPlatform
     public static <T extends Mob> Supplier<Item> registerSpawnEgg(Supplier<EntityType<T>> entityType, int primaryColor, int secondaryColor, Item.Properties properties){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Supplier<SimpleParticleType> registerParticleType(String id,boolean bl){
         throw new AssertionError();
     }
 

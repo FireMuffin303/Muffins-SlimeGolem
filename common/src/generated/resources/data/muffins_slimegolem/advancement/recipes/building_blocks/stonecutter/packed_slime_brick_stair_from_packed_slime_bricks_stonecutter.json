@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_packed_slime_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "muffins_slimegolem:packed_slime_bricks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:stonecutter/packed_slime_brick_stair_from_packed_slime_bricks_stonecutter"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_packed_slime_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:stonecutter/packed_slime_brick_stair_from_packed_slime_bricks_stonecutter"
+    ]
+  }
+}

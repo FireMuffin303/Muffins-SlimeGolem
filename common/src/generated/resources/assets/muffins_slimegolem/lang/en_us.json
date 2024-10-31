@@ -1,0 +1,22 @@
+{
+  "block.muffins_slimegolem.chiseled_packed_slime_block": "Chiseled Packed Slime Block",
+  "block.muffins_slimegolem.packed_slime_block": "Packed Slime Block",
+  "block.muffins_slimegolem.packed_slime_brick_slab": "Packed Slime Bricks Slab",
+  "block.muffins_slimegolem.packed_slime_brick_stair": "Packed Slime Bricks Stair",
+  "block.muffins_slimegolem.packed_slime_brick_wall": "Packed Slime Bricks Wall",
+  "block.muffins_slimegolem.packed_slime_bricks": "Packed Slime Bricks",
+  "block.muffins_slimegolem.packed_slime_slab": "Packed Slime Slab",
+  "block.muffins_slimegolem.packed_slime_stair": "Packed Slime Stair",
+  "block.muffins_slimegolem.packed_slime_wall": "Packed Slime Wall",
+  "block.muffins_slimegolem.slime_algae": "Slime Algae",
+  "entity.muffins_slimegolem.slime_golem": "Slime Golem",
+  "item.muffins_slimegolem.music_disc_bounce_til_the_end": "Music Disc",
+  "item.muffins_slimegolem.music_disc_bouncyslime": "Music Disc",
+  "item.muffins_slimegolem.slime_pie": "Slime Pie",
+  "itemGroup.muffins_slimegolem.main": "Muffin's Slime Golem",
+  "jei.muffins_slimegolem.cursed_slime_soul_fire.description": "Place Soul Campfire above any Packed Slime Block to prevent Slimes spawn in the chunk",
+  "jei.muffins_slimegolem.cursed_slime_soul_fire.title": "Cursed Slime Soul Campfire",
+  "jei.muffins_slimegolem.slime_dance.music": "Play any music from a jukebox\nto make them dance,\nthen give them a Slime Pie",
+  "jei.muffins_slimegolem.slime_dance.title": "Slime Golem Dance",
+  "jukebox_song.muffins_slimegolem.bouncyslime": "FireMuffin303 - bouncyslime"
+}

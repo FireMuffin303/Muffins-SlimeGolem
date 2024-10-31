@@ -1,10 +1,21 @@
 package net.firemuffin303.slimegolem;
 
+import mezz.jei.api.recipe.RecipeType;
+import net.firemuffin303.slimegolem.common.integration.category.CursedSlimeSoulRecipeDummy;
+import net.firemuffin303.slimegolem.common.integration.category.SlimeDanceRecipeDummy;
 import net.firemuffin303.slimegolem.common.registry.*;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.JukeboxSong;
 
 public class MuffinsSlimeGolemMod {
     public static final String MOD_ID = "muffins_slimegolem";
+    public static final RecipeType<SlimeDanceRecipeDummy> SLIME_DANCING = RecipeType.create(MuffinsSlimeGolemMod.MOD_ID,"slime_dance",SlimeDanceRecipeDummy.class);
+    public static final RecipeType<CursedSlimeSoulRecipeDummy> CURSED_SLIME_SOUL = RecipeType.create(MuffinsSlimeGolemMod.MOD_ID,"cursed_slime_soul",CursedSlimeSoulRecipeDummy.class);
+
+    public static final ResourceKey<JukeboxSong> BOUNCY_SLIME = ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,"bouncyslime"));
 
     public static void init() {
         ModSoundEvents.init();
@@ -14,6 +25,7 @@ public class MuffinsSlimeGolemMod {
         ModItem.init();
         ModItemTags.init();
         ModBlockTags.init();
+        ModParticleTypes.init();
 
 
     }

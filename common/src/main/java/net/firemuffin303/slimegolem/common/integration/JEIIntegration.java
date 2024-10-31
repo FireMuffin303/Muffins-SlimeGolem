@@ -1,15 +1,16 @@
 package net.firemuffin303.slimegolem.common.integration;
 
+import com.google.common.collect.ImmutableList;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.helpers.IModIdHelper;
+import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
-import net.firemuffin303.slimegolem.common.registry.ModItem;
-import net.minecraft.network.chat.Component;
+import net.firemuffin303.slimegolem.common.integration.category.CursedSlimeSoulRecipeCategory;
+import net.firemuffin303.slimegolem.common.integration.category.CursedSlimeSoulRecipeDummy;
+import net.firemuffin303.slimegolem.common.integration.category.SlimeDanceRecipeCategory;
+import net.firemuffin303.slimegolem.common.integration.category.SlimeDanceRecipeDummy;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 
 @JeiPlugin
 public class JEIIntegration implements IModPlugin {
@@ -19,7 +20,15 @@ public class JEIIntegration implements IModPlugin {
     }
 
     @Override
+    public void registerCategories(IRecipeCategoryRegistration registration) {
+        registration.addRecipeCategories(new SlimeDanceRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new CursedSlimeSoulRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+    }
+
+    @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        registration.addIngredientInfo(new ItemStack(ModItem.SLIME_PIE.get()), VanillaTypes.ITEM_STACK, Component.translatable("jei.muffins_slimegolem.info.slime_pie"));
+        registration.addRecipes(MuffinsSlimeGolemMod.SLIME_DANCING, ImmutableList.of(new SlimeDanceRecipeDummy()));
+        registration.addRecipes(MuffinsSlimeGolemMod.CURSED_SLIME_SOUL, ImmutableList.of(new CursedSlimeSoulRecipeDummy()));
+
     }
 }

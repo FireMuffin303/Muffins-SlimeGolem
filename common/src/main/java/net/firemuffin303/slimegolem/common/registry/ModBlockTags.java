@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Block;
 
 public class ModBlockTags {
     public static final TagKey<Block> PACKED_SLIME_BLOCK = TagKey.create(Registries.BLOCK,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,"packed_slime_block"));
+    public static final TagKey<Block> SLIME_GOLEM_BLOCKS = TagKey.create(Registries.BLOCK,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,"slime_golem_blocks"));
 
     public static void init(){}
 }

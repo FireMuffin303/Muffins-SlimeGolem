@@ -3,10 +3,12 @@
   "package": "net.firemuffin303.slimegolem.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-
   ],
   "mixins": [
-    "CarvedPumpkinMixin"
+    "CampfireBlockMixin",
+    "CarvedPumpkinMixin",
+    "PistonStructureResolverMixin",
+    "SlimeEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,0 +1,5 @@
+// 1.21	2024-10-31T17:02:06.1204014	Muffin's Slime Golem/Tags for minecraft:block
+db192907f70c6408e0efaa3a7e8b939fd4f537e8 data\muffins_slimegolem\tags\block\packed_slime_block.json
+de2ae4e46c52168fec1b207f0f6b05fabc0d8902 data\minecraft\tags\block\mineable\hoe.json
+5233d70368ced82dbc2aeee6b08a019b6f34f87a data\minecraft\tags\block\walls.json
+66ebc9d7277632e6fd293b44f29e53bb3032aa70 data\muffins_slimegolem\tags\block\slime_golem_blocks.json

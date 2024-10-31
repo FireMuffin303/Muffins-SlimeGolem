@@ -1,10 +1,12 @@
 package net.firemuffin303.slimegolem.neoforge;
 
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
+import net.firemuffin303.slimegolem.common.ModSimpleParticleType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -12,9 +14,8 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.nio.file.Path;
 import java.util.function.Supplier;
@@ -38,7 +39,7 @@ public class ModPlatformImpl {
         return SlimeGolemModNeoForge.ENTITY_TYPE.register(id,() -> supplier.get().build(MuffinsSlimeGolemMod.MOD_ID));
     }
 
-    public static Supplier<SoundEvent> registerSoundEvent(String id, Supplier<SoundEvent> event) {
+    public static DeferredHolder<SoundEvent, SoundEvent> registerSoundEvent(String id, Supplier<SoundEvent> event) {
         return SlimeGolemModNeoForge.SOUND_EVENT.register(id,event);
     }
 
@@ -57,8 +58,8 @@ public class ModPlatformImpl {
     /*public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntity(String id, ModBlockEntityTypes.BlockEntitySupplier<T> blockEntityTypeSupplier, Block block) {
     }*/
 
-
-
-
+    public static Supplier<SimpleParticleType> registerParticleType(String id, boolean bl) {
+        return SlimeGolemModNeoForge.PARTICLE_TYPE.register(id,() -> new ModSimpleParticleType(bl));
+    }
 
 }

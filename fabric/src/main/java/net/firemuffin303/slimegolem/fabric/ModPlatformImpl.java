@@ -4,10 +4,13 @@ package net.firemuffin303.slimegolem.fabric;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
+import net.firemuffin303.slimegolem.common.ModSimpleParticleType;
 import net.firemuffin303.slimegolem.common.registry.ModBlockEntityTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -41,8 +44,9 @@ public class ModPlatformImpl {
         return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),BlockEntityType.Builder.of(blockEntityTypeSupplier::create,block).build(null));
     }
 
-    public static Supplier<SoundEvent> registerSoundEvent(String id, Supplier<SoundEvent> event) {
-        return () -> Registry.register(BuiltInRegistries.SOUND_EVENT,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),event.get());
+    public static Supplier<Holder.Reference<SoundEvent>> registerSoundEvent(String id, Supplier<SoundEvent> event) {
+        Holder.Reference<SoundEvent> soundEventReference = Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),event.get());
+        return () -> soundEventReference;
     }
 
     public static <T extends Block> Supplier<T> registerBlock(String id, Supplier<T> supplier) {
@@ -58,6 +62,11 @@ public class ModPlatformImpl {
     public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String id, Supplier<EntityType.Builder<T>> supplier) {
         EntityType<T> entityType =  Registry.register(BuiltInRegistries.ENTITY_TYPE,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),supplier.get().build(MuffinsSlimeGolemMod.MOD_ID));
         return () -> entityType;
+    }
+
+    public static Supplier<SimpleParticleType> registerParticleType(String id,boolean bl) {
+        SimpleParticleType simpleParticleType =Registry.register(BuiltInRegistries.PARTICLE_TYPE,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),new ModSimpleParticleType(bl));
+        return () -> simpleParticleType;
     }
 
 }

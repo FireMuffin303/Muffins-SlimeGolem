@@ -1,0 +1,13 @@
+{
+  "values": [
+    "muffins_slimegolem:packed_slime_block",
+    "muffins_slimegolem:packed_slime_bricks",
+    "muffins_slimegolem:chiseled_packed_slime_block",
+    "muffins_slimegolem:packed_slime_stair",
+    "muffins_slimegolem:packed_slime_slab",
+    "muffins_slimegolem:packed_slime_wall",
+    "muffins_slimegolem:packed_slime_brick_stair",
+    "muffins_slimegolem:packed_slime_brick_slab",
+    "muffins_slimegolem:packed_slime_brick_wall"
+  ]
+}

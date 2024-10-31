@@ -6,8 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.common.registry.ModBlock;
-import net.firemuffin303.slimegolem.fabric.datagen.provider.LootTableProvider;
-import net.firemuffin303.slimegolem.fabric.datagen.provider.ModRecipeProvider;
+import net.firemuffin303.slimegolem.fabric.datagen.provider.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
@@ -28,17 +27,26 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(BlockModelProvider::new);
         pack.addProvider(LootTableProvider::new);
         pack.addProvider(ModRecipeProvider::new);
+        pack.addProvider(ModTagDatagen.BlockTagDatagen::new);
+        pack.addProvider(LangProvider::new);
+        pack.addProvider(LangProvider.ThaiLangProvider::new);
+        pack.addProvider(DynamicDataProvider::new);
     }
 
-    private class BlockModelProvider extends FabricModelProvider {
+    private static class BlockModelProvider extends FabricModelProvider {
         public BlockModelProvider(FabricDataOutput output) {
             super(output);
         }
 
         @Override
         public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
-            blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(ModBlock.PACKED_SLIME_BLOCK.get(), ModelTemplates.CUBE_ALL.create(ModBlock.PACKED_SLIME_BLOCK.get(), TextureMapping.cube(ModelLocationUtils.getModelLocation(Blocks.SLIME_BLOCK)), blockStateModelGenerator.modelOutput)));
-            ModBlock.BLOCKS.forEach((block) -> {cubeall(block.get(),blockStateModelGenerator);});
+            blockStateModelGenerator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(
+                    ModBlock.PACKED_SLIME_BLOCK.get(),
+                    ModelTemplates.CUBE_ALL.create(ModBlock.PACKED_SLIME_BLOCK.get(),
+                            TextureMapping.cube(ModelLocationUtils.getModelLocation(Blocks.SLIME_BLOCK)), blockStateModelGenerator.modelOutput)));
+
+            cubeall(ModBlock.PACKED_SLIME_BRICKS.get(),blockStateModelGenerator);
+            cubeall(ModBlock.CHISELED_PACKED_SLIME_BLOCK.get(),blockStateModelGenerator);
 
             slab(Blocks.SLIME_BLOCK,blockStateModelGenerator, (SlabBlock) ModBlock.PACKED_SLIME_SLAB.get());
             slabBlockMapping().forEach(((block, slabBlock) -> slab(block,blockStateModelGenerator,slabBlock)));
@@ -55,7 +63,10 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
         }
 
         private void cubeall(Block block,BlockModelGenerators blockModelGenerators){
-            blockModelGenerators.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, ModelTemplates.CUBE_ALL.create(block, TextureMapping.cube(ModelLocationUtils.getModelLocation(block)), blockModelGenerators.modelOutput)));
+            blockModelGenerators.blockStateOutput.accept(
+                    BlockModelGenerators.createSimpleBlock(block,
+                            ModelTemplates.CUBE_ALL.create(block,
+                                    TextureMapping.cube(ModelLocationUtils.getModelLocation(block)), blockModelGenerators.modelOutput)));
         }
 
         private void slab(Block block, BlockModelGenerators blockModelGenerators, SlabBlock slabBlock){

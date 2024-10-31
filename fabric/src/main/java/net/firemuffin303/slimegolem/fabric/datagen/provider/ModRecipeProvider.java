@@ -2,14 +2,15 @@ package net.firemuffin303.slimegolem.fabric.datagen.provider;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.firemuffin303.slimegolem.common.registry.ModBlock;
 import net.firemuffin303.slimegolem.common.registry.ModItem;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
@@ -25,6 +26,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public void buildRecipes(RecipeOutput exporter) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlock.PACKED_SLIME_BLOCK.get(),1).requires(Blocks.SLIME_BLOCK).requires(Items.SLIME_BALL)
+                .unlockedBy(getHasName(Items.SLIME_BALL),has(Items.SLIME_BALL)).save(exporter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItem.SLIME_PIE.get(),1).requires(Items.SLIME_BALL).requires(Items.SUGAR).requires(Items.EGG)
+                .unlockedBy(getHasName(Items.SLIME_BALL),has(Items.SLIME_BALL)).save(exporter);
         //coloredBlock(ModItem.WHITE_PACKED_SLIME_BLOCK,ModItem.PACKED_SLIME_BLOCK.get(), Items.WHITE_DYE,exporter);
         //coloredBlock(ModItem.LIGHT_GRAY_PACKED_SLIME_BLOCK,ModItem.PACKED_SLIME_BLOCK.get(),Items.LIGHT_GRAY_DYE,exporter);
         //coloredBlock(ModItem.GRAY_PACKED_SLIME_BLOCK,ModItem.PACKED_SLIME_BLOCK.get(),Items.GRAY_DYE,exporter);
@@ -462,19 +468,19 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     }
 
     private void stoneCutFamily(Supplier<Item> block, Supplier<Item> brick, Supplier<Item> chiseled, Supplier<Item> slab, Supplier<Item> stair, Supplier<Item> wall, Supplier<Item> brick_slab, Supplier<Item> brick_stair, Supplier<Item> brick_wall, RecipeOutput exporter){
-        stonecut("",block.get(),brick.get(),1,exporter);
-        stonecut("",block.get(),chiseled.get(),1,exporter);
-        stonecut("",block.get(),stair.get(),1,exporter);
-        stonecut("",block.get(),slab.get(),2,exporter);
-        stonecut("",block.get(),wall.get(),1,exporter);
-        stonecut("",block.get(),brick_slab.get(),2,exporter);
-        stonecut("",block.get(),brick_stair.get(),1,exporter);
-        stonecut("",block.get(),brick_wall.get(),1,exporter);
+        stonecut("stonecutter/"+getItemName(brick.get())+"_from_"+getItemName(block.get())+"_stonecutter",block.get(),brick.get(),1,exporter);
+        stonecut("stonecutter/"+getItemName(chiseled.get())+"_from_"+getItemName(block.get())+"_stonecutter",block.get(),chiseled.get(),1,exporter);
+        stonecut("stonecutter/"+getItemName(stair.get())+"_from_"+getItemName(block.get())+"_stonecutter",block.get(),stair.get(),1,exporter);
+        stonecut("stonecutter/"+getItemName(slab.get())+"_from_"+getItemName(block.get())+"_stonecutter",block.get(),slab.get(),2,exporter);
+        stonecut("stonecutter/"+getItemName(wall.get())+"_from_"+getItemName(block.get())+"_stonecutter",block.get(),wall.get(),1,exporter);
+        stonecut("stonecutter/"+getItemName(brick_slab.get())+"_from_"+getItemName(block.get())+"_stonecutter",block.get(),brick_slab.get(),2,exporter);
+        stonecut("stonecutter/"+getItemName(brick_stair.get())+"_from_"+getItemName(block.get())+"_stonecutter",block.get(),brick_stair.get(),1,exporter);
+        stonecut("stonecutter/"+getItemName(brick_wall.get())+"_from_"+getItemName(block.get())+"_stonecutter",block.get(),brick_wall.get(),1,exporter);
 
-        stonecut("",brick.get(),chiseled.get(),1,exporter);
-        stonecut("",brick.get(),brick_slab.get(),2,exporter);
-        stonecut("",brick.get(),brick_stair.get(),1,exporter);
-        stonecut("",brick.get(),brick_wall.get(),1,exporter);
+        stonecut("stonecutter/"+getItemName(chiseled.get())+"_from_"+getItemName(brick.get())+"_stonecutter",brick.get(),chiseled.get(),1,exporter);
+        stonecut("stonecutter/"+getItemName(brick_slab.get())+"_from_"+getItemName(brick.get())+"_stonecutter",brick.get(),brick_slab.get(),2,exporter);
+        stonecut("stonecutter/"+getItemName(brick_stair.get())+"_from_"+getItemName(brick.get())+"_stonecutter",brick.get(),brick_stair.get(),1,exporter);
+        stonecut("stonecutter/"+getItemName(brick_wall.get())+"_from_"+getItemName(brick.get())+"_stonecutter",brick.get(),brick_wall.get(),1,exporter);
     }
 
 
