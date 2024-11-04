@@ -1,5 +1,7 @@
 package net.firemuffin303.slimegolem.fabric;
 
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
@@ -12,12 +14,15 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.levelgen.GenerationStep;
 
 public class MuffinsSlimeGolemModFabric implements ModInitializer {
 
     @Override
     public void onInitialize() {
         MuffinsSlimeGolemMod.init();
+
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Decoration.VEGETAL_DECORATION,MuffinsSlimeGolemMod.SLIME_ALGAE_PLACED_FEATURE);
 
         FabricDefaultAttributeRegistry.register(ModEntityTypes.SLIME_GOLEM.get(), SlimeGolemEntity.createAttributes());
 
@@ -27,6 +32,8 @@ public class MuffinsSlimeGolemModFabric implements ModInitializer {
                         .title(Component.translatable("itemGroup."+MuffinsSlimeGolemMod.MOD_ID+".main"))
                         .icon(() -> new ItemStack(ModItem.SLIME_PIE.get()))
                         .displayItems(MuffinsSlimeGolemMod::displayItem).build());
+
+
 
     }
 }

@@ -1,8 +1,10 @@
 package net.firemuffin303.slimegolem;
 
 import com.ibm.icu.impl.Assert;
+import com.mojang.serialization.MapCodec;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 //import dev.architectury.platform.Platform;
+import net.firemuffin303.slimegolem.common.SlimeChunkPlacement;
 import net.firemuffin303.slimegolem.common.registry.ModBlockEntityTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -20,6 +22,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 
 import java.nio.file.Path;
 import java.util.function.Supplier;
@@ -78,6 +82,11 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
+    public static <T extends PlacementModifier> Supplier<PlacementModifierType<T>> registerPlacementType(String id, MapCodec<T> mapCodec) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
     public static <T extends Block> TagKey<T> registerBlockTag(ResourceKey<Registry<T>> blockRegistry, String id) {
         throw new AssertionError();
     }
@@ -96,4 +105,6 @@ public class ModPlatform {
     public static boolean getShowHoneyLayer(){
         throw new AssertionError();
     }
+
+
 }

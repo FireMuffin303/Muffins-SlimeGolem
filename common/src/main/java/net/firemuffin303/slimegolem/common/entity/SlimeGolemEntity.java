@@ -3,7 +3,6 @@ package net.firemuffin303.slimegolem.common.entity;
 import com.google.common.collect.Maps;
 import net.firemuffin303.slimegolem.common.block.SlimeAlgaeBlock;
 import net.firemuffin303.slimegolem.common.registry.ModBlock;
-import net.firemuffin303.slimegolem.common.registry.ModEntityTypes;
 import net.firemuffin303.slimegolem.common.registry.ModItem;
 import net.firemuffin303.slimegolem.common.registry.ModLootTables;
 import net.minecraft.core.BlockPos;
@@ -54,7 +53,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;

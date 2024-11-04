@@ -1,12 +1,19 @@
 package net.firemuffin303.slimegolem.fabric.datagen;
 
+import com.mojang.logging.LogUtils;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
+import net.firemuffin303.slimegolem.common.SlimeChunkPlacement;
 import net.firemuffin303.slimegolem.common.registry.ModBlock;
 import net.firemuffin303.slimegolem.fabric.datagen.provider.*;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
@@ -14,10 +21,18 @@ import net.minecraft.data.models.model.ModelLocationUtils;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TexturedModel;
+import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.MultifaceGrowthConfiguration;
+import net.minecraft.world.level.levelgen.placement.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ModDataGenerator implements DataGeneratorEntrypoint {
@@ -31,6 +46,39 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(LangProvider::new);
         pack.addProvider(LangProvider.ThaiLangProvider::new);
         pack.addProvider(DynamicDataProvider::new);
+    }
+
+    @Override
+    public void buildRegistry(RegistrySetBuilder registryBuilder) {
+        registryBuilder.add(Registries.CONFIGURED_FEATURE,bootstrapContext ->
+                bootstrapContext.register(MuffinsSlimeGolemMod.SLIME_ALGAE_FEATURE,new ConfiguredFeature<>(Feature.MULTIFACE_GROWTH,new MultifaceGrowthConfiguration((MultifaceBlock) ModBlock.SLIME_ALGAE.get(),20,true,true,true,0.5f, HolderSet.direct(Block::builtInRegistryHolder,new Block[]{
+                        Blocks.STONE,
+                        Blocks.ANDESITE,
+                        Blocks.DIORITE,
+                        Blocks.GRANITE,
+                        Blocks.DRIPSTONE_BLOCK,
+                        Blocks.CALCITE,
+                        Blocks.TUFF,
+                        Blocks.DEEPSLATE,
+                        Blocks.MOSS_BLOCK,
+                        Blocks.CLAY
+                }))))
+        );
+
+        registryBuilder.add(Registries.PLACED_FEATURE,bootstrapContext -> {
+            HolderGetter<ConfiguredFeature<?,?>> holderGetter = bootstrapContext.lookup(Registries.CONFIGURED_FEATURE);
+            Holder<ConfiguredFeature<?,?>> featureHolder = holderGetter.getOrThrow(MuffinsSlimeGolemMod.SLIME_ALGAE_FEATURE);
+
+            bootstrapContext.register(MuffinsSlimeGolemMod.SLIME_ALGAE_PLACED_FEATURE,new PlacedFeature(featureHolder,
+                    List.of(
+                            CountPlacement.of(UniformInt.of(80,120)),
+                            InSquarePlacement.spread(),
+                            HeightRangePlacement.uniform(VerticalAnchor.bottom(),VerticalAnchor.absolute(40)),
+                            SlimeChunkPlacement.placement(),
+                            BiomeFilter.biome()
+                    )
+                    ));
+        });
     }
 
     private static class BlockModelProvider extends FabricModelProvider {

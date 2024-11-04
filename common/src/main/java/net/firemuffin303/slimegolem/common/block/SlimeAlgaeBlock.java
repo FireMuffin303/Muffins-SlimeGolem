@@ -17,6 +17,7 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class SlimeAlgaeBlock extends MultifaceBlock implements SimpleWaterloggedBlock {
     public static final MapCodec<SlimeAlgaeBlock> CODEC = simpleCodec(SlimeAlgaeBlock::new);
+    private final MultifaceSpreader spreader = new MultifaceSpreader(this);
 
     private static final BooleanProperty WATERLOGGED;
 
@@ -51,7 +52,7 @@ public class SlimeAlgaeBlock extends MultifaceBlock implements SimpleWaterlogged
 
     @Override
     public MultifaceSpreader getSpreader() {
-        return null;
+        return this.spreader;
     }
 
     static {

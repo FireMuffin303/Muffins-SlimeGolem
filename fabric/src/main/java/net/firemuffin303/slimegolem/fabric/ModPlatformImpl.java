@@ -1,10 +1,13 @@
 package net.firemuffin303.slimegolem.fabric;
 
 
+import com.mojang.logging.LogUtils;
+import com.mojang.serialization.MapCodec;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.common.ModSimpleParticleType;
+import net.firemuffin303.slimegolem.common.SlimeChunkPlacement;
 import net.firemuffin303.slimegolem.common.registry.ModBlockEntityTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -22,6 +25,8 @@ import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 
 import java.util.function.Supplier;
 
@@ -67,6 +72,12 @@ public class ModPlatformImpl {
     public static Supplier<SimpleParticleType> registerParticleType(String id,boolean bl) {
         SimpleParticleType simpleParticleType =Registry.register(BuiltInRegistries.PARTICLE_TYPE,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),new ModSimpleParticleType(bl));
         return () -> simpleParticleType;
+    }
+
+    public static <T extends PlacementModifier> Supplier<PlacementModifierType<T>> registerPlacementType(String id, MapCodec<T> mapCodec) {
+        PlacementModifierType<T> placementModifierType = Registry.register(BuiltInRegistries.PLACEMENT_MODIFIER_TYPE,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),() -> mapCodec);
+
+        return () -> placementModifierType;
     }
 
 }

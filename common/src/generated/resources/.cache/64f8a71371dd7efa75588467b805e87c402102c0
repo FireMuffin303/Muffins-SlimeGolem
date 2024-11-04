@@ -1,2 +1,4 @@
-// 1.21	2024-10-31T17:02:06.1170997	Muffin's Slime Golem/muffins_slimegolem_dynamicProvider
+// 1.21	2024-11-05T00:39:40.0490167	Muffin's Slime Golem/muffins_slimegolem_dynamicProvider
 02f9e93be45cc33b1f6682ee8836c44abfb2a876 data\muffins_slimegolem\jukebox_song\bouncyslime.json
+b0b3d94a6da6ec53c4b4effccab7452c79560db1 data\muffins_slimegolem\worldgen\placed_feature\slime_algae_placed_feature.json
+7cd25329975e10b6a34f131da45efe7d996fe1d7 data\muffins_slimegolem\worldgen\configured_feature\slime_algae_feature.json

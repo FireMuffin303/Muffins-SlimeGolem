@@ -1,0 +1,34 @@
+{
+  "feature": "muffins_slimegolem:slime_algae_feature",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 120,
+        "min_inclusive": 80
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": 40
+        },
+        "min_inclusive": {
+          "above_bottom": 0
+        }
+      }
+    },
+    {
+      "type": "muffins_slimegolem:slime_chunk"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
