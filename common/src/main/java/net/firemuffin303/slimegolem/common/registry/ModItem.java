@@ -18,7 +18,7 @@ public class ModItem {
     public static final Supplier<Item> SLIME_PIE = registerItem("slime_pie",() -> new Item(new Item.Properties().food(ModFoods.SLIME_PIE)));
     public static final Supplier<Item> SLIME_GOLEM_SPAWN_EGG = registerItem("slime_golem_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.SLIME_GOLEM.get(),1619264,7665522,new Item.Properties()));
     public static final Supplier<Item> MUSIC_DISC_BOUNCYSLIME = registerItem("music_disc_bouncyslime",() -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(MuffinsSlimeGolemMod.BOUNCY_SLIME)));
-    public static final Supplier<Item> MUSIC_DISC_BOUNCE_TIL_THE_END = registerItem("music_disc_bounce_til_the_end",() -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(MuffinsSlimeGolemMod.BOUNCY_SLIME)));
+    //public static final Supplier<Item> MUSIC_DISC_BOUNCE_TIL_THE_END = registerItem("music_disc_bounce_til_the_end",() -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(MuffinsSlimeGolemMod.BOUNCY_SLIME)));
     public static final Supplier<Item> SLIME_ALGAE = registerItem("slime_algae",() -> new BlockItem(ModBlock.SLIME_ALGAE.get(),new Item.Properties()));
 
     public static final Supplier<Item> PACKED_SLIME_BLOCK = registerItem("packed_slime_block",() -> new BlockItem(ModBlock.PACKED_SLIME_BLOCK.get(),new Item.Properties()));

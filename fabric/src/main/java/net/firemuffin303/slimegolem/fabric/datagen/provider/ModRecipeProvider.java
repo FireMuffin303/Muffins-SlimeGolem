@@ -26,8 +26,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public void buildRecipes(RecipeOutput exporter) {
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlock.PACKED_SLIME_BLOCK.get(),1).requires(Blocks.SLIME_BLOCK).requires(Items.SLIME_BALL)
-                .unlockedBy(getHasName(Items.SLIME_BALL),has(Items.SLIME_BALL)).save(exporter);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,ModBlock.PACKED_SLIME_BLOCK.get(),1).define('A',Blocks.SLIME_BLOCK)
+                        .pattern("AA").pattern("AA").unlockedBy(getHasName(Items.SLIME_BALL),has(Items.SLIME_BALL)).save(exporter);
+
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItem.SLIME_PIE.get(),1).requires(Items.SLIME_BALL).requires(Items.SUGAR).requires(Items.EGG)
                 .unlockedBy(getHasName(Items.SLIME_BALL),has(Items.SLIME_BALL)).save(exporter);

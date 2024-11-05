@@ -14,6 +14,8 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLEnvironment;
@@ -28,6 +30,7 @@ public class SlimeGolemModNeoForge {
     public static final DeferredRegister<SoundEvent> SOUND_EVENT = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT,MuffinsSlimeGolemMod.MOD_ID);
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB = DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB,MuffinsSlimeGolemMod.MOD_ID);
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPE = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE,MuffinsSlimeGolemMod.MOD_ID);
+    public static final DeferredRegister<PlacementModifierType<?>> PLACEMENT_TYPE = DeferredRegister.create(BuiltInRegistries.PLACEMENT_MODIFIER_TYPE,MuffinsSlimeGolemMod.MOD_ID);
 
     public SlimeGolemModNeoForge(IEventBus iEventBus) {
         // Submit our event bus to let architectury register our content on the right time
@@ -38,6 +41,7 @@ public class SlimeGolemModNeoForge {
         ENTITY_TYPE.register(iEventBus);
         SOUND_EVENT.register(iEventBus);
         PARTICLE_TYPE.register(iEventBus);
+        PLACEMENT_TYPE.register(iEventBus);
 
 
         CREATIVE_MODE_TAB.register("main",

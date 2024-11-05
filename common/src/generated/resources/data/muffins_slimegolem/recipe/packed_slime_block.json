@@ -1,13 +1,14 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "minecraft:crafting_shaped",
   "category": "building",
-  "ingredients": [
-    {
+  "key": {
+    "A": {
       "item": "minecraft:slime_block"
-    },
-    {
-      "item": "minecraft:slime_ball"
     }
+  },
+  "pattern": [
+    "AA",
+    "AA"
   ],
   "result": {
     "count": 1,

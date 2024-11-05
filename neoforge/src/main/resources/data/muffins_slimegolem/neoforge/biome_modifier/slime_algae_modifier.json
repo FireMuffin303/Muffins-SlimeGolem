@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#c:is_overworld",
+  "features": "muffins_slimegolem:slime_algae_placed_feature",
+  "step": "vegetal_decoration"
+}

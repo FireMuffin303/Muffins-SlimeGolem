@@ -1,12 +1,17 @@
 package net.firemuffin303.slimegolem.neoforge;
 
+import com.mojang.serialization.MapCodec;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.common.ModSimpleParticleType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -14,6 +19,8 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -39,8 +46,9 @@ public class ModPlatformImpl {
         return SlimeGolemModNeoForge.ENTITY_TYPE.register(id,() -> supplier.get().build(MuffinsSlimeGolemMod.MOD_ID));
     }
 
-    public static DeferredHolder<SoundEvent, SoundEvent> registerSoundEvent(String id, Supplier<SoundEvent> event) {
-        return SlimeGolemModNeoForge.SOUND_EVENT.register(id,event);
+    public static Supplier<Holder.Reference<SoundEvent>> registerSoundEvent(String id, Supplier<SoundEvent> event) {
+        DeferredHolder<SoundEvent,SoundEvent> soundEventReference = SlimeGolemModNeoForge.SOUND_EVENT.register(id,event);
+        return () -> (Holder.Reference<SoundEvent>) soundEventReference.getDelegate();
     }
 
     public static void registerRenderLayer(Supplier<Block> blockSupplier, RenderType renderType) {
@@ -60,6 +68,11 @@ public class ModPlatformImpl {
 
     public static Supplier<SimpleParticleType> registerParticleType(String id, boolean bl) {
         return SlimeGolemModNeoForge.PARTICLE_TYPE.register(id,() -> new ModSimpleParticleType(bl));
+    }
+
+    public static <T extends PlacementModifier> Supplier<PlacementModifierType<T>> registerPlacementType(String id, MapCodec<T> mapCodec) {
+        return SlimeGolemModNeoForge.PLACEMENT_TYPE.register(id,() ->  () -> mapCodec);
+
     }
 
 }

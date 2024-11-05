@@ -51,7 +51,7 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
     @Override
     public void buildRegistry(RegistrySetBuilder registryBuilder) {
         registryBuilder.add(Registries.CONFIGURED_FEATURE,bootstrapContext ->
-                bootstrapContext.register(MuffinsSlimeGolemMod.SLIME_ALGAE_FEATURE,new ConfiguredFeature<>(Feature.MULTIFACE_GROWTH,new MultifaceGrowthConfiguration((MultifaceBlock) ModBlock.SLIME_ALGAE.get(),20,true,true,true,0.5f, HolderSet.direct(Block::builtInRegistryHolder,new Block[]{
+                bootstrapContext.register(MuffinsSlimeGolemMod.SLIME_ALGAE_FEATURE,new ConfiguredFeature<>(Feature.MULTIFACE_GROWTH,new MultifaceGrowthConfiguration((MultifaceBlock) ModBlock.SLIME_ALGAE.get(),20,true,true,true,0.75f, HolderSet.direct(Block::builtInRegistryHolder,new Block[]{
                         Blocks.STONE,
                         Blocks.ANDESITE,
                         Blocks.DIORITE,
@@ -71,7 +71,8 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
 
             bootstrapContext.register(MuffinsSlimeGolemMod.SLIME_ALGAE_PLACED_FEATURE,new PlacedFeature(featureHolder,
                     List.of(
-                            CountPlacement.of(UniformInt.of(80,120)),
+                            CountPlacement.of(UniformInt.of(40,80)),
+                            RarityFilter.onAverageOnceEvery(3),
                             InSquarePlacement.spread(),
                             HeightRangePlacement.uniform(VerticalAnchor.bottom(),VerticalAnchor.absolute(40)),
                             SlimeChunkPlacement.placement(),
