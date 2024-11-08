@@ -2,12 +2,10 @@ package net.firemuffin303.slimegolem.fabric.datagen.provider;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.firemuffin303.slimegolem.common.registry.ModBlock;
-import net.firemuffin303.slimegolem.common.registry.ModBlockTags;
-import net.firemuffin303.slimegolem.common.registry.ModItem;
-import net.firemuffin303.slimegolem.common.registry.ModItemTags;
+import net.firemuffin303.slimegolem.common.registry.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
@@ -65,6 +63,18 @@ public class ModTagDatagen {
                     .add(ModItem.PACKED_SLIME_BRICK_SLAB.get())
                     .add(ModItem.PACKED_SLIME_BRICK_WALL.get());
 
+        }
+    }
+
+    public static class EntityTagProvider extends FabricTagProvider.EntityTypeTagProvider{
+
+        public EntityTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
+            super(output, completableFuture);
+        }
+
+        @Override
+        protected void addTags(HolderLookup.Provider wrapperLookup) {
+            this.getOrCreateTagBuilder(EntityTypeTags.FALL_DAMAGE_IMMUNE).add(ModEntityTypes.SLIME_GOLEM.get());
         }
     }
 }

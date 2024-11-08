@@ -36,7 +36,6 @@ public class LangProvider extends FabricLanguageProvider {
         translationBuilder.add(ModBlock.SLIME_ALGAE.get(),"Slime Algae");
         translationBuilder.add(ModItem.SLIME_PIE.get(),"Slime Pie");
         translationBuilder.add(ModItem.MUSIC_DISC_BOUNCYSLIME.get(),"Music Disc");
-        translationBuilder.add(ModItem.MUSIC_DISC_BOUNCE_TIL_THE_END.get(),"Music Disc");
         translationBuilder.add(ModEntityTypes.SLIME_GOLEM.get(),"Slime Golem");
 
     }
@@ -69,7 +68,6 @@ public class LangProvider extends FabricLanguageProvider {
             translationBuilder.add(ModBlock.SLIME_ALGAE.get(),"Slime Algae");
             translationBuilder.add(ModItem.SLIME_PIE.get(),"พายสไลม์");
             translationBuilder.add(ModItem.MUSIC_DISC_BOUNCYSLIME.get(),"แผ่นเพลง");
-            translationBuilder.add(ModItem.MUSIC_DISC_BOUNCE_TIL_THE_END.get(),"แผ่นเพลง");
             translationBuilder.add(ModEntityTypes.SLIME_GOLEM.get(),"สไลม์โกเลม");
 
         }

@@ -48,6 +48,9 @@ allprojects {
             name = "ModMaven"
             url = "https://modmaven.dev"
         }
+
+        maven { url "https://maven.shedaniel.me/" }
+        maven { url "https://maven.terraformersmc.com/releases/" }
     }
 
     tasks.withType(JavaCompile) {

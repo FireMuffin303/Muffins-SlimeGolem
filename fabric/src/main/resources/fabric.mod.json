@@ -27,6 +27,9 @@
     ],
     "jei_mod_plugin": [
       "net.firemuffin303.slimegolem.common.integration.JEIIntegration"
+    ],
+    "modmenu": [
+      "net.firemuffin303.slimegolem.fabric.config.ModMenuConfig"
     ]
   },
   "mixins": [

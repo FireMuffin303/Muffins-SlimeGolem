@@ -1,5 +1,7 @@
 package net.firemuffin303.slimegolem;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import mezz.jei.api.recipe.RecipeType;
 import net.firemuffin303.slimegolem.common.SlimeChunkPlacement;
 import net.firemuffin303.slimegolem.common.integration.category.CursedSlimeSoulRecipeDummy;
@@ -28,6 +30,7 @@ public class MuffinsSlimeGolemMod {
 
 
     public static void init() {
+        AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
         ModSoundEvents.init();
         ModLootTables.init();
         ModBlock.init();
