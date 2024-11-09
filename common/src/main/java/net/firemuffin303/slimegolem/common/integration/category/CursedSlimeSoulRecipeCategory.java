@@ -11,6 +11,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
+import net.firemuffin303.slimegolem.common.integration.JEIIntegration;
 import net.firemuffin303.slimegolem.common.registry.ModBlock;
 import net.firemuffin303.slimegolem.common.registry.ModBlockTags;
 import net.minecraft.client.Minecraft;
@@ -59,7 +60,7 @@ public class CursedSlimeSoulRecipeCategory implements IRecipeCategory<CursedSlim
 
     @Override
     public RecipeType<CursedSlimeSoulRecipeDummy> getRecipeType() {
-        return MuffinsSlimeGolemMod.CURSED_SLIME_SOUL;
+        return JEIIntegration.CURSED_SLIME_SOUL;
     }
 
     @Override

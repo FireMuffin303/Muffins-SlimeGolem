@@ -12,6 +12,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.common.entity.SlimeGolemEntity;
+import net.firemuffin303.slimegolem.common.integration.JEIIntegration;
 import net.firemuffin303.slimegolem.common.registry.ModEntityTypes;
 import net.firemuffin303.slimegolem.common.registry.ModItem;
 import net.minecraft.client.Minecraft;
@@ -48,7 +49,7 @@ public class SlimeDanceRecipeCategory implements IRecipeCategory<SlimeDanceRecip
 
     @Override
     public RecipeType<SlimeDanceRecipeDummy> getRecipeType() {
-        return MuffinsSlimeGolemMod.SLIME_DANCING;
+        return JEIIntegration.SLIME_DANCING;
     }
 
     @Override

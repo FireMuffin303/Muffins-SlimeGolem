@@ -1,6 +1,9 @@
 package net.firemuffin303.slimegolem.neoforge;
 
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
+import net.firemuffin303.slimegolem.ModConfig;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.common.registry.ModEntityTypes;
 import net.firemuffin303.slimegolem.common.registry.ModItem;
@@ -16,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
@@ -59,6 +63,13 @@ public class SlimeGolemModNeoForge {
 
 
         iEventBus.addListener(this::registerAttribute);
+
+        //WHY ARE YOU NOT USING THE SAME ID AS FABRIC
+        if(ModList.get().isLoaded("cloth_config")){
+            AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
+            MuffinsSlimeGolemMod.isClothConfigLoaded = true;
+
+        }
     }
 
 

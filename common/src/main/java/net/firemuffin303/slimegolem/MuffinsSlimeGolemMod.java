@@ -12,25 +12,21 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.JukeboxSong;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
-
-import java.util.function.Supplier;
 
 public class MuffinsSlimeGolemMod {
     public static final String MOD_ID = "muffins_slimegolem";
-    public static final RecipeType<SlimeDanceRecipeDummy> SLIME_DANCING = RecipeType.create(MuffinsSlimeGolemMod.MOD_ID,"slime_dance",SlimeDanceRecipeDummy.class);
-    public static final RecipeType<CursedSlimeSoulRecipeDummy> CURSED_SLIME_SOUL = RecipeType.create(MuffinsSlimeGolemMod.MOD_ID,"cursed_slime_soul",CursedSlimeSoulRecipeDummy.class);
+    public static boolean isClothConfigLoaded = false;
 
     public static final ResourceKey<JukeboxSong> BOUNCY_SLIME = ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,"bouncyslime"));
     public static final ResourceKey<ConfiguredFeature<?,?>> SLIME_ALGAE_FEATURE = ResourceKey.create(Registries.CONFIGURED_FEATURE,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,"slime_algae_feature"));
     public static final ResourceKey<PlacedFeature> SLIME_ALGAE_PLACED_FEATURE = ResourceKey.create(Registries.PLACED_FEATURE,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,"slime_algae_placed_feature"));
 
 
-
     public static void init() {
-        AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
+
         ModSoundEvents.init();
         ModLootTables.init();
         ModBlock.init();

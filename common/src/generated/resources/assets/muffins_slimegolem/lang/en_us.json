@@ -11,11 +11,17 @@
   "block.muffins_slimegolem.slime_algae": "Slime Algae",
   "entity.muffins_slimegolem.slime_golem": "Slime Golem",
   "item.muffins_slimegolem.music_disc_bouncyslime": "Music Disc",
+  "item.muffins_slimegolem.slime_golem_spawn_egg": "Slime Golem Spawn Egg",
   "item.muffins_slimegolem.slime_pie": "Slime Pie",
   "itemGroup.muffins_slimegolem.main": "Muffin's Slime Golem",
   "jei.muffins_slimegolem.cursed_slime_soul_fire.description": "Place Soul Campfire above any Packed Slime Block to prevent Slimes spawn in the chunk",
   "jei.muffins_slimegolem.cursed_slime_soul_fire.title": "Cursed Slime Soul Campfire",
   "jei.muffins_slimegolem.slime_dance.music": "Play any music from a jukebox\nto make them dance,\nthen give them a Slime Pie",
   "jei.muffins_slimegolem.slime_dance.title": "Slime Golem Dance",
-  "jukebox_song.muffins_slimegolem.bouncyslime": "FireMuffin303 - bouncyslime"
+  "jukebox_song.muffins_slimegolem.bouncyslime": "FireMuffin303 - bouncyslime",
+  "modmenu.descriptionTranslation.muffins_slimegolem": "Add Slime Golem to Minecraft. A good ally for finding Slime Chunks!",
+  "modmenu.nameTranslation.muffins_slimegolem": "Muffin's Slime Golem",
+  "modmenu.summaryTranslation.muffins_slimegolem": "Add Slime Golem to Minecraft. A good ally for finding Slime Chunks!",
+  "text.autoconfig.muffins_slimegolem.option.showHoneyLayer": "Slime Golems show honey layer when waxed",
+  "text.autoconfig.muffins_slimegolem.title": "Muffin's Slime Golem"
 }

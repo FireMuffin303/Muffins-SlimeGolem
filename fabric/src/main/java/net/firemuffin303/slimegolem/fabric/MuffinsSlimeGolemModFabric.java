@@ -1,9 +1,13 @@
 package net.firemuffin303.slimegolem.fabric;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.loader.api.FabricLoader;
+import net.firemuffin303.slimegolem.ModConfig;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.fabricmc.api.ModInitializer;
 import net.firemuffin303.slimegolem.common.registry.ModEntityTypes;
@@ -20,6 +24,7 @@ public class MuffinsSlimeGolemModFabric implements ModInitializer {
 
     @Override
     public void onInitialize() {
+
         MuffinsSlimeGolemMod.init();
 
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Decoration.VEGETAL_DECORATION,MuffinsSlimeGolemMod.SLIME_ALGAE_PLACED_FEATURE);
@@ -34,6 +39,9 @@ public class MuffinsSlimeGolemModFabric implements ModInitializer {
                         .displayItems(MuffinsSlimeGolemMod::displayItem).build());
 
 
-
+        if(FabricLoader.getInstance().isModLoaded("cloth-config")){
+            AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
+            MuffinsSlimeGolemMod.isClothConfigLoaded = true;
+        }
     }
 }

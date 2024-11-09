@@ -1,6 +1,7 @@
 package net.firemuffin303.slimegolem.neoforge.client;
 
 import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.firemuffin303.slimegolem.ModConfig;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.client.CursedSlimeSoulParticle;
@@ -53,6 +54,8 @@ public class SlimeGolemClientModForge {
     }
 
     public static void registerConfig(ModContainer container){
-        container.registerExtensionPoint(IConfigScreenFactory.class, (modContainer, arg) -> AutoConfig.getConfigScreen(ModConfig.class,arg).get());
+        if(ModList.get().isLoaded("cloth_config")){
+            container.registerExtensionPoint(IConfigScreenFactory.class, (modContainer, arg) -> AutoConfig.getConfigScreen(ModConfig.class,arg).get());
+        }
     }
 }

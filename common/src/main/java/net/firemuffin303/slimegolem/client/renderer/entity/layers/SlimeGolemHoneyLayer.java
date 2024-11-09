@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.firemuffin303.slimegolem.ModConfig;
+import net.firemuffin303.slimegolem.ModPlatform;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.client.model.SlimeGolemModel;
 import net.firemuffin303.slimegolem.common.entity.SlimeGolemEntity;
@@ -27,16 +28,30 @@ public class SlimeGolemHoneyLayer extends RenderLayer<SlimeGolemEntity, SlimeGol
     @Override
     public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, SlimeGolemEntity entity, float f, float g, float h, float j, float k, float l) {
 
-        ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
-        if(config.showHoneyLayer){
-            if(!entity.isInvisible()){
-                if(entity.isWaxed()){
-                    VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.entityTranslucent(WAX_LOCATION));
-                    this.model.setupAnim(entity, f, g, j, k, l);
-                    this.model.renderToBuffer(poseStack,vertexConsumer,i,LivingEntityRenderer.getOverlayCoords(entity,0.0f));
-                    //renderColoredCutoutModel(this.getParentModel(),WAX_LOCATION,poseStack,multiBufferSource,i,entity,1.0f,1.0f,1.0f);
+
+        if(MuffinsSlimeGolemMod.isClothConfigLoaded){
+            ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+            if(config.showHoneyLayer){
+                if(!entity.isInvisible()){
+                    if(entity.isWaxed()){
+                        VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.entityTranslucent(WAX_LOCATION));
+                        this.model.setupAnim(entity, f, g, j, k, l);
+                        this.model.renderToBuffer(poseStack,vertexConsumer,i,LivingEntityRenderer.getOverlayCoords(entity,0.0f));
+
+                    }
                 }
             }
+            return;
         }
+
+        if(!entity.isInvisible()){
+            if(entity.isWaxed()){
+                VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.entityTranslucent(WAX_LOCATION));
+                this.model.setupAnim(entity, f, g, j, k, l);
+                this.model.renderToBuffer(poseStack,vertexConsumer,i,LivingEntityRenderer.getOverlayCoords(entity,0.0f));
+            }
+        }
+
+
     }
 }
