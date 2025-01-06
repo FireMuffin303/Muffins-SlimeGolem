@@ -1,4 +1,4 @@
-// 1.21	2024-11-09T10:43:19.1372282	Muffin's Slime Golem/Model Definitions
+// 1.21	2025-01-06T22:35:40.2956468	Muffin's Slime Golem/Model Definitions
 16ff0b4b0a32e1f6e02daf5c9999488105edb92d assets\muffins_slimegolem\models\item\packed_slime_block.json
 885882aa9248afe058a3aa2b941f65d9f3f5ec2e assets\muffins_slimegolem\blockstates\chiseled_packed_slime_block.json
 92ca55116cac2b71cb414d1c9d5c9c2cdda4f679 assets\muffins_slimegolem\models\block\packed_slime_stair_outer.json
@@ -36,5 +36,6 @@ ffef569262404c9b5d7da8c5a093379fbf3174ba assets\muffins_slimegolem\models\item\p
 fe707a79bf45f3fa300b551324b7d23dfbac08ec assets\muffins_slimegolem\models\block\packed_slime_stair.json
 f58b3fc2c4721e118200e3ae19a7445407e4eaa7 assets\muffins_slimegolem\models\block\packed_slime_block.json
 ec8c36ba0b9d471c7074c2446c95f2e842781128 assets\muffins_slimegolem\blockstates\packed_slime_wall.json
+bb8746377a0a5574b1057080c813593f7d1d5ea6 assets\muffins_slimegolem\models\item\slime_charge.json
 2af51a326897dadb2a7a101964754392bf36ca8d assets\muffins_slimegolem\models\item\packed_slime_wall.json
 2d43b9a1f6fcf6b3ed931a41460b475f96a908a4 assets\muffins_slimegolem\models\block\packed_slime_brick_slab.json

@@ -1,6 +1,6 @@
 package net.firemuffin303.slimegolem.mixin;
 
-import net.firemuffin303.slimegolem.common.registry.ModBlockTags;
+import net.firemuffin303.slimegolem.common.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
@@ -26,7 +26,7 @@ public abstract class SlimeEntityMixin {
         AtomicBoolean bl = new AtomicBoolean(false);
         chunkAccess.findBlocks(blockState -> blockState.is(Blocks.SOUL_CAMPFIRE) && blockState.getValue(CampfireBlock.LIT),(blockPos1, blockState) -> {
 
-            bl.set(levelAccessor.getBlockState(blockPos1.below()).is(ModBlockTags.PACKED_SLIME_BLOCK) );
+            bl.set(levelAccessor.getBlockState(blockPos1.below()).is(ModTags.PACKED_SLIME_BLOCK) );
             });
         if(bl.get()){
             cir.setReturnValue(false);

@@ -5,10 +5,13 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.firemuffin303.slimegolem.ModSoundEvents;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.common.SlimeChunkPlacement;
 import net.firemuffin303.slimegolem.common.registry.ModBlock;
+import net.firemuffin303.slimegolem.common.registry.ModItem;
 import net.firemuffin303.slimegolem.fabric.datagen.provider.*;
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
@@ -22,8 +25,10 @@ import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TexturedModel;
 import net.minecraft.data.worldgen.features.CaveFeatures;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -82,6 +87,15 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
                     )
                     ));
         });
+
+        registryBuilder.add(Registries.JUKEBOX_SONG,bootstrapContext -> {
+           bootstrapContext.register(MuffinsSlimeGolemMod.BOUNCY_SLIME,
+                   new JukeboxSong(ModSoundEvents.MUSIC_DISC_BOUNCYSLIME.get(),
+                           Component.translatable(Util.makeDescriptionId("jukebox_song",MuffinsSlimeGolemMod.BOUNCY_SLIME.location())),
+                           134f,
+                           7
+                           ));
+        });
     }
 
     private static class BlockModelProvider extends FabricModelProvider {
@@ -110,7 +124,7 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
 
         @Override
         public void generateItemModels(ItemModelGenerators itemModelGenerator) {
-
+            itemModelGenerator.generateFlatItem(ModItem.SLIME_CHARGE.get(), ModelTemplates.FLAT_ITEM);
         }
 
         private void cubeall(Block block,BlockModelGenerators blockModelGenerators){

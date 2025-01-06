@@ -33,7 +33,7 @@ public class DynamicDataProvider extends FabricDynamicRegistryProvider {
 
     @Override
     protected void configure(HolderLookup.Provider registries, Entries entries) {
-        entries.add(MuffinsSlimeGolemMod.BOUNCY_SLIME,new JukeboxSong(ModSoundEvents.MUSIC_DISC_BOUNCYSLIME.get(), Component.translatable(Util.makeDescriptionId("jukebox_song",MuffinsSlimeGolemMod.BOUNCY_SLIME.location())),134,7));
+        entries.add(registries.lookupOrThrow(Registries.JUKEBOX_SONG),MuffinsSlimeGolemMod.BOUNCY_SLIME);
 
         entries.add(registries.lookupOrThrow(Registries.CONFIGURED_FEATURE),MuffinsSlimeGolemMod.SLIME_ALGAE_FEATURE);
         entries.add(registries.lookupOrThrow(Registries.PLACED_FEATURE),MuffinsSlimeGolemMod.SLIME_ALGAE_PLACED_FEATURE);

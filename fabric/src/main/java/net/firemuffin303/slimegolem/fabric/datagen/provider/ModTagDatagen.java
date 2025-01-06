@@ -6,9 +6,8 @@ import net.firemuffin303.slimegolem.common.registry.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.EntityTypeTags;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Blocks;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -20,7 +19,7 @@ public class ModTagDatagen {
 
         @Override
         protected void addTags(HolderLookup.Provider wrapperLookup) {
-            this.getOrCreateTagBuilder(ModBlockTags.PACKED_SLIME_BLOCK)
+            this.getOrCreateTagBuilder(ModTags.PACKED_SLIME_BLOCK)
                     .add(ModBlock.PACKED_SLIME_BLOCK.get())
                     .add(ModBlock.PACKED_SLIME_BRICKS.get())
                     .add(ModBlock.CHISELED_PACKED_SLIME_BLOCK.get())
@@ -31,12 +30,12 @@ public class ModTagDatagen {
                     .add(ModBlock.PACKED_SLIME_BRICK_SLAB.get())
                     .add(ModBlock.PACKED_SLIME_BRICK_WALL.get());
 
-            this.getOrCreateTagBuilder(ModBlockTags.SLIME_GOLEM_BLOCKS)
+            this.getOrCreateTagBuilder(ModTags.SLIME_GOLEM_BLOCKS)
                     .add(Blocks.SLIME_BLOCK)
-                    .forceAddTag(ModBlockTags.PACKED_SLIME_BLOCK);
+                    .forceAddTag(ModTags.PACKED_SLIME_BLOCK);
 
             this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_HOE)
-                    .forceAddTag(ModBlockTags.PACKED_SLIME_BLOCK);
+                    .forceAddTag(ModTags.PACKED_SLIME_BLOCK);
 
             this.getOrCreateTagBuilder(BlockTags.WALLS)
                     .add(ModBlock.PACKED_SLIME_WALL.get())
@@ -52,7 +51,7 @@ public class ModTagDatagen {
 
         @Override
         protected void addTags(HolderLookup.Provider wrapperLookup) {
-            this.getOrCreateTagBuilder(ModItemTags.PACKED_SLIME_BLOCK)
+            this.getOrCreateTagBuilder(ModTags.PACKED_SLIME_BLOCK_ITEM)
                     .add(ModItem.PACKED_SLIME_BLOCK.get())
                     .add(ModItem.PACKED_SLIME_BRICKS.get())
                     .add(ModItem.CHISELED_PACKED_SLIME_BLOCK.get())
@@ -75,6 +74,10 @@ public class ModTagDatagen {
         @Override
         protected void addTags(HolderLookup.Provider wrapperLookup) {
             this.getOrCreateTagBuilder(EntityTypeTags.FALL_DAMAGE_IMMUNE).add(ModEntityTypes.SLIME_GOLEM.get());
+
+            this.getOrCreateTagBuilder(ModTags.CAN_GO_PASS_SLIME_CHARGE)
+                    .add(EntityType.SHULKER_BULLET)
+                    .add(EntityType.SLIME);
         }
     }
 }

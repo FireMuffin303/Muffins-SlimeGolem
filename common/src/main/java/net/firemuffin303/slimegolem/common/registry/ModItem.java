@@ -2,6 +2,7 @@ package net.firemuffin303.slimegolem.common.registry;
 
 import net.firemuffin303.slimegolem.ModPlatform;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
+import net.firemuffin303.slimegolem.common.item.SlimeChargeItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -20,6 +21,7 @@ public class ModItem {
     public static final Supplier<Item> MUSIC_DISC_BOUNCYSLIME = registerItem("music_disc_bouncyslime",() -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(MuffinsSlimeGolemMod.BOUNCY_SLIME)));
     //public static final Supplier<Item> MUSIC_DISC_BOUNCE_TIL_THE_END = registerItem("music_disc_bounce_til_the_end",() -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(MuffinsSlimeGolemMod.BOUNCY_SLIME)));
     public static final Supplier<Item> SLIME_ALGAE = registerItem("slime_algae",() -> new BlockItem(ModBlock.SLIME_ALGAE.get(),new Item.Properties()));
+    public static final Supplier<Item> SLIME_CHARGE = registerItem("slime_charge",() -> new SlimeChargeItem(new Item.Properties()));
 
     public static final Supplier<Item> PACKED_SLIME_BLOCK = registerItem("packed_slime_block",() -> new BlockItem(ModBlock.PACKED_SLIME_BLOCK.get(),new Item.Properties()));
     public static final Supplier<Item> PACKED_SLIME_STAIR = registerItem("packed_slime_stair",() -> new BlockItem(ModBlock.PACKED_SLIME_STAIR.get(),new Item.Properties()));

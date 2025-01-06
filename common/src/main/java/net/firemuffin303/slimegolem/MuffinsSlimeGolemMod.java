@@ -1,18 +1,12 @@
 package net.firemuffin303.slimegolem;
 
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
-import mezz.jei.api.recipe.RecipeType;
 import net.firemuffin303.slimegolem.common.SlimeChunkPlacement;
-import net.firemuffin303.slimegolem.common.integration.category.CursedSlimeSoulRecipeDummy;
-import net.firemuffin303.slimegolem.common.integration.category.SlimeDanceRecipeDummy;
 import net.firemuffin303.slimegolem.common.registry.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.JukeboxSong;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -26,18 +20,14 @@ public class MuffinsSlimeGolemMod {
 
 
     public static void init() {
-
         ModSoundEvents.init();
         ModLootTables.init();
         ModBlock.init();
         ModEntityTypes.init();
         ModItem.init();
-        ModItemTags.init();
-        ModBlockTags.init();
+        ModTags.init();
         ModParticleTypes.init();
         SlimeChunkPlacement.init();
-
-
     }
 
     public static void displayItem(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output){
@@ -45,6 +35,7 @@ public class MuffinsSlimeGolemMod {
         output.accept(ModItem.SLIME_GOLEM_SPAWN_EGG.get());
         output.accept(ModItem.MUSIC_DISC_BOUNCYSLIME.get());
         output.accept(ModItem.SLIME_ALGAE.get());
+        output.accept(ModItem.SLIME_CHARGE.get());
 
         output.accept(ModItem.PACKED_SLIME_BLOCK.get());
         output.accept(ModItem.PACKED_SLIME_STAIR.get());

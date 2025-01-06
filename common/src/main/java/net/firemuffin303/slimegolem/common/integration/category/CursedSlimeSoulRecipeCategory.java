@@ -13,7 +13,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.common.integration.JEIIntegration;
 import net.firemuffin303.slimegolem.common.registry.ModBlock;
-import net.firemuffin303.slimegolem.common.registry.ModBlockTags;
+import net.firemuffin303.slimegolem.common.registry.ModTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.LightTexture;
@@ -50,7 +50,7 @@ public class CursedSlimeSoulRecipeCategory implements IRecipeCategory<CursedSlim
     public CursedSlimeSoulRecipeCategory(IGuiHelper iGuiHelper){
         this.icon = iGuiHelper.createDrawableItemStack(new ItemStack(ModBlock.PACKED_SLIME_BLOCK.get()));
         this.background = iGuiHelper.createDrawable(CONTAINER_LOCATION,0,0,154,65);
-        var blocks = BuiltInRegistries.BLOCK.stream().filter(block -> block.defaultBlockState().is(ModBlockTags.PACKED_SLIME_BLOCK)).toList();
+        var blocks = BuiltInRegistries.BLOCK.stream().filter(block -> block.defaultBlockState().is(ModTags.PACKED_SLIME_BLOCK)).toList();
         this.itemStacks = blocks.stream().map(block -> new ItemStack(block.asItem())).toList();
         this.formattedCharSequences = Minecraft.getInstance().font.split(Component.translatable("jei.muffins_slimegolem.cursed_slime_soul_fire.description"),102);
         //this.blockStates = blocks.stream().map(Block::defaultBlockState).toList();

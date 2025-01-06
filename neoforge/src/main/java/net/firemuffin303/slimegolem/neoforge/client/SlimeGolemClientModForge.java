@@ -6,6 +6,7 @@ import net.firemuffin303.slimegolem.ModConfig;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.client.CursedSlimeSoulParticle;
 import net.firemuffin303.slimegolem.client.SlimeGolemClientMod;
+import net.firemuffin303.slimegolem.client.model.SlimeChargeModel;
 import net.firemuffin303.slimegolem.client.model.SlimeGolemModel;
 import net.firemuffin303.slimegolem.common.registry.ModParticleTypes;
 import net.firemuffin303.slimegolem.neoforge.config.ModForgeConfig;
@@ -46,6 +47,7 @@ public class SlimeGolemClientModForge {
     public static void registryLayer(EntityRenderersEvent.RegisterLayerDefinitions event){
         event.registerLayerDefinition(SlimeGolemModel.LAYER,SlimeGolemModel::createInnerLayer);
         event.registerLayerDefinition(SlimeGolemModel.OUT_LAYER,SlimeGolemModel::createOuterLayer);
+        event.registerLayerDefinition(SlimeChargeModel.LAYER,SlimeChargeModel::createBodyLayer);
     }
 
     @SubscribeEvent
