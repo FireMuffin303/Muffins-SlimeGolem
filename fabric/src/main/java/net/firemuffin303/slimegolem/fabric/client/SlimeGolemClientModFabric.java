@@ -1,17 +1,18 @@
 package net.firemuffin303.slimegolem.fabric.client;
 
+import com.terraformersmc.modmenu.util.mod.Mod;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.firemuffin303.slimegolem.client.CursedSlimeSoulParticle;
 import net.firemuffin303.slimegolem.client.SlimeGolemClientMod;
-import net.firemuffin303.slimegolem.client.model.SlimeChargeModel;
+import net.firemuffin303.slimegolem.client.SlimeTrailParticle;
+import net.firemuffin303.slimegolem.client.model.SlimeChargeGroundModel;
+import net.firemuffin303.slimegolem.client.model.SlimeChargeProjectileModel;
 import net.firemuffin303.slimegolem.client.model.SlimeGolemModel;
 import net.firemuffin303.slimegolem.common.registry.ModParticleTypes;
-import net.minecraft.client.particle.CampfireSmokeParticle;
 
 @Environment(EnvType.CLIENT)
 public class SlimeGolemClientModFabric implements ClientModInitializer {
@@ -21,8 +22,10 @@ public class SlimeGolemClientModFabric implements ClientModInitializer {
         SlimeGolemClientMod.init();
         EntityModelLayerRegistry.registerModelLayer(SlimeGolemModel.LAYER, SlimeGolemModel::createInnerLayer);
         EntityModelLayerRegistry.registerModelLayer(SlimeGolemModel.OUT_LAYER, SlimeGolemModel::createOuterLayer);
-        EntityModelLayerRegistry.registerModelLayer(SlimeChargeModel.LAYER, SlimeChargeModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(SlimeChargeProjectileModel.LAYER, SlimeChargeProjectileModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(SlimeChargeGroundModel.LAYER, SlimeChargeGroundModel::createBodyLayer);
 
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.CURSED_SLIME_SOUL.get(), CursedSlimeSoulParticle.Provider::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SLIME_TRAIL.get(), SlimeTrailParticle.Provider::new);
     }
 }

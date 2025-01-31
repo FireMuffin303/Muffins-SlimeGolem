@@ -3,7 +3,6 @@ package net.firemuffin303.slimegolem.client.model;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.common.entity.SlimeChargeProjectile;
 import net.minecraft.client.model.HierarchicalModel;
-import net.minecraft.client.model.geom.LayerDefinitions;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -11,12 +10,12 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 
-public class SlimeChargeModel extends HierarchicalModel<SlimeChargeProjectile> {
+public class SlimeChargeProjectileModel extends HierarchicalModel<SlimeChargeProjectile> {
     private final ModelPart bone;
     public static final ModelLayerLocation LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,"slime_charge"),"main");
 
 
-    public SlimeChargeModel(ModelPart modelPart){
+    public SlimeChargeProjectileModel(ModelPart modelPart){
         super(RenderType::entityTranslucent);
         this.bone = modelPart.getChild("bone");
     }

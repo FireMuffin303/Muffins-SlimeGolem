@@ -5,6 +5,7 @@ import net.firemuffin303.slimegolem.common.block.SlimeAlgaeBlock;
 import net.firemuffin303.slimegolem.common.registry.ModBlock;
 import net.firemuffin303.slimegolem.common.registry.ModItem;
 import net.firemuffin303.slimegolem.common.registry.ModLootTables;
+import net.firemuffin303.slimegolem.common.registry.ModParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;

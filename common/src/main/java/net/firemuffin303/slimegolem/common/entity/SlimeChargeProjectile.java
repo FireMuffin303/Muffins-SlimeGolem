@@ -34,8 +34,6 @@ import java.util.List;
 public class SlimeChargeProjectile extends AbstractHurtingProjectile implements ItemSupplier {
     protected boolean isGrounded;
     protected int lifeTime;
-    protected float hit = 1.0F;
-    protected static final EntityDataAccessor<Integer> SIZE = SynchedEntityData.defineId(SlimeChargeProjectile.class, EntityDataSerializers.INT);
     @Nullable
     protected BlockState stickTo;
     public SlimeChargeProjectile(EntityType<? extends AbstractHurtingProjectile> entityType, Level level) {
@@ -46,21 +44,8 @@ public class SlimeChargeProjectile extends AbstractHurtingProjectile implements 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(SIZE,0);
     }
 
-    @Override
-    public void onSyncedDataUpdated(EntityDataAccessor<?> entityDataAccessor) {
-        if(SIZE.equals(entityDataAccessor)){
-            this.updateSize();
-        }
-        super.onSyncedDataUpdated(entityDataAccessor);
-    }
-
-    private void updateSize() {
-        this.refreshDimensions();
-        this.hit = this.getSize();
-    }
 
     @Override
     public void tick() {
@@ -95,7 +80,7 @@ public class SlimeChargeProjectile extends AbstractHurtingProjectile implements 
 
             if(!list.isEmpty()){
                 for (LivingEntity livingEntity : list){
-                    livingEntity.makeStuckInBlock(this.level().getBlockState(this.blockPosition()),new Vec3(0.25, 0.05000000074505806, 0.25));
+                    livingEntity.makeStuckInBlock(this.level().getBlockState(this.blockPosition()),new Vec3(0.66, 0.25000000074505806, 0.66));
                 }
             }
 
@@ -103,10 +88,6 @@ public class SlimeChargeProjectile extends AbstractHurtingProjectile implements 
         }else {
             this.applyGravity();
         }
-    }
-
-    public void setSize(int i){
-        this.entityData.set(SIZE, Mth.clamp(i,0,6));
     }
 
     @Override
@@ -125,17 +106,8 @@ public class SlimeChargeProjectile extends AbstractHurtingProjectile implements 
         return false;
     }
 
-    @Override
-    protected void onHit(HitResult hitResult) {
-        if(hitResult.getType() == HitResult.Type.ENTITY){
-            EntityHitResult hitResult1 = (EntityHitResult) hitResult;
-            if(hitResult1.getEntity() instanceof SlimeChargeProjectile slimeChargeProjectile){
-                int size = slimeChargeProjectile.getSize() + 1;
-                slimeChargeProjectile.setSize(size);
-                this.discard();
-            }
-        }
-        super.onHit(hitResult);
+    public boolean isGrounded(){
+        return this.isGrounded;
     }
 
     @Override
@@ -151,24 +123,12 @@ public class SlimeChargeProjectile extends AbstractHurtingProjectile implements 
         return false;
     }
 
-    @Override
-    public boolean hurt(DamageSource damageSource, float f) {
-        if(!this.level().isClientSide){
-            this.hit -= f;
-            ((ServerLevel)this.level()).sendParticles(ParticleTypes.ITEM_SLIME, this.getX(), this.getY(), this.getZ(), 15, 0.2, 0.2, 0.2, 0.0);
-            if(this.hit <= 0){
-                this.discard();
-            }
-        }
 
-        return super.hurt(damageSource, f);
-    }
 
     @Override
     public boolean save(CompoundTag compoundTag) {
         compoundTag.putBoolean("isGrounded",this.isGrounded);
         compoundTag.putInt("lifeTime",this.lifeTime);
-        compoundTag.putInt("size",this.getSize());
         return super.save(compoundTag);
     }
 
@@ -177,18 +137,9 @@ public class SlimeChargeProjectile extends AbstractHurtingProjectile implements 
         super.load(compoundTag);
         this.isGrounded = compoundTag.getBoolean("isGrounded");
         this.lifeTime = compoundTag.getInt("lifeTime");
-        this.setSize(compoundTag.getInt("size"));
     }
 
-    @Override
-    public @NotNull EntityDimensions getDimensions(Pose pose) {
-        EntityDimensions entityDimensions = this.getType().getDimensions();
-        return EntityDimensions.scalable((this.getSize() * 0.25f) + entityDimensions.width(),(this.getSize() * 0.1f) + entityDimensions.height());
-    }
 
-    public int getSize() {
-        return this.entityData.get(SIZE);
-    }
 
     @Override
     public ItemStack getItem() {
