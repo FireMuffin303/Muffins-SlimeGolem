@@ -1,104 +1,98 @@
 package net.firemuffin303.slimegolem.common.entity;
 
-import com.mojang.logging.LogUtils;
-import net.firemuffin303.slimegolem.common.registry.ModTags;
+import net.firemuffin303.slimegolem.common.registry.ModMobEffects;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Mth;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.ItemSupplier;
-import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.windcharge.AbstractWindCharge;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.SimpleExplosionDamageCalculator;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.event.ItemEvent;
-import java.util.List;
+import java.util.Optional;
 
 public class SlimeChargeProjectile extends AbstractHurtingProjectile implements ItemSupplier {
-    protected boolean isGrounded;
-    protected int lifeTime;
-    @Nullable
-    protected BlockState stickTo;
+    protected static final ExplosionDamageCalculator EXPLOSION_DAMAGE_CALCULATOR = new SimpleExplosionDamageCalculator(false,false, Optional.of(0f),Optional.empty());
+
     public SlimeChargeProjectile(EntityType<? extends AbstractHurtingProjectile> entityType, Level level) {
         super(entityType, level);
-        this.lifeTime = 500;
     }
-
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-    }
-
 
     @Override
     public void tick() {
         super.tick();
-        if(this.isGrounded){
-            if(!this.level().isClientSide){
-                if(this.lifeTime < 0){
-                    this.discard();
-                }
-
-                List<Projectile> projectiles = this.level().getEntitiesOfClass(Projectile.class,this.getBoundingBox(),projectile -> {
-                    return  !projectile.getType().is(ModTags.CAN_GO_PASS_SLIME_CHARGE);
-                });
-
-                if(!projectiles.isEmpty()){
-                    for (Projectile projectile : projectiles){
-                        //projectile.makeStuckInBlock(this.level().getBlockState(this.blockPosition()),new Vec3(0.25, 0.05000000074505806, 0.25));
-                        if(projectile instanceof AbstractArrow abstractArrow){
-                            ItemStack itemStack = abstractArrow.getPickupItemStackOrigin().copy();
-                            ItemEntity item = new ItemEntity(this.level(),abstractArrow.getX(),abstractArrow.getY(),abstractArrow.getZ(),itemStack);
-                            this.level().addFreshEntity(item);
-                            abstractArrow.discard();
-                        }
-                    }
-                }
-            }
-
-
-            List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class,this.getBoundingBox(),livingEntity -> {
-                return  !livingEntity.isSpectator() && !livingEntity.hasEffect(MobEffects.OOZING);
-            });
-
-            if(!list.isEmpty()){
-                for (LivingEntity livingEntity : list){
-                    livingEntity.makeStuckInBlock(this.level().getBlockState(this.blockPosition()),new Vec3(0.66, 0.25000000074505806, 0.66));
-                }
-            }
-
-            this.lifeTime--;
-        }else {
+        if (!this.level().isClientSide && this.getBlockY() > this.level().getMaxBuildHeight() + 30) {
+            this.explode();
+            this.discard();
+        } else {
+            super.tick();
             this.applyGravity();
         }
+
     }
 
     @Override
     protected void onHitBlock(BlockHitResult blockHitResult) {
-        this.stickTo = this.level().getBlockState(blockHitResult.getBlockPos());
         super.onHitBlock(blockHitResult);
-        Vec3 vec3 = blockHitResult.getLocation().subtract(this.getX(), this.getY(), this.getZ());
-        this.setDeltaMovement(vec3);
-        Vec3 vec32 = vec3.normalize().scale(0.05000000074505806);
-        this.setPosRaw(this.getX() - vec32.x, this.getY() - vec32.y, this.getZ() - vec32.z);
-        this.isGrounded = true;
+        this.explode();
+        this.discard();
+    }
+
+    @Override
+    protected void onHitEntity(EntityHitResult entityHitResult) {
+        super.onHitEntity(entityHitResult);
+        if(!this.level().isClientSide){
+            Entity entity = entityHitResult.getEntity();
+            LivingEntity attacker = null;
+            if(this.getOwner() instanceof LivingEntity livingEntity){
+                attacker = livingEntity;
+                attacker.setLastHurtMob(entity);
+            }
+
+            DamageSource damageSource = this.damageSources().windCharge(this, attacker);
+            if(entity.hurt(damageSource,1.0f) && entity instanceof LivingEntity hitEntity){
+                EnchantmentHelper.doPostAttackEffects((ServerLevel) this.level(),hitEntity,damageSource);
+            }
+            this.explode();
+        }
+
+    }
+
+    @Override
+    protected boolean canHitEntity(Entity entity) {
+        if (entity instanceof SlimeChargeProjectile) {
+            return false;
+        } else {
+            return entity.getType() != EntityType.END_CRYSTAL && super.canHitEntity(entity);
+        }
+    }
+
+    @Override
+    public boolean canCollideWith(Entity entity) {
+        return !(entity instanceof SlimeChargeProjectile) && super.canCollideWith(entity);
+    }
+
+    @Override
+    protected void onHit(HitResult hitResult) {
+        super.onHit(hitResult);
+        if(!this.level().isClientSide){
+            this.discard();
+        }
     }
 
     @Override
@@ -106,40 +100,10 @@ public class SlimeChargeProjectile extends AbstractHurtingProjectile implements 
         return false;
     }
 
-    public boolean isGrounded(){
-        return this.isGrounded;
-    }
-
-    @Override
-    protected boolean canHitEntity(Entity entity) {
-        if(entity instanceof SlimeChargeProjectile){
-            return true;
-        }
-        return super.canHitEntity(entity);
-    }
-
     @Override
     public boolean isPickable() {
         return false;
     }
-
-
-
-    @Override
-    public boolean save(CompoundTag compoundTag) {
-        compoundTag.putBoolean("isGrounded",this.isGrounded);
-        compoundTag.putInt("lifeTime",this.lifeTime);
-        return super.save(compoundTag);
-    }
-
-    @Override
-    public void load(CompoundTag compoundTag) {
-        super.load(compoundTag);
-        this.isGrounded = compoundTag.getBoolean("isGrounded");
-        this.lifeTime = compoundTag.getInt("lifeTime");
-    }
-
-
 
     @Override
     public ItemStack getItem() {
@@ -148,11 +112,22 @@ public class SlimeChargeProjectile extends AbstractHurtingProjectile implements 
 
     @Override
     protected @Nullable ParticleOptions getTrailParticle() {
-        return null;
+        return ParticleTypes.ITEM_SLIME;
     }
 
     @Override
     protected double getDefaultGravity() {
         return 0.045;
+    }
+
+    private void explode(){
+        this.level().explode(this,null,EXPLOSION_DAMAGE_CALCULATOR,this.position().x(),this.position().y(),this.position().z(),2.0f,false, Level.ExplosionInteraction.NONE,ParticleTypes.GUST_EMITTER_SMALL,ParticleTypes.GUST_EMITTER_LARGE, SoundEvents.WIND_CHARGE_BURST);
+
+    }
+
+    public static void onLivingEntityHit(LivingEntity livingEntity){
+        livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,100,1));
+        livingEntity.addEffect(new MobEffectInstance(ModMobEffects.BOUNCE.get(),20*30,0));
+        livingEntity.resetFallDistance();
     }
 }

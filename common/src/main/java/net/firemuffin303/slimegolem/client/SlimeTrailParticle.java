@@ -1,6 +1,6 @@
 package net.firemuffin303.slimegolem.client;
-
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.logging.LogUtils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
@@ -11,19 +11,27 @@ import org.joml.Quaternionf;
 
 public class SlimeTrailParticle extends TextureSheetParticle {
     private final SpriteSet sprites;
+    private final int maxLifeTime;
     protected SlimeTrailParticle(ClientLevel clientLevel, double d, double e, double f,SpriteSet sprites) {
         super(clientLevel, d, e, f);
-        this.lifetime = 200;
+        this.maxLifeTime = 200;
+        this.lifetime = this.maxLifeTime;
         this.sprites = sprites;
         this.scale(3.5f);
         this.setSpriteFromAge(this.sprites);
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        float f = (Math.abs(((float)this.age - (float)this.lifetime)) / (float)this.lifetime) * 0.75f;
+        this.setAlpha(f);
+    }
+
+    @Override
     public void render(VertexConsumer vertexConsumer, Camera camera, float f) {
         Quaternionf quaternionf = new Quaternionf();
         quaternionf.rotateX(-1.5708f);
-
         this.renderRotatedQuad(vertexConsumer, camera, quaternionf, f);
     }
 

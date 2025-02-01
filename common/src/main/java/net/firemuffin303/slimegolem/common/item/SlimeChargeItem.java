@@ -32,7 +32,7 @@ public class SlimeChargeItem extends Item implements ProjectileItem {
             if(slimeChargeProjectile == null){
                 return InteractionResultHolder.fail(itemStack);
             }
-            slimeChargeProjectile.setPos(player.getX(),player.getEyeY(),player.getZ());
+            slimeChargeProjectile.setPos(player.getX(),player.getEyePosition().y(),player.getZ());
             slimeChargeProjectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
             level.addFreshEntity(slimeChargeProjectile);
             level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.WIND_CHARGE_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));

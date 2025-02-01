@@ -2,10 +2,7 @@ package net.firemuffin303.slimegolem.common.entity;
 
 import com.google.common.collect.Maps;
 import net.firemuffin303.slimegolem.common.block.SlimeAlgaeBlock;
-import net.firemuffin303.slimegolem.common.registry.ModBlock;
-import net.firemuffin303.slimegolem.common.registry.ModItem;
-import net.firemuffin303.slimegolem.common.registry.ModLootTables;
-import net.firemuffin303.slimegolem.common.registry.ModParticleTypes;
+import net.firemuffin303.slimegolem.common.registry.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -24,14 +21,19 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.Shearable;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.AbstractGolem;
+import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
@@ -59,7 +61,7 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
-public class SlimeGolemEntity extends AbstractGolem implements Shearable {
+public class SlimeGolemEntity extends AbstractGolem implements Shearable, RangedAttackMob {
     private static final EntityDataAccessor<Byte> DATA_PUMPKIN_ID;
     private static final EntityDataAccessor<Byte> DATA_COLOR_ID;
     private static final EntityDataAccessor<Boolean> IS_WAXED;
@@ -103,9 +105,13 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
 
     @Override
     protected void registerGoals() {
+        this.goalSelector.addGoal(1,new RangedAttackGoal(this,1.25d,20,10.0f));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0D, 1.0000001E-5F));
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(1,new NearestAttackableTargetGoal<Mob>(this,Mob.class,10,true,true,livingEntity -> {
+            return livingEntity instanceof Enemy;
+        }));
 
     }
 
@@ -379,6 +385,23 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable {
         COLORARRAY_BY_COLOR = Maps.newEnumMap((Map) Arrays.stream(DyeColor.values()).collect(Collectors.toMap((dyeColor) -> {
             return dyeColor;
         }, SlimeGolemEntity::createSlimeColor)));
+    }
+
+    @Override
+    public void performRangedAttack(LivingEntity livingEntity, float f) {
+        SlimeChargeProjectile slimeChargeProjectile = ModEntityTypes.SLIME_CHARGE.get().create(this.level());
+        if(slimeChargeProjectile == null){
+            return;
+        }
+        double d = livingEntity.getEyeY() - 1.100000023841858;
+        double e = livingEntity.getX() - this.getX();
+        double g = d - slimeChargeProjectile.getY();
+        double h = livingEntity.getZ() - this.getZ();
+        double i = Math.sqrt(e * e + h * h) * 0.20000000298023224;
+        slimeChargeProjectile.setPos(this.getX(),this.getEyeY(),this.getZ());
+        slimeChargeProjectile.shootFromRotation(this, this.getXRot(), this.getYRot(), 0.0F, 1.5F, 1.0F);
+        this.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        this.level().addFreshEntity(slimeChargeProjectile);
     }
 
     class JukeboxListener implements GameEventListener {

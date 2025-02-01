@@ -6,6 +6,7 @@ import com.mojang.serialization.MapCodec;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
+import net.firemuffin303.slimegolem.common.ModMobEffect;
 import net.firemuffin303.slimegolem.common.ModSimpleParticleType;
 import net.firemuffin303.slimegolem.common.SlimeChunkPlacement;
 import net.firemuffin303.slimegolem.common.registry.ModBlockEntityTypes;
@@ -17,6 +18,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -78,6 +80,11 @@ public class ModPlatformImpl {
         PlacementModifierType<T> placementModifierType = Registry.register(BuiltInRegistries.PLACEMENT_MODIFIER_TYPE,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),() -> mapCodec);
 
         return () -> placementModifierType;
+    }
+
+    public static Supplier<Holder<MobEffect>> registerEffect(String id, Supplier<ModMobEffect> modMobEffect) {
+        Holder<MobEffect> mobEffect = Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,id),modMobEffect.get());
+        return () -> mobEffect;
     }
 
 }

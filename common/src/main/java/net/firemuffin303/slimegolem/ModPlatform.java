@@ -4,6 +4,7 @@ import com.ibm.icu.impl.Assert;
 import com.mojang.serialization.MapCodec;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 //import dev.architectury.platform.Platform;
+import net.firemuffin303.slimegolem.common.ModMobEffect;
 import net.firemuffin303.slimegolem.common.SlimeChunkPlacement;
 import net.firemuffin303.slimegolem.common.registry.ModBlockEntityTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -15,6 +16,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -107,4 +109,8 @@ public class ModPlatform {
     }
 
 
+    @ExpectPlatform
+    public static Supplier<Holder<MobEffect>> registerEffect(String id, Supplier<ModMobEffect> modMobEffect) {
+        throw new AssertionError();
+    }
 }

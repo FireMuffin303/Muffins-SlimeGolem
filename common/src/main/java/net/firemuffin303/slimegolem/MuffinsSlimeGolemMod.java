@@ -27,6 +27,7 @@ public class MuffinsSlimeGolemMod {
         ModItem.init();
         ModTags.init();
         ModParticleTypes.init();
+        ModMobEffects.init();
         SlimeChunkPlacement.init();
     }
 

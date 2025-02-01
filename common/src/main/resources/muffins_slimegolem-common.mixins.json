@@ -8,7 +8,11 @@
     "CampfireBlockMixin",
     "CarvedPumpkinMixin",
     "PistonStructureResolverMixin",
-    "SlimeEntityMixin"
+    "SlimeEntityMixin",
+    "bounceEffect.EntityMixin",
+    "bounceEffect.LivingEntityMixin",
+    "slimeChargeBehavior.EntityMixin",
+    "slimeChargeBehavior.LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
