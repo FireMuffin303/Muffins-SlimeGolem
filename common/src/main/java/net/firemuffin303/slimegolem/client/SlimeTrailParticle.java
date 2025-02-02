@@ -1,6 +1,5 @@
 package net.firemuffin303.slimegolem.client;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.logging.LogUtils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;

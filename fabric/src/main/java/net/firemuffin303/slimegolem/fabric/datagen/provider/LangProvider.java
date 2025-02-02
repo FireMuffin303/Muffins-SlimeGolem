@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.firemuffin303.slimegolem.common.registry.ModBlock;
 import net.firemuffin303.slimegolem.common.registry.ModEntityTypes;
 import net.firemuffin303.slimegolem.common.registry.ModItem;
+import net.firemuffin303.slimegolem.common.registry.ModParticleTypes;
 import net.minecraft.core.HolderLookup;
 
 import java.util.concurrent.CompletableFuture;
@@ -48,7 +49,7 @@ public class LangProvider extends FabricLanguageProvider {
         translationBuilder.add(ModItem.SLIME_GOLEM_SPAWN_EGG.get(),"Slime Golem Spawn Egg");
         translationBuilder.add(ModItem.MUSIC_DISC_BOUNCYSLIME.get(),"Music Disc");
         translationBuilder.add(ModEntityTypes.SLIME_GOLEM.get(),"Slime Golem");
-
+        translationBuilder.add("effect.muffins_slimegolem.bounce","Bounce");
     }
 
     public static class ThaiLangProvider extends FabricLanguageProvider{
@@ -90,6 +91,7 @@ public class LangProvider extends FabricLanguageProvider {
             translationBuilder.add(ModItem.SLIME_GOLEM_SPAWN_EGG.get(),"ไข่เกิดสไลม์โกเลม");
             translationBuilder.add(ModItem.MUSIC_DISC_BOUNCYSLIME.get(),"แผ่นเพลง");
             translationBuilder.add(ModEntityTypes.SLIME_GOLEM.get(),"สไลม์โกเลม");
+            translationBuilder.add("effect.muffins_slimegolem.bounce","เด้ง");
 
         }
     }

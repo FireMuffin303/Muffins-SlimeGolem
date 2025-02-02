@@ -9,6 +9,7 @@
   "block.muffins_slimegolem.packed_slime_stair": "บันไดสไลม์อัดแน่น",
   "block.muffins_slimegolem.packed_slime_wall": "กำแพงสไลม์อัดแน่น",
   "block.muffins_slimegolem.slime_algae": "ตะไคร่สไลม์",
+  "effect.muffins_slimegolem.bounce": "เด้ง",
   "entity.muffins_slimegolem.slime_golem": "สไลม์โกเลม",
   "item.muffins_slimegolem.music_disc_bouncyslime": "แผ่นเพลง",
   "item.muffins_slimegolem.slime_golem_spawn_egg": "ไข่เกิดสไลม์โกเลม",

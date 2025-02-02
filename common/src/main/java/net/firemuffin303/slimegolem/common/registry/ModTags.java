@@ -14,6 +14,6 @@ public class ModTags {
 
     public static final TagKey<Item> PACKED_SLIME_BLOCK_ITEM = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,"packed_slime_golem"));
 
-    public static final TagKey<EntityType<?>> CAN_GO_PASS_SLIME_CHARGE = TagKey.create(Registries.ENTITY_TYPE,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,"can_go_pass_slime_charge"));
+    public static final TagKey<EntityType<?>> IMMUNE_TO_BOUNCE = TagKey.create(Registries.ENTITY_TYPE,ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,"immune_to_bounce"));
     public static void init(){}
 }

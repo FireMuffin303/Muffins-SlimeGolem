@@ -73,10 +73,11 @@ public class ModTagDatagen {
 
         @Override
         protected void addTags(HolderLookup.Provider wrapperLookup) {
-            this.getOrCreateTagBuilder(EntityTypeTags.FALL_DAMAGE_IMMUNE).add(ModEntityTypes.SLIME_GOLEM.get());
+            this.getOrCreateTagBuilder(EntityTypeTags.FALL_DAMAGE_IMMUNE)
+                    .add(ModEntityTypes.SLIME_GOLEM.get());
 
-            this.getOrCreateTagBuilder(ModTags.CAN_GO_PASS_SLIME_CHARGE)
-                    .add(EntityType.SHULKER_BULLET)
+            this.getOrCreateTagBuilder(ModTags.IMMUNE_TO_BOUNCE)
+                    .add(ModEntityTypes.SLIME_GOLEM.get())
                     .add(EntityType.SLIME);
         }
     }

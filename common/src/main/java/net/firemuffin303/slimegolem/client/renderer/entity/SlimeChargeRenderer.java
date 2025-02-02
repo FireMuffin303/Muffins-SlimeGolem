@@ -13,8 +13,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
 public class SlimeChargeRenderer extends EntityRenderer<SlimeChargeProjectile> {
-    private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/projectiles/wind_charge.png");
-    private static final ResourceLocation GROUND_TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,"textures/entity/projectiles/slime_charge_ground.png");
+    private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(MuffinsSlimeGolemMod.MOD_ID,"textures/entity/projectiles/slime_charge.png");
     private final SlimeChargeProjectileModel model;
     public SlimeChargeRenderer(EntityRendererProvider.Context context) {
         super(context);

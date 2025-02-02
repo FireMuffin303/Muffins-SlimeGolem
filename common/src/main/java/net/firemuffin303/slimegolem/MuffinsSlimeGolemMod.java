@@ -2,13 +2,17 @@ package net.firemuffin303.slimegolem;
 
 import net.firemuffin303.slimegolem.common.SlimeChunkPlacement;
 import net.firemuffin303.slimegolem.common.registry.*;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+
+import java.util.function.Supplier;
 
 public class MuffinsSlimeGolemMod {
     public static final String MOD_ID = "muffins_slimegolem";

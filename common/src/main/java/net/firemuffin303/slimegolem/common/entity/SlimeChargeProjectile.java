@@ -1,6 +1,8 @@
 package net.firemuffin303.slimegolem.common.entity;
 
+import net.firemuffin303.slimegolem.MuffinsSlimeGolemMod;
 import net.firemuffin303.slimegolem.common.registry.ModMobEffects;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -121,7 +123,7 @@ public class SlimeChargeProjectile extends AbstractHurtingProjectile implements 
     }
 
     private void explode(){
-        this.level().explode(this,null,EXPLOSION_DAMAGE_CALCULATOR,this.position().x(),this.position().y(),this.position().z(),2.0f,false, Level.ExplosionInteraction.NONE,ParticleTypes.GUST_EMITTER_SMALL,ParticleTypes.GUST_EMITTER_LARGE, SoundEvents.WIND_CHARGE_BURST);
+        this.level().explode(this,null,EXPLOSION_DAMAGE_CALCULATOR,this.position().x(),this.position().y(),this.position().z(),2.0f,false, Level.ExplosionInteraction.NONE,ParticleTypes.GUST_EMITTER_SMALL,ParticleTypes.GUST_EMITTER_LARGE, Holder.direct(SoundEvents.SLIME_ATTACK));
 
     }
 

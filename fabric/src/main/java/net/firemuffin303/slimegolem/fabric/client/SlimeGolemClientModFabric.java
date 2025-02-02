@@ -13,6 +13,7 @@ import net.firemuffin303.slimegolem.client.model.SlimeChargeGroundModel;
 import net.firemuffin303.slimegolem.client.model.SlimeChargeProjectileModel;
 import net.firemuffin303.slimegolem.client.model.SlimeGolemModel;
 import net.firemuffin303.slimegolem.common.registry.ModParticleTypes;
+import net.minecraft.client.particle.SpellParticle;
 
 @Environment(EnvType.CLIENT)
 public class SlimeGolemClientModFabric implements ClientModInitializer {
@@ -27,5 +28,6 @@ public class SlimeGolemClientModFabric implements ClientModInitializer {
 
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.CURSED_SLIME_SOUL.get(), CursedSlimeSoulParticle.Provider::new);
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SLIME_TRAIL.get(), SlimeTrailParticle.Provider::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.BOUNCE_EFFECT.get(), SpellParticle.Provider::new);
     }
 }

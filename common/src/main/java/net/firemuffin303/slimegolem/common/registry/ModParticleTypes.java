@@ -10,6 +10,7 @@ public class ModParticleTypes {
 
     public static final Supplier<SimpleParticleType> CURSED_SLIME_SOUL = ModPlatform.registerParticleType("cursed_slime_soul",true);
     public static final Supplier<SimpleParticleType> SLIME_TRAIL = ModPlatform.registerParticleType("slime_trail",false);
+    public static final Supplier<SimpleParticleType> BOUNCE_EFFECT = ModPlatform.registerParticleType("bounce",false);
 
     public static void init() {
 

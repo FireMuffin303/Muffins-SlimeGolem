@@ -398,8 +398,9 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable, Ranged
         double g = d - slimeChargeProjectile.getY();
         double h = livingEntity.getZ() - this.getZ();
         double i = Math.sqrt(e * e + h * h) * 0.20000000298023224;
-        slimeChargeProjectile.setPos(this.getX(),this.getEyeY(),this.getZ());
-        slimeChargeProjectile.shootFromRotation(this, this.getXRot(), this.getYRot(), 0.0F, 1.5F, 1.0F);
+        slimeChargeProjectile.setPos(this.getX(),this.getEyeY() - 0.10000000149011612,this.getZ());
+        slimeChargeProjectile.shootFromRotation(this, this.getXRot(), this.getYHeadRot(), 0.0F, 1.0f, 1.0F);
+        slimeChargeProjectile.setOwner(this);
         this.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(slimeChargeProjectile);
     }

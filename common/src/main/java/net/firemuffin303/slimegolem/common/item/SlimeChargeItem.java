@@ -40,7 +40,7 @@ public class SlimeChargeItem extends Item implements ProjectileItem {
             player.awardStat(Stats.ITEM_USED.get(this));
             itemStack.consume(1, player);
         }
-        return super.use(level, player, interactionHand);
+        return InteractionResultHolder.sidedSuccess(itemStack,level.isClientSide());
     }
 
     @Override
