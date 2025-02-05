@@ -32,6 +32,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD,ModItem.SLIME_PIE.get(),1).requires(Items.SLIME_BALL).requires(Items.SUGAR).requires(Items.EGG)
                 .unlockedBy(getHasName(Items.SLIME_BALL),has(Items.SLIME_BALL)).save(exporter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT,ModItem.SLIME_CHARGE.get(),3).requires(Items.SLIME_BALL).requires(Items.GUNPOWDER)
+                .unlockedBy(getHasName(Items.SLIME_BALL),has(Items.SLIME_BALL)).save(exporter);
         //coloredBlock(ModItem.WHITE_PACKED_SLIME_BLOCK,ModItem.PACKED_SLIME_BLOCK.get(), Items.WHITE_DYE,exporter);
         //coloredBlock(ModItem.LIGHT_GRAY_PACKED_SLIME_BLOCK,ModItem.PACKED_SLIME_BLOCK.get(),Items.LIGHT_GRAY_DYE,exporter);
         //coloredBlock(ModItem.GRAY_PACKED_SLIME_BLOCK,ModItem.PACKED_SLIME_BLOCK.get(),Items.GRAY_DYE,exporter);

@@ -79,6 +79,9 @@ public class ModTagDatagen {
             this.getOrCreateTagBuilder(ModTags.IMMUNE_TO_BOUNCE)
                     .add(ModEntityTypes.SLIME_GOLEM.get())
                     .add(EntityType.SLIME);
+
+            this.getOrCreateTagBuilder(ModTags.NOT_TARGETED_BY_SLIME_GOLEM)
+                    .add(EntityType.SLIME);
         }
     }
 }

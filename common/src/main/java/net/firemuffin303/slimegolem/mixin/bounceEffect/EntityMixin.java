@@ -33,9 +33,11 @@ public abstract class EntityMixin {
 
     @Shadow public abstract Vec3 position();
 
+    @Shadow public abstract boolean isSuppressingBounce();
+
     @WrapOperation(method = "move",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/Block;updateEntityAfterFallOn(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/world/entity/Entity;)V"))
     public void muffins_slimeGolem$move(Block instance, BlockGetter blockGetter, Entity entity, Operation<Void> original){
-        if(((Entity)(Object)this) instanceof LivingEntity livingEntity && livingEntity.hasEffect(ModMobEffects.BOUNCE.get())){
+        if(((Entity)(Object)this) instanceof LivingEntity livingEntity && livingEntity.hasEffect(ModMobEffects.BOUNCE.get()) && !livingEntity.isSuppressingBounce()){
             Vec3 vec3d = livingEntity.getDeltaMovement();
             if (vec3d.y < 0.0D) {
                 double d = 1D * (livingEntity.getEffect(ModMobEffects.BOUNCE.get()).getAmplifier() + 1);

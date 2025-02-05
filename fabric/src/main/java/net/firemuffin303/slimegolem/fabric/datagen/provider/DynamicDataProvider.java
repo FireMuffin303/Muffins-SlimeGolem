@@ -37,6 +37,7 @@ public class DynamicDataProvider extends FabricDynamicRegistryProvider {
 
         entries.add(registries.lookupOrThrow(Registries.CONFIGURED_FEATURE),MuffinsSlimeGolemMod.SLIME_ALGAE_FEATURE);
         entries.add(registries.lookupOrThrow(Registries.PLACED_FEATURE),MuffinsSlimeGolemMod.SLIME_ALGAE_PLACED_FEATURE);
+        entries.add(registries.lookupOrThrow(Registries.DAMAGE_TYPE),MuffinsSlimeGolemMod.SLIME_CHARGE);
 
         /*
         Holder<ConfiguredFeature<?,?>> holder = entries.add(MuffinsSlimeGolemMod.SLIME_ALGAE_FEATURE, new ConfiguredFeature<>(Feature.MULTIFACE_GROWTH,new MultifaceGrowthConfiguration((MultifaceBlock) ModBlock.SLIME_ALGAE.get(),20,true,true,true,0.5f, HolderSet.direct(Block::builtInRegistryHolder,new Block[]{

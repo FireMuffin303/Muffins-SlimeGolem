@@ -18,13 +18,13 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin {
+public abstract class LivingEntityMixin extends EntityMixin {
 
     @Shadow public abstract boolean hasEffect(Holder<MobEffect> holder);
 
     @WrapOperation(method = "causeFallDamage",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;causeFallDamage(FFLnet/minecraft/world/damagesource/DamageSource;)Z"))
     public boolean muffins_slimeGolem$causeFallDamage(LivingEntity instance, float f, float g, DamageSource damageSource, Operation<Boolean> original){
-        if(instance.hasEffect(ModMobEffects.BOUNCE.get())){
+        if(instance.hasEffect(ModMobEffects.BOUNCE.get()) && !this.isSuppressingBounce()){
             return false;
         }
         return original.call(instance, f, g, damageSource);
@@ -32,7 +32,7 @@ public abstract class LivingEntityMixin {
 
     @WrapOperation(method = "calculateFallDamage",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/EntityType;is(Lnet/minecraft/tags/TagKey;)Z"))
     public boolean muffins_slimeGolem$calculateFallDamage(EntityType<?> instance, TagKey<EntityType<?>> tagKey, Operation<Boolean> original){
-        if(this.hasEffect(ModMobEffects.BOUNCE.get())){
+        if(this.hasEffect(ModMobEffects.BOUNCE.get()) && !this.isSuppressingBounce()){
             return true;
         }
         return original.call(instance,tagKey);

@@ -16,7 +16,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 public class SlimeChargeItem extends Item implements ProjectileItem {
     private static final int COOLDOWN = 10;
@@ -33,6 +35,7 @@ public class SlimeChargeItem extends Item implements ProjectileItem {
                 return InteractionResultHolder.fail(itemStack);
             }
             slimeChargeProjectile.setPos(player.getX(),player.getEyePosition().y(),player.getZ());
+            slimeChargeProjectile.setOwner(player);
             slimeChargeProjectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
             level.addFreshEntity(slimeChargeProjectile);
             level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.WIND_CHARGE_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
@@ -61,5 +64,12 @@ public class SlimeChargeItem extends Item implements ProjectileItem {
         slimeChargeProjectile.setPos(position.x(),position.y(),position.z());
         slimeChargeProjectile.setDeltaMovement(vec3);
         return slimeChargeProjectile;
+    }
+
+    @Override
+    public @NotNull DispenseConfig createDispenseConfig() {
+        return DispenseConfig.builder().positionFunction((blockSource, direction) -> {
+            return DispenserBlock.getDispensePosition(blockSource, 1.0, Vec3.ZERO);
+        }).uncertainty(6.6666665F).power(1.0F).overrideDispenseEvent(1051).build();
     }
 }

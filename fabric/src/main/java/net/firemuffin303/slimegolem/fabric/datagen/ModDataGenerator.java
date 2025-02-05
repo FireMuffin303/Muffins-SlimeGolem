@@ -28,6 +28,7 @@ import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -53,6 +54,7 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(LangProvider::new);
         pack.addProvider(LangProvider.ThaiLangProvider::new);
         pack.addProvider(DynamicDataProvider::new);
+        //pack.addProvider(LootTableProvider.TrialChamberLootProvider::new);
     }
 
     @Override
@@ -96,6 +98,8 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
                            7
                            ));
         });
+
+        registryBuilder.add(Registries.DAMAGE_TYPE,bootstrapContext -> bootstrapContext.register(MuffinsSlimeGolemMod.SLIME_CHARGE, new DamageType("mob",0.1f)));
     }
 
     private static class BlockModelProvider extends FabricModelProvider {

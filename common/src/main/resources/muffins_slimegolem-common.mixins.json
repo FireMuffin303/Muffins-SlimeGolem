@@ -7,6 +7,9 @@
   "mixins": [
     "CampfireBlockMixin",
     "CarvedPumpkinMixin",
+    "LootPoolAccessor",
+    "LootTableAccessor",
+    "LootTableBuilderAccessor",
     "PistonStructureResolverMixin",
     "SlimeEntityMixin",
     "bounceEffect.EntityMixin",

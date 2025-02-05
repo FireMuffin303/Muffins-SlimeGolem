@@ -1,3 +1,4 @@
-// 1.21	2025-02-02T15:00:22.4753936	Muffin's Slime Golem/Tags for minecraft:entity_type
+// 1.21	2025-02-05T09:34:47.2136684	Muffin's Slime Golem/Tags for minecraft:entity_type
 e141fb4f0f8b0c5246d859d5fd59736f0fae51a3 data\muffins_slimegolem\tags\entity_type\immune_to_bounce.json
+5e2d6dbd339cdc162f1bd13fa83d0ece1b6014d8 data\muffins_slimegolem\tags\entity_type\not_targeted_by_slime_golem.json
 34ef28ec75579ce2483913a6741f8b43220141c5 data\minecraft\tags\entity_type\fall_damage_immune.json

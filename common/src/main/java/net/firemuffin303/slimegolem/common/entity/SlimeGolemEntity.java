@@ -110,7 +110,7 @@ public class SlimeGolemEntity extends AbstractGolem implements Shearable, Ranged
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1,new NearestAttackableTargetGoal<Mob>(this,Mob.class,10,true,true,livingEntity -> {
-            return livingEntity instanceof Enemy;
+            return livingEntity instanceof Enemy && !livingEntity.getType().is(ModTags.NOT_TARGETED_BY_SLIME_GOLEM);
         }));
 
     }

@@ -48,6 +48,7 @@ public class LangProvider extends FabricLanguageProvider {
         translationBuilder.add(ModItem.SLIME_PIE.get(),"Slime Pie");
         translationBuilder.add(ModItem.SLIME_GOLEM_SPAWN_EGG.get(),"Slime Golem Spawn Egg");
         translationBuilder.add(ModItem.MUSIC_DISC_BOUNCYSLIME.get(),"Music Disc");
+        translationBuilder.add(ModItem.SLIME_CHARGE.get(), "Slime Charge");
         translationBuilder.add(ModEntityTypes.SLIME_GOLEM.get(),"Slime Golem");
         translationBuilder.add("effect.muffins_slimegolem.bounce","Bounce");
     }
@@ -91,6 +92,7 @@ public class LangProvider extends FabricLanguageProvider {
             translationBuilder.add(ModItem.SLIME_GOLEM_SPAWN_EGG.get(),"ไข่เกิดสไลม์โกเลม");
             translationBuilder.add(ModItem.MUSIC_DISC_BOUNCYSLIME.get(),"แผ่นเพลง");
             translationBuilder.add(ModEntityTypes.SLIME_GOLEM.get(),"สไลม์โกเลม");
+            translationBuilder.add(ModItem.SLIME_CHARGE.get(), "ประจุสไลม์");
             translationBuilder.add("effect.muffins_slimegolem.bounce","เด้ง");
 
         }
