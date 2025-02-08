@@ -8,7 +8,7 @@
     "FireMuffin303"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/muffins-slime-golem",
+    "homepage": "https://modrinth.com/mod/muffins-slime-golem",
     "sources": "https://github.com/FireMuffin303/SlimeGolem",
     "issues": "https://github.com/FireMuffin303/SlimeGolem/issues"
   },
@@ -37,7 +37,7 @@
   ],
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.21",
+    "minecraft": ["1.21","1.21.1"],
     "java": ">=21"
   }
 }
